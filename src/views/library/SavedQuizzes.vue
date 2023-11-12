@@ -26,7 +26,7 @@
        No quiz to show.
     </div>
     <div class="grid md:grid-cols-3 md:gap-3 gap-y-3 max-w-6xl mx-auto">
-        <quiz-list :quizzes="quizzes"></quiz-list>
+        <quiz-list :quizzes="quizzes.data"></quiz-list>
         
     </div>
     <div  class="flex justify-end my-4 me-3">
@@ -56,7 +56,7 @@ export default {
     data() {
     
         return {
-            quizzes: {},
+            quizzes: [],
             currentPage : 1,
             searchKey : '',
             showSearch : false,

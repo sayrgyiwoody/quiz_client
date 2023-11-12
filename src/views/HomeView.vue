@@ -23,7 +23,7 @@
             </div>
             <div class="grid md:grid-cols-3 md:gap-3 gap-y-3">
                 
-                <quiz-list :quizzes="searched_quizzes">
+                <quiz-list :quizzes="searched_quizzes.data">
                     
                 </quiz-list>
                 
@@ -74,10 +74,10 @@ export default {
     data() {
         return {
             searchKey: '',
-            latest_quizzes : {},
+            latest_quizzes : [],
             saved_quizzes : [],
-            most_played_quizzes : {},
-            searched_quizzes : {},
+            most_played_quizzes : [],
+            searched_quizzes : [],
             currentPage : 1,
         }
     },
@@ -114,21 +114,6 @@ export default {
             }
         })
         .catch(error => console.log(error));
-        },
-        getSavedQuizzes(){
-            this.setLoadingStatus(true);
-            axios.get('http://127.0.0.1:8000/api/quiz/getSavedQuizzes',{
-                        headers : {
-                            'Authorization' : `Bearer ${this.getToken}`,
-                        }
-                    })
-            .then((response) => {
-                if(response.data.status == true){
-                    this.setLoadingStatus(false);
-                    this.saved_quizzes = response.data.saved_quizzes;
-                }
-            })
-            .catch(error => console.log(error));
         },
         searchQuizzes() {
             if(this.searchKey.length > 3){
@@ -173,7 +158,6 @@ export default {
     },
     mounted () {
         this.getLatestQuizzes();
-        this.getSavedQuizzes();
         // this.showAlert(`<h4 class="flex items-center text-primary mb-1 justify-center mb-3">
         //                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
         //                     <path fill="currentColor" d="M13 3c3.9 0 7 3.1 7 7c0 2.8-1.6 5.2-4 6.3V21H9v-3H8c-1.1 0-2-.9-2-2v-3H4.5c-.4 0-.7-.5-.4-.8L6 9.7C6.2 5.9 9.2 3 13 3m0-2C8.4 1 4.6 4.4 4.1 8.9L2.5 11c-.6.8-.6 1.8-.2 2.6c.4.7 1 1.2 1.7 1.3V16c0 1.9 1.3 3.4 3 3.9V23h11v-5.5c2.5-1.7 4-4.4 4-7.5c0-5-4-9-9-9m1 13h-2v-1h2v1m1.6-4.5c-.3.4-.6.8-1.1 1.1V12h-3v-1.4c-1.4-.8-1.9-2.7-1.1-4.1s2.7-1.9 4.1-1.1s1.9 2.7 1.1 4.1Z"/>
