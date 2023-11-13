@@ -7,7 +7,7 @@
                         <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74c0-3.87-3.13-7-7-7m2 11.58V16h-1v-4.59l1.71-1.7c.39-.39.39-1.03 0-1.42c-.39-.39-1.03-.39-1.42 0L12 9.59l-1.29-1.3c-.39-.39-1.03-.39-1.42 0c-.39.39-.39 1.03 0 1.42l1.71 1.7V16h-1v-2.42C8.23 12.81 7 11.05 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.05-1.23 3.81-3 4.58M9 20h6v1c0 .55-.45 1-1 1h-4c-.55 0-1-.45-1-1v-1Z"/>
                         </svg>
-                        <span class="ms-2 text-2xl font-semibold">Quiz Information</span>
+                        <span class="ms-2 text-2xl font-semibold">Edit Information</span>
                     </h4>
                     <div v-if="quiz_title || quiz_desc || selectedCategory " @click="clearInfo()" class="flex items-center p-1 md:p-2 border-2 hover:bg-slate-50 dark:hover:bg-zinc-600 duration-150 border-blue-600 text-zinc-900 dark:text-slate-100 bg-white shadow dark:bg-zinc-700 rounded">
                         <svg class=" inline-block w-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M235.5 216.81c-22.56-11-35.5-34.58-35.5-64.8v-17.28a15.94 15.94 0 0 0-10.09-14.87L165 110a8 8 0 0 1-4.48-10.34l21.32-53a28 28 0 0 0-16.1-37a28.14 28.14 0 0 0-35.82 16a.61.61 0 0 0 0 .12L108.9 79a8 8 0 0 1-10.37 4.49L73.11 73.14a15.89 15.89 0 0 0-17.37 3.66C34.68 98.45 24 123.75 24 152a111.45 111.45 0 0 0 31.18 77.53A8 8 0 0 0 61 232h171a8 8 0 0 0 3.5-15.19ZM67.14 88l25.41 10.3a24 24 0 0 0 31.23-13.45l21-53c2.56-6.11 9.47-9.27 15.43-7a12 12 0 0 1 6.88 15.92l-21.4 52.99a24 24 0 0 0 13.43 31.14l24.88 9.83V153L55.77 101.71A108.84 108.84 0 0 1 67.14 88Zm48 128a87.53 87.53 0 0 1-24.34-42a8 8 0 0 0-15.49 4a105.16 105.16 0 0 0 18.36 38H64.44A95.54 95.54 0 0 1 40 152a85.9 85.9 0 0 1 7.73-36.29l137.8 55.12c3 18 10.56 33.48 21.89 45.16Z"/></svg>
@@ -16,15 +16,11 @@
                     
                 </div>
                     <hr class="mt-2 mb-4">   
-                    <div v-if="infoSaved" class="flex items-center border-[1.5px] dark:border-zinc-700 text-green-500 font-semibold rounded px-4 py-3 mb-4">
-                        Changes saved
-                        <svg class=" inline-block ms-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm45.66 85.66l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 11.32Z"/></svg>
-                    </div>
                     <div v-if="infoValidateMessage" class="flex items-center border-[1.5px] dark:border-zinc-700 text-red-600 font-semibold rounded px-4 py-3 mb-4">
                         {{infoValidateMessage}}
                         <svg class=" inline-block ms-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/></svg>
                     </div>
-                    <form @submit.prevent="saveQuizInfo">
+                    <div>
                         <div action="" class="">
                             <div class="relative z-0 w-full mb-4 group">
                                 <input v-model="quiz_title"  name="" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -46,7 +42,7 @@
                             </svg>
                             <span class="ms-2 font-medium">Save Changes</span>
                         </button>
-                    </form>
+                    </div>
             </div>
             <div class="mt-3 bg-white dark:bg-zinc-800 px-4 py-3 rounded shadow animate__animated animate__bounceIn">
                 <div class="flex justify-between">
@@ -63,7 +59,7 @@
                 </div>
                     <hr class="mt-2 mb-4">
                     <div v-if="quizSaved" class="flex items-center border-[1.5px] dark:border-zinc-700 text-green-500 font-semibold rounded px-4 py-3 mb-4">
-                        Changes saved
+                        success
                         <svg class=" inline-block ms-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm45.66 85.66l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 11.32Z"/></svg>
                     </div>
                     <div class="border-[1.5px] dark:border-zinc-700 rounded px-4 py-3 mb-4">
@@ -167,7 +163,7 @@
                 <div v-if="questionList.length > 0" class="flex items-center mt-6 ">
                     <button @click="publish" type="button" class="animate__animated animate__bounceIn me-4 group flex items-center py-3 px-5 mr-2 mb-2 text-sm font-medium text-zinc-900 focus:outline-none bg-white rounded-lg border border-zinc-200 hover:bg-slate-50 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-700 dark:bg-zinc-800 dark:text-slate-400 dark:border-zinc-600 dark:hover:text-white dark:hover:bg-zinc-700">
                         <svg class=" group-hover:rotate-45 duration-200 inline-block me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M152 224a8 8 0 0 1-8 8h-32a8 8 0 0 1 0-16h32a8 8 0 0 1 8 8Zm-24-112a12 12 0 1 0-12-12a12 12 0 0 0 12 12Zm95.62 43.83l-12.36 55.63a16 16 0 0 1-25.51 9.11L158.51 200h-61l-27.26 20.57a16 16 0 0 1-25.51-9.11l-12.36-55.63a16.09 16.09 0 0 1 3.32-13.71l28.56-34.26a123.07 123.07 0 0 1 8.57-36.67c12.9-32.34 36-52.63 45.37-59.85a16 16 0 0 1 19.6 0c9.34 7.22 32.47 27.51 45.37 59.85a123.07 123.07 0 0 1 8.57 36.67l28.56 34.26a16.09 16.09 0 0 1 3.32 13.71ZM99.43 184h57.14c21.12-37.54 25.07-73.48 11.74-106.88C156.55 47.64 134.49 29 128 24c-6.51 5-28.57 23.64-40.33 53.12c-13.31 33.4-9.36 69.34 11.76 106.88Zm-15 5.85q-16.15-29.35-19.6-57.69L48 152.36L60.36 208l.18-.13ZM208 152.36l-16.83-20.2q-3.42 28.28-19.56 57.69l23.85 18l.18.13Z"/></svg>
-                        <span class="font-medium">Publish</span>
+                        <span class="font-medium">Update</span>
                     </button>
                     <button @click="clearAll()" type="button" class="animate__animated animate__bounceIn   group flex items-center py-3 px-5 mr-2 mb-2 text-sm font-medium text-zinc-900 focus:outline-none bg-white rounded-lg border border-zinc-200 hover:bg-slate-50 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-700 dark:bg-zinc-800 dark:text-slate-400 dark:border-zinc-600 dark:hover:text-white dark:hover:bg-zinc-700">
                         <svg class=" group-hover:scale-110 duration-200 inline-block me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"/></svg>
@@ -248,18 +244,6 @@ export default {
             ];
             this.option = null;
         },
-        // save quiz information to local storage
-        saveQuizInfo(){
-            localStorage.setItem("selected_category",this.selectedCategory);
-            localStorage.setItem("quiz_title",this.quiz_title);
-            localStorage.setItem("quiz_desc",this.quiz_desc);
-            this.showInfoSaved();
-        },
-        saveQuizLocal(){
-            localStorage.setItem("questionList",JSON.stringify(this.questionList));
-            localStorage.setItem("answerList",JSON.stringify(this.answerList));
-
-        },
         // show info saved alert 
         showInfoSaved(){
             this.infoSaved = true;
@@ -274,23 +258,6 @@ export default {
             this.quizSaved = false;
             }, 2000); 
         },
-        // get quiz information from localStorage
-        getLocalQuizInfo(){
-            this.quiz_title = localStorage.getItem("quiz_title");
-            this.quiz_desc = localStorage.getItem("quiz_desc");
-            this.selectedCategory = localStorage.getItem("selected_category");
-        },
-        // get questionList and answerList from localStorage
-        getLocalQuestions(){
-            const localQuestions = localStorage.getItem("questionList");
-            if(localQuestions){
-                this.questionList = JSON.parse(localQuestions);
-            }
-            const localAnswers = localStorage.getItem("answerList");
-            if(localAnswers){
-                this.answerList = JSON.parse(localAnswers);
-            }
-        },
         // add question to quiz form 
         addQuestion(){
             if(this.editStatus){
@@ -299,7 +266,6 @@ export default {
                 this.updateAnswerList();
 
                 this.clearForm();
-                this.saveQuizLocal();
                 this.editStatus = false;
 
             }else {
@@ -319,7 +285,6 @@ export default {
                 )
                 this.clearForm();
                 this.showQuizSaved();
-                this.saveQuizLocal();
                 this.updateId();
             }
 
@@ -356,7 +321,6 @@ export default {
 
                     this.updateId();
                     
-                    this.saveQuizLocal();
                     if(this.totalPages===1) {
                         this.currentPage = 1;
                     }
@@ -447,7 +411,6 @@ export default {
                 if (result.isConfirmed) {
                     this.questionList = [];
                     this.answerList = [];
-                    this.saveQuizLocal();
                     Swal.fire(
                         {
                             html: `<p class="text-center text-xl font-semibold">Deleted</p">`,
@@ -468,7 +431,6 @@ export default {
             this.quiz_title = "";
             this.quiz_desc = "";
             this.selectedCategory = "";
-            this.saveQuizInfo();
         },
         // clear edit form 
         cancelEdit(){
@@ -479,8 +441,9 @@ export default {
         publish(){
             if(this.validateInfo()){
                 this.infoValidateMessage = null;
-                axios.post("http://127.0.0.1:8000/api/quiz/create",
+                axios.post("http://127.0.0.1:8000/api/quiz/update",
                 {   
+                    'edit_quiz_id' : this.$route.params.quiz_id,
                     'quiz_title' : this.quiz_title,
                     'category_id' : this.selectedCategory,
                     'quiz_desc' : this.quiz_desc,
@@ -493,11 +456,7 @@ export default {
                 })
                 .then((response)=>{
                     if(response.data.status){
-                        this.questionList = [];
-                        this.answerList = [];
-                        this.saveQuizLocal();
-                        this.clearInfo();
-                        this.showAlert(`<p class="text-center text-xl font-semibold">Published</p"><p class="text-center">Quiz uploaded to server successfully</p>`,'success');
+                        this.directLibrary();
                     }
                 })
                 .catch((error)=>{
@@ -510,22 +469,6 @@ export default {
                 }, 2000); 
                 this.showAlert(`<p class="text-center text-xl font-semibold">Quiz Info Required</p"><p class="text-center">Please fill all quiz information</p>`,'info')
             }
-        },
-        getCategoryList(){
-            this.setLoadingStatus(true);
-            axios.get("http://127.0.0.1:8000/api/category/list",
-                {
-                    headers : {
-                        'Authorization' : `Bearer ${this.getToken}`,
-                    }
-                })
-                .then((response)=>{
-                    this.categories = response.data.categories;
-                    this.setLoadingStatus(false);
-                })
-                .catch((error)=>{
-                    return false;
-                })
         },
         showAlert(message,icon){
             if(localStorage.getItem('darkMode') == 'true') {
@@ -554,12 +497,35 @@ export default {
                 
                 return false
             }
-        }
+        },
+        getEditInfo(){
+            this.setLoadingStatus(true);
+            axios.post(`http://127.0.0.1:8000/api/quiz/getEditInfo`,{
+                    'quiz_id' : this.$route.params.quiz_id,
+                    },
+                    {
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
+                    }).then((response) => {
+                        this.setLoadingStatus(false);
+                        this.quiz_title = response.data.quiz.title;
+                        this.quiz_desc = response.data.quiz.desc;
+                        this.selectedCategory = response.data.quiz.category_id;
+                        this.questionList = response.data.question_list;
+                        this.answerList = response.data.answer_list;
+                        this.categories = response.data.categories;
+                }).catch(error => console.log(error));
+        },
+        directLibrary(){
+          this.$router.push({
+            name :'myLibrary',
+            
+          })
+        },
     },
     mounted () {
-        this.getLocalQuestions();
-        this.getLocalQuizInfo();
-        this.getCategoryList();
+        this.getEditInfo();
     },
 }
 </script>

@@ -91,6 +91,7 @@ export default {
                 name : "home"
             })
         },
+        
     },
     mounted () {
         this.getQuizzes();

@@ -24,6 +24,11 @@ const routes = [
     component : ()=> import('../views/CreatePage.vue')
   },
   {
+    path : '/editPage/:quiz_id',
+    name : 'editPage',
+    component : ()=> import('../views/EditPage.vue')
+  },
+  {
     path : '/allQuiz',
     name : 'allQuiz',
     component : ()=> import('../views/AllQuiz.vue')
