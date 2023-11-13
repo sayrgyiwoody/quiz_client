@@ -1,6 +1,6 @@
 <template>
     <div class="flex  justify-between items-center text-zinc-800 dark:text-slate-200 mb-3 text-xl">
-        <a @click="directHome()" class="hover:text-primary duration-100 font-semibold"><i class="fa-solid fa-arrow-left me-2 cursor-pointer"></i>Back</a>
+        <a @click="directHome()" class="cursor-pointer hover:text-primary duration-100 font-semibold"><i class="fa-solid fa-arrow-left me-2 cursor-pointer"></i>Back</a>
     </div>
     <div class="md:px-4 font-medium text-primary dark:text-blue-500 mb-4">
         <h4 class="mb-3 flex items-center">Total : {{quizzes.total}}
