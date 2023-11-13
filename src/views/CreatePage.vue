@@ -340,7 +340,7 @@ export default {
                 var bgColor = '#ffffff';
             }
             Swal.fire({
-                html: `<p class="text-center text-xl font-semibold">Are you Sure?</p"><p class="text-center">This question will be deleted.</p>`,
+                html: `<p class="text-center text-xl font-semibold mb-2">Are you Sure?</p"><p class="text-center">This question will be deleted.</p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -435,7 +435,7 @@ export default {
             }
             console.log(textColor,bgColor);
             Swal.fire({
-                html: `<p class="text-center text-xl font-semibold">Are you Sure?</p"><p class="text-center">All question will be deleted.</p>`,
+                html: `<p class="text-center text-xl font-semibold mb-2">Are you Sure?</p"><p class="text-center">All question will be deleted.</p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -497,7 +497,7 @@ export default {
                         this.answerList = [];
                         this.saveQuizLocal();
                         this.clearInfo();
-                        this.showAlert(`<p class="text-center text-xl font-semibold">Published</p"><p class="text-center">Quiz uploaded to server successfully</p>`,'success');
+                        this.showAlert(`<p class="text-center text-xl font-semibold mb-2">Published</p"><p class="text-center">Quiz uploaded to server successfully</p>`,'success');
                     }
                 })
                 .catch((error)=>{
@@ -508,7 +508,7 @@ export default {
                 setTimeout(() => {
                 this.infoValidateMessage = null;
                 }, 2000); 
-                this.showAlert(`<p class="text-center text-xl font-semibold">Quiz Info Required</p"><p class="text-center">Please fill all quiz information</p>`,'info')
+                this.showAlert(`<p class="text-center text-xl font-semibold mb-2">Quiz Info Required</p"><p class="text-center">Please fill all quiz information</p>`,'info')
             }
         },
         getCategoryList(){

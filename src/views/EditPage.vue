@@ -36,12 +36,7 @@
                             <option selected value="">Choose category</option>
                             <option :selected="c.id == selectedCategory" v-for="(c,index) in categories" :key="index" :value="c.id">{{c.name}}</option>
                         </select>
-                        <button class=" flex items-center justify-center text-white dark:text-slate-50 px-4 py-2 bg-primary hover:bg-primary_hover rounded dark:bg-zinc-700 dark:hover:bg-zinc-600 duration-150">
-                            <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-9 11q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4Z"/>
-                            </svg>
-                            <span class="ms-2 font-medium">Save Changes</span>
-                        </button>
+                        
                     </div>
             </div>
             <div class="mt-3 bg-white dark:bg-zinc-800 px-4 py-3 rounded shadow animate__animated animate__bounceIn">
@@ -305,7 +300,7 @@ export default {
                 var bgColor = '#ffffff';
             }
             Swal.fire({
-                html: `<p class="text-center text-xl font-semibold">Are you Sure?</p"><p class="text-center">This question will be deleted.</p>`,
+                html: `<p class="text-center text-xl font-semibold mb-2">Are you Sure?</p"><p class="text-center">This question will be deleted.</p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -399,7 +394,7 @@ export default {
             }
             console.log(textColor,bgColor);
             Swal.fire({
-                html: `<p class="text-center text-xl font-semibold">Are you Sure?</p"><p class="text-center">All question will be deleted.</p>`,
+                html: `<p class="text-center text-xl font-semibold mb-2">Are you Sure?</p"><p class="text-center">All question will be deleted.</p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -456,7 +451,28 @@ export default {
                 })
                 .then((response)=>{
                     if(response.data.status){
-                        this.directLibrary();
+                        if(localStorage.getItem('darkMode') == 'true') {
+                            var textColor = '#ffffff';
+                            var bgColor = '#3f3f46';
+                        }else {
+                            var textColor = '#18181b';
+                            var bgColor = '#ffffff';
+                        }
+                        Swal.fire(
+                                    {
+                                        html: `<p class="text-center text-xl font-semibold mb-2">Quiz Updated</p"><p class="text-center">Quiz updated successfully. Now you can return back to see the update quiz.</p>`,
+                                        icon: 'success',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Back to Library',
+                                        color: `${textColor}`,
+                                        background: `${bgColor}`,
+                                    }
+                        ).then((result)=>{
+                            if(result.isConfirmed){
+                            this.directLibrary();   
+                            }
+                        })
                     }
                 })
                 .catch((error)=>{
@@ -467,7 +483,7 @@ export default {
                 setTimeout(() => {
                 this.infoValidateMessage = null;
                 }, 2000); 
-                this.showAlert(`<p class="text-center text-xl font-semibold">Quiz Info Required</p"><p class="text-center">Please fill all quiz information</p>`,'info')
+                this.showAlert(`<p class="text-center text-xl font-semibold mb-2">Quiz Info Required</p"><p class="text-center">Please fill all quiz information</p>`,'info')
             }
         },
         showAlert(message,icon){
