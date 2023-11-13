@@ -25,8 +25,8 @@
        No quiz to show.
     </div>
     <div class="grid md:grid-cols-3 md:gap-3 gap-y-3 max-w-6xl mx-auto">
-        <quiz-list :quizzes="quizzes.data"></quiz-list>
-        
+
+        <created-list :quizzes="quizzes.data"></created-list>        
     </div>
     <div  class="flex justify-end my-4 me-3">
         <div class="flex items-center">
@@ -43,6 +43,8 @@
 
 <script>
 import QuizList from '../../components/QuizList.vue'
+import CreatedList from '../../components/CreatedList.vue'
+
 import {mapActions,mapGetters} from 'vuex'
 import axios from 'axios'
 
@@ -51,6 +53,7 @@ export default {
     name : 'CreatedByMe',
     components: {
         QuizList,
+        CreatedList,
     },
     data() {
     

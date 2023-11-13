@@ -15,7 +15,7 @@
     >
         
 
-        <swiper-slide class="swiper-quiz bg-white pb-2 dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 shadow rounded border-[1.5px] border-slate-200 dark:border-zinc-500 animate__animated animate__bounceIn" v-for="(quiz,index) in quizzes" :key="index">
+        <swiper-slide class="swiper-quiz bg-white pb-2 dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 shadow rounded border-1 dark:border-[1.5px] border-slate-200 dark:border-zinc-500 animate__animated animate__bounceIn" v-for="(quiz,index) in quizzes" :key="index">
           <div class="swiper-slide flex flex-col">
           <p class="  w-full flex justify-between mb-3"><span class="flex items-center bg-violet-600 px-3 py-1 text-white rounded-tl rounded-br text-sm">{{quiz.category_name}}</span>
             <svg :class="{'hidden':isQuizSaved(quiz.quiz_id)}" @click="saveQuiz(quiz.quiz_id)" class=" inline-block text-primary" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16.923l-3.738 1.608q-.808.348-1.535-.13Q6 17.926 6 17.052V5.616q0-.69.463-1.152Q6.925 4 7.615 4H13v1H7.615q-.23 0-.423.192Q7 5.385 7 5.615v11.393q0 .327.279.519t.586.058L12 15.8l4.135 1.785q.307.134.586-.058q.279-.192.279-.52V11h1v6.052q0 .873-.727 1.35q-.727.477-1.535.129L12 16.923ZM12 5H7h6h-1Zm5 2h-1.5q-.213 0-.356-.144T15 6.499q0-.212.144-.356Q15.288 6 15.5 6H17V4.5q0-.213.144-.356T17.5 4q.212 0 .356.144q.143.144.143.356V6h1.5q.213 0 .356.144q.144.144.144.357q0 .212-.144.356Q19.713 7 19.5 7H18v1.5q0 .213-.144.356Q17.712 9 17.5 9t-.356-.144Q17 8.713 17 8.5V7Z"/></svg>
@@ -26,7 +26,6 @@
                     <i class="fa-solid fa-user-astronaut me-2 "></i>
                     <span class="">{{quiz.user_name}}</span>
             |       <span class="">{{formatDate(quiz.created_at)}}</span>
-            {{isQuizSaved(quiz.quiz_id)}}
                 </div>
                 <h3 class="mb-1 text-lg font-medium text-zinc-800 dark:text-slate-200">{{quiz.title}}</h3>
                 <p class="px-3 mb-1 text-sm text-slate-500 dark:text-muted" >{{limitString(quiz.desc,100)}}</p>

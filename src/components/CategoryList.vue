@@ -17,8 +17,8 @@
                 <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
                         <div @click="categoryFilter(c.id)" v-for="(c, index) in displayedCategories" :key="index" class="animate__animated animate__bounceIn cursor-pointer bg-white dark:bg-zinc-800 h-fit hover:bg-slate-50 dark:hover:bg-zinc-700 duration-150 shadow-sm hover:shadow px-3 py-2 group rounded">
                             <img :src="c.image" alt="category img" class="h-20 object-contain mx-auto bg-white rounded">
-                            <p class="mt-2 text-sm md:text-base group-hover:text-blue-500 text-center text-zinc-800 dark:text-slate-200">{{c.name}}</p>
-                            <p class="text-center text-sm text-slate-600 dark:text-muted font-semibold">quizzes : {{c.quizzes_count}}</p>
+                            <p class="mt-2 text-sm md:text-base group-hover:text-blue-500 text-center text-zinc-800 dark:text-slate-200 font-medium">{{c.name}}</p>
+                            <p class="text-center text-sm text-gray-500 dark:text-muted font-semibold">quizzes : {{c.quizzes_count}}</p>
                                 
                         </div>
                    </div>
