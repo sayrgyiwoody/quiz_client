@@ -1,7 +1,6 @@
 <template>
     
     
-    
     <div  v-for="(quiz,index) in quizzes" :key="index" class="pb-2 animate__animated animate__bounceIn group bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 shadow rounded border-[1.5px] border-slate-200 dark:border-zinc-500">
         <div class=" w-full flex justify-between mb-3">
             <p class=" h-fit flex items-center bg-violet-600 px-3 py-2 text-white rounded-tl rounded-br text-sm">{{quiz.category_name}}</p>
@@ -77,6 +76,7 @@ export default {
     props: {
         quizzes : Array,
     },
+    emits: ['delete-quiz'],
     computed: {
         ...mapGetters(['getToken']),
 
@@ -140,6 +140,7 @@ export default {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }
                     }).then((response) => {
+                        this.$emit('delete-quiz');
                         const index = this.quizzes.findIndex(q=>q.quiz_id==quiz_id);
                         this.quizzes.splice(index,1);
                         this.hideDropDown();

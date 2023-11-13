@@ -26,7 +26,7 @@
     </div>
     <div class="grid md:grid-cols-3 md:gap-3 gap-y-3 max-w-6xl mx-auto">
 
-        <created-list :quizzes="quizzes.data"></created-list>        
+        <created-list :quizzes="quizzes.data" @delete-quiz="reduceTotalQuizzes"></created-list>        
     </div>
     <div  class="flex justify-end my-4 me-3">
         <div class="flex items-center">
@@ -90,6 +90,9 @@ export default {
             this.$router.push({
                 name : "home"
             })
+        },
+        reduceTotalQuizzes() {
+            this.quizzes.total -= 1;
         },
         
     },

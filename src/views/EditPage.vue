@@ -470,7 +470,7 @@ export default {
                                     }
                         ).then((result)=>{
                             if(result.isConfirmed){
-                            this.directLibrary();   
+                            this.returnBack();   
                             }
                         })
                     }
@@ -533,11 +533,8 @@ export default {
                         this.categories = response.data.categories;
                 }).catch(error => console.log(error));
         },
-        directLibrary(){
-          this.$router.push({
-            name :'myLibrary',
-            
-          })
+        returnBack(){
+          this.$router.back();
         },
     },
     mounted () {
