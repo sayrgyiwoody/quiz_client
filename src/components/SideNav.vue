@@ -15,9 +15,9 @@
     <aside v-show="!isLoginView" id="logo-sidebar" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
          <div class="px-6">
-            <img class="mx-auto rounded-full w-16 mb-1" src="https://ui-avatars.com/api/?background=2563eb&color=ffffff&name=WaiyanTun" alt="">  
-            <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">Wai Yan Tun</p>
-            <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">waiyanwoody@gmail.com</p>
+            <img class="mx-auto rounded-full w-16 mb-1" :src="imageUrl" alt="">  
+            <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ getUserData.name }}</p>
+            <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ getUserData.email }}</p>
          </div>
            <ul class="space-y-2 px-6 font-medium">
             
@@ -49,7 +49,7 @@
                   <span class=" ml-3">My Library</span>
                </button>
             </router-link>
-            <router-link to="/login" class="nav-link" active-class="router-link-exact-active">
+            <router-link to="/profile" class="nav-link" active-class="router-link-exact-active">
 
                  <button class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                   <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
@@ -86,6 +86,9 @@
 </style>
 
 <script>
+import { mapActions , mapGetters } from 'vuex'
+import axios from 'axios'
+
 export default {
    data() {
       return {
@@ -94,11 +97,21 @@ export default {
       }
    },
    computed: {
-      isLoginView() {
-                return this.$route.name=== 'login'; 
+      ...mapGetters(['getToken','getUserData']),
+        isLoginView() {
+         return this.$route.name=== 'login'; 
       },
-   },
+      imageUrl(){
+         if(this.getUserData.profile_photo_path){
+         return 'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
+         }else {
+         return 'https://ui-avatars.com/api/?background=2563eb&color=ffffff&name=' + this.getUserData.name;
+         }
+      }
+    },
    methods: {
+      ...mapActions(['setLoadingStatus']),
+      
       toggleDarkMode() {
          this.darkMode = !this.darkMode;
          document.documentElement.classList.toggle('dark');
@@ -126,5 +139,6 @@ export default {
          this.directLogin();
       },
    },
+
 }
 </script>

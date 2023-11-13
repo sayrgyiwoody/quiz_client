@@ -7,10 +7,10 @@
                                 Categories : {{categories.length}}
                         </span>
                         </div>
-                        <p v-if="showAllCategories" @click="showAllCategories = false" class=" text-violet-500 flex items-center ">Hide
+                        <p v-if="showAllCategories" @click="showAllCategories = false" class=" cursor-pointer text-violet-500 flex items-center ">Hide
                                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-4.6 4.6L6 14l6-6l6 6l-1.4 1.4l-4.6-4.6Z"/></svg>
                         </p>
-                        <p v-else @click="showAllCategories = true" class=" text-violet-500 flex items-center ">Show All
+                        <p v-else @click="showAllCategories = true" class=" cursor-pointer text-violet-500 flex items-center ">Show All
                                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4l-6 6Z"/></svg>
                         </p>
                 </h4>

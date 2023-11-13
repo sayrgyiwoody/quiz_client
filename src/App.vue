@@ -22,6 +22,7 @@ import { mapGetters , mapActions } from 'vuex'
 
         },
         methods: {
+            ...mapActions(["setLoadingStatus","setUserData"]),
             checkDarkMode() {
                 const localDarkMode = localStorage.getItem('darkMode');
                 if(JSON.parse(localDarkMode) == true ){
@@ -54,30 +55,25 @@ import { mapGetters , mapActions } from 'vuex'
                 this.$store.dispatch("setToken",null);
                 this.directLogin();
             },
-            validateToken(){
-                axios.post("http://127.0.0.1:8000/api/validateToken",
-                {   
-                    'message' : "hello"
-                },{
+            getProfileInfo() {
+            this.setLoadingStatus(true);
+            axios.get(`http://127.0.0.1:8000/api/getProfileInfo`,{
                     headers : {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
-                })
-                .then((response)=>{
-                    if(response.data.status){
-                        return true;
-                    }
-                })
-                .catch((error)=>{
-                    return false;
-                })
-            }
-        
+                }).then((response) => {
+                    const userInfo = response.data.user;
+                    this.setUserData(userInfo);
+                    this.setLoadingStatus(false);
+            }).catch(error => console.log(error));
+            },
+            
         },
         mounted () {
             this.checkDarkMode();
             this.getLocalToken();
             this.checkToken();
+            this.getProfileInfo();
         }
     }
 </script>

@@ -54,6 +54,11 @@ const routes = [
     component : ()=> import('../views/library/MyLibrary.vue')
   },
   {
+    path : '/profile',
+    name  :'profile',
+    component : ()=> import('../views/profile/Profile.vue')
+  },
+  {
     path : '/:patchMatch(.*)*',
     name  :'notFound',
     component : ()=> import('../views/NotFound.vue')
