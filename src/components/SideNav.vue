@@ -1,6 +1,6 @@
 <template>
-    <div v-show="!isLoginView" class="bg-white dark:bg-zinc-800 inline-flex items-center justify-between w-screen p-2 text-sm text-gray-500 sm:hidden  dark:text-gray-400 ">
-        <svg data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <div v-if="!isLoginView" class="bg-white dark:bg-zinc-800 inline-flex items-center justify-between w-screen p-2 text-sm text-gray-500 sm:hidden  dark:text-gray-400 ">
+        <svg @click="toggleNav" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
         </svg>
         <a @click="directHome" class="flex items-center pl-2.5">
@@ -12,9 +12,15 @@
             <svg class="text-gray-600" v-else xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.75 0-6.375-2.625T3 12q0-3.75 2.625-6.375T12 3q.35 0 .688.025t.662.075q-1.025.725-1.638 1.888T11.1 7.5q0 2.25 1.575 3.825T16.5 12.9q1.375 0 2.525-.613T20.9 10.65q.05.325.075.662T21 12q0 3.75-2.625 6.375T12 21Z"/></svg>
       </div>
      </div>
-    <aside v-show="!isLoginView" id="logo-sidebar" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
+    <aside v-if="!isLoginView" :class="showNavMobile ?'translate-x-0':'-translate-x-full'" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform  sm:translate-x-0" aria-label="Sidebar">
+       
+      <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
          <div v-if="userData" class="px-6">
+            <div @click="toggleNav" class="text-zinc-900 dark:text-white md:hidden">
+               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 15 15">
+                  <path fill="currentColor" fill-rule="evenodd" d="M.877 7.5a6.623 6.623 0 1 1 13.246 0a6.623 6.623 0 0 1-13.246 0ZM7.5 1.827a5.673 5.673 0 1 0 0 11.346a5.673 5.673 0 0 0 0-11.346Zm2.354 3.32a.5.5 0 0 1 0 .707L8.207 7.5l1.647 1.646a.5.5 0 0 1-.708.708L7.5 8.207L5.854 9.854a.5.5 0 0 1-.708-.708L6.793 7.5L5.146 5.854a.5.5 0 0 1 .708-.708L7.5 6.793l1.646-1.647a.5.5 0 0 1 .708 0Z" clip-rule="evenodd"/>
+               </svg>
+             </div> 
             <img class="mx-auto rounded-full w-16 h-16 object-cover mb-1" :src="imageUrl" alt="">  
             <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ userData.name }}</p>
             <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ userData.email }}</p>
@@ -28,9 +34,8 @@
                   <span class="ml-3 text-white">Create</span>
                </button>
             </li>
-            <li>
 
-            <router-link to="/home" class="nav-link" active-class="router-link-exact-active">
+            <router-link @click="showNavMobile = false" to="/home" class="nav-link" active-class="router-link-exact-active">
                   <button class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M6.5 17.5L14 14l3.5-7.5L10 10l-3.5 7.5ZM12 13q-.425 0-.713-.288T11 12q0-.425.288-.713T12 11q.425 0 .713.288T13 12q0 .425-.288.713T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/>
@@ -39,8 +44,7 @@
                      <span class="ml-3">Explore</span>
                   </button>
             </router-link>
-            </li>
-            <router-link to="/myLibrary" class="nav-link" active-class="router-link-exact-active">
+            <router-link @click="showNavMobile = false" to="/myLibrary" class="nav-link" active-class="router-link-exact-active">
                  <button class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                   
                   <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 14 14">
@@ -49,7 +53,7 @@
                   <span class=" ml-3">My Library</span>
                </button>
             </router-link>
-            <router-link to="/profile" class="nav-link" active-class="router-link-exact-active">
+            <router-link @click="showNavMobile = false" to="/profile" class="nav-link" active-class="router-link-exact-active">
 
                  <button class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                   <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
@@ -58,7 +62,7 @@
                     <span class=" ml-3">Profile</span>
                  </button>
             </router-link>
-            <router-link to="/setting" class="nav-link" active-class="router-link-exact-active">
+            <router-link @click="showNavMobile = false" to="/setting" class="nav-link" active-class="router-link-exact-active">
                  <button class="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                   <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                      <path fill="currentColor" d="M19.43 12.98c.04-.32.07-.64.07-.98c0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.488.488 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1a.566.566 0 0 0-.18-.03c-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98c0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03c.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73c0 .21-.02.43-.05.73l-.14 1.13l.89.7l1.08.84l-.7 1.21l-1.27-.51l-1.04-.42l-.9.68c-.43.32-.84.56-1.25.73l-1.06.43l-.16 1.13l-.2 1.35h-1.4l-.19-1.35l-.16-1.13l-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7l-1.06.43l-1.27.51l-.7-1.21l1.08-.84l.89-.7l-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13l-.89-.7l-1.08-.84l.7-1.21l1.27.51l1.04.42l.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43l.16-1.13l.2-1.35h1.39l.19 1.35l.16 1.13l1.06.43c.43.18.83.41 1.23.71l.91.7l1.06-.43l1.27-.51l.7 1.21l-1.07.85l-.89.7l.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2z"/>
@@ -76,6 +80,7 @@
            </ul>
         </div>
      </aside>
+     <div v-if="showNavMobile" class="absolute w-full h-full bg-gray-900 dark:bg-zinc-900 z-10 opacity-50 dark:opacity-80"></div>
 </template>
 
 <style  scoped>
@@ -93,11 +98,14 @@ export default {
    data() {
       return {
          darkMode: localStorage.getItem('darkMode') === 'true',
+         showNavMobile : false,
+         isMobile: window.innerWidth <= 768,
 
       }
    },
    computed: {
       ...mapGetters(['getToken','getUserData']),
+      
         isLoginView() {
          return this.$route.name=== 'login'; 
       },
@@ -117,7 +125,9 @@ export default {
     },
    methods: {
       ...mapActions(['setLoadingStatus','setToken']),
-      
+      toggleNav(){
+         this.showNavMobile = !(this.showNavMobile);
+      },
       toggleDarkMode() {
          this.darkMode = !this.darkMode;
          document.documentElement.classList.toggle('dark');

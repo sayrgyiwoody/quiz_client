@@ -1,6 +1,6 @@
 <template>
     <div class="flex mt-6 flex-col items-center justify-center animate__animated animate__fadeIn">
-        <form method="POST" action="" enctype="multipart/form-data" class="w-full px-6 py-3 md:px-7 md:py-4 max-w-3xl bg-white dark:bg-zinc-800 shadow-sm rounded">
+        <form @submit.prevent="updateProfileInfo" class="w-full px-6 py-3 md:px-7 md:py-4 max-w-3xl bg-white dark:bg-zinc-800 shadow-sm rounded">
             <h4 class="text-center text-2xl font-semibold text-zinc-900 dark:text-white">Personal Info</h4>
             <p class="text-center text-zinc-600 dark:text-muted font-medium mb-4">Update your own personal informations</p>
             <hr class="mb-6  bg-zinc-900 h-[1.6px]">
@@ -119,6 +119,7 @@ export default {
     data() {
         return {
             imageUrl : '/images/default_user.png',
+            file : null,
         }
     },
     computed: {
@@ -153,6 +154,7 @@ export default {
                 };
 
                 reader.readAsDataURL(file);
+                this.file = file;
             }
         },
         getProfileInfo() {
@@ -168,6 +170,56 @@ export default {
                    
                     this.setLoadingStatus(false);
             }).catch(error => console.log(error));
+        },
+        updateProfileInfo() {
+            this.setLoadingStatus(true);
+            let formData = new FormData();
+        
+            // Append JSON data
+            formData.append('name', this.getUserData.name);
+            formData.append('email', this.getUserData.email);
+            formData.append('gender', this.getUserData.gender);
+            formData.append('number', this.getUserData.number);
+            formData.append('address', this.getUserData.address);
+
+            // Append the file
+            formData.append('image', this.file);
+
+            axios.post('http://127.0.0.1:8000/api/account/updateProfileInfo',formData , {    
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${this.getToken}`,
+                    },
+                })
+                .then(response => {
+                    this.showAlert(response.data.message,response.data.status);
+                    this.setUserData(response.data.userInfo[0]);
+                    this.setLoadingStatus(false);
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.setLoadingStatus(false);
+                });
+        },
+        showAlert(message,icon){
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
+            Swal.fire(
+                        {
+                            html: `${message}`,
+                            icon: icon,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ok',
+                            color: `${textColor}`,
+                            background: `${bgColor}`,
+                        }
+                      )
         },
         
     },
