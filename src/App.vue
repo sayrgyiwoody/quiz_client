@@ -42,7 +42,8 @@ import { mapGetters , mapActions } from 'vuex'
                 }
             },
                    
-            getLocalToken(){
+            getLocalData(){
+                this.$store.dispatch("setUserData",JSON.parse(localStorage.getItem('userData')));
                 this.$store.dispatch("setToken",localStorage.getItem('login_token'));
             },
             directLogin() {
@@ -55,25 +56,13 @@ import { mapGetters , mapActions } from 'vuex'
                 this.$store.dispatch("setToken",null);
                 this.directLogin();
             },
-            getProfileInfo() {
-            this.setLoadingStatus(true);
-            axios.get(`http://127.0.0.1:8000/api/getProfileInfo`,{
-                    headers : {
-                        'Authorization' : `Bearer ${this.getToken}`,
-                    }
-                }).then((response) => {
-                    const userInfo = response.data.user;
-                    this.setUserData(userInfo);
-                    this.setLoadingStatus(false);
-            }).catch(error => console.log(error));
-            },
+            
             
         },
         mounted () {
             this.checkDarkMode();
-            this.getLocalToken();
+            // this.getLocalData();
             this.checkToken();
-            this.getProfileInfo();
         }
     }
 </script>

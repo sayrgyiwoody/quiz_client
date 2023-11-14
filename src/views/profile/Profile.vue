@@ -1,13 +1,13 @@
 <template>
     <div class="flex mt-6 flex-col items-center justify-center animate__animated animate__fadeIn">
-        <form method="POST" action="" enctype="multipart/form-data" class="w-full mt-4 p-6 md:p-7 md:w-2/3 bg-white dark:bg-zinc-800 shadow-sm rounded">
+        <form method="POST" action="" enctype="multipart/form-data" class="w-full px-6 py-3 md:px-7 md:py-4 max-w-3xl bg-white dark:bg-zinc-800 shadow-sm rounded">
             <h4 class="text-center text-2xl font-semibold text-zinc-900 dark:text-white">Personal Info</h4>
             <p class="text-center text-zinc-600 dark:text-muted font-medium mb-4">Update your own personal informations</p>
             <hr class="mb-6  bg-zinc-900 h-[1.6px]">
             <div class="md:grid md:grid-cols-3 md:space-x-6">
                 <div class="">
                     <!-- @if (Auth::user()->profile_photo_path === null) -->
-                        <img id="profile-image" class=" w-full md:h-60 object-cover rounded-md" :src="imageUrl" alt="">
+                        <img id="profile-image" class="object-cover w-full h-60 rounded-md" :src="imageUrl" alt="">
                     <!-- @else
                     <img id="profile-image" class=" w-full h-60 object-cover rounded-md" src="" alt="">
                     @endif -->
@@ -55,16 +55,16 @@
     
                     <div class="flex items-center space-x-3 justify-center">
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'male'" id="default-radio-1" type="radio" value="male" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
+                            <input :checked="getUserData.gender === 'male'" id="default-radio-1" type="radio" value="male" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-1" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
                         </div>
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'female'"  id="default-radio-2" type="radio" value="female" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
+                            <input :checked="getUserData.gender === 'female'"  id="default-radio-2" type="radio" value="female" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-2" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                         </div>
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'other'"  id="default-radio-3" type="radio" value="other" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
+                            <input :checked="getUserData.gender === 'other'"  id="default-radio-3" type="radio" value="other" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-3" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
                         </div>
                     </div>
                 </div>
@@ -118,22 +118,20 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            userInfo : {},
+            imageUrl : '/images/default_user.png',
         }
     },
     computed: {
         ...mapGetters(['getToken','getUserData']),
-        imageUrl(){
-         if(this.getUserData.profile_photo_path){
-         return 'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
-         }else {
-         return 'https://ui-avatars.com/api/?background=2563eb&color=ffffff&name=' + this.getUserData.name;
-         }
-      }
+
     },
     methods: {
-        ...mapActions(['setLoadingStatus']),
-
+        ...mapActions(['setLoadingStatus','setUserData']),
+        getImageUrl(){
+            if(this.getUserData.profile_photo_path){
+            this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
+            }
+        },
         handleDrop(event) {
             event.preventDefault();
 
@@ -157,7 +155,24 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
+        getProfileInfo() {
+            this.setLoadingStatus(true);
+            axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+                    headers : {
+                        'Authorization' : `Bearer ${this.getToken}`,
+                    }
+                }).then((response) => {
+                    const userInfo = response.data.user;
+                    this.setUserData(userInfo);
+                    this.getImageUrl();
+                   
+                    this.setLoadingStatus(false);
+            }).catch(error => console.log(error));
+        },
         
+    },
+    mounted() {
+        this.getProfileInfo();
     },
 }
 </script>

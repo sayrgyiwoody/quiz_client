@@ -77,7 +77,7 @@ export default {
                     this.clearForm();
                     this.directHome();
                     this.storeUserInfo(response);
-                    this.storeLocalToken(response.data.token);
+                    this.storeLocalData(response.data);
                 }else {
                     this.validateStatus = true;
                     this.validateMessage = response.data.message;
@@ -112,8 +112,9 @@ export default {
             this.$store.dispatch("setToken",response.data.token);
         },
         // store token in local storage
-        storeLocalToken(token){
-            localStorage.setItem("login_token",token);
+        storeLocalData(data){
+            localStorage.setItem("login_token",data.token);
+            localStorage.setItem("userData",JSON.stringify(data.user));
         },
         
     },

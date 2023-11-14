@@ -15,7 +15,7 @@
     <aside v-show="!isLoginView" id="logo-sidebar" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
          <div class="px-6">
-            <img class="mx-auto rounded-full w-16 mb-1" :src="imageUrl" alt="">  
+            <img class="mx-auto rounded-full w-16 h-16 object-cover mb-1" :src="imageUrl" alt="">  
             <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ getUserData.name }}</p>
             <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ getUserData.email }}</p>
          </div>
@@ -104,13 +104,13 @@ export default {
       imageUrl(){
          if(this.getUserData.profile_photo_path){
          return 'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
-         }else {
-         return 'https://ui-avatars.com/api/?background=2563eb&color=ffffff&name=' + this.getUserData.name;
          }
+         return '/images/default_user.png';
+         
       }
     },
    methods: {
-      ...mapActions(['setLoadingStatus']),
+      ...mapActions(['setLoadingStatus','setToken']),
       
       toggleDarkMode() {
          this.darkMode = !this.darkMode;
@@ -132,12 +132,28 @@ export default {
             name : "home"
          })
       },
-      
+      // getProfileInfo() {
+      //       this.setLoadingStatus(true);
+      //       axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+      //               headers : {
+      //                   'Authorization' : `Bearer ${this.getToken}`,
+      //               }
+      //           }).then((response) => {
+      //               const userInfo = response.data.user;
+      //               this.setUserData(userInfo);
+      //               this.setLoadingStatus(false);
+      //       }).catch(error => console.log(error));
+      // },
       logout(){
          localStorage.removeItem("login_token");
          this.$store.dispatch("setToken",null);
+         this.$store.dispatch("setUserData",null);
          this.directLogin();
+         
       },
+   },
+   mounted () {
+      
    },
 
 }
