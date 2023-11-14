@@ -80,7 +80,7 @@
            </ul>
         </div>
      </aside>
-     <div v-if="showNavMobile" class="absolute w-full h-full bg-gray-900 dark:bg-zinc-900 z-10 opacity-50 dark:opacity-80"></div>
+     <div v-if="showNavMobile" class="absolute top-0 w-full h-full bg-gray-900 dark:bg-zinc-900 z-10 opacity-50 dark:opacity-80"></div>
 </template>
 
 <style  scoped>
@@ -141,25 +141,14 @@ export default {
       directCreate() {
          this.$router.push({
             name : "createPage"
-         })
+         });
+         this.showNavMobile = false;
       },
       directHome() {
          this.$router.push({
             name : "home"
          })
       },
-      // getProfileInfo() {
-      //       this.setLoadingStatus(true);
-      //       axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
-      //               headers : {
-      //                   'Authorization' : `Bearer ${this.getToken}`,
-      //               }
-      //           }).then((response) => {
-      //               const userInfo = response.data.user;
-      //               this.setUserData(userInfo);
-      //               this.setLoadingStatus(false);
-      //       }).catch(error => console.log(error));
-      // },
       logout(){
          localStorage.removeItem("login_token");
          localStorage.removeItem("userData");

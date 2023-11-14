@@ -6,11 +6,8 @@
             <hr class="mb-6  bg-zinc-900 h-[1.6px]">
             <div class="md:grid md:grid-cols-3 md:space-x-6">
                 <div class="">
-                    <!-- @if (Auth::user()->profile_photo_path === null) -->
                         <img id="profile-image" class="object-cover w-full h-60 rounded-md" :src="imageUrl" alt="">
-                    <!-- @else
-                    <img id="profile-image" class=" w-full h-60 object-cover rounded-md" src="" alt="">
-                    @endif -->
+                    
                     <div class="mt-3 mb-5">
                         <div
                           @dragover.prevent
@@ -50,6 +47,8 @@
                             />
                           </label>
                         </div>
+                        <p v-if="errorMsg.image" class=" text-red-600 text-sm mt-2">{{ errorMsg.image[0] }}</p>
+
                       </div>
     
     
@@ -67,39 +66,33 @@
                             <label for="default-radio-3" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
                         </div>
                     </div>
+                    <p v-if="errorMsg.gender" class=" text-red-600 text-sm mt-2">{{ errorMsg.gender[0] }}</p>
+
                 </div>
                 <div class=" col-span-2">
     
                     <div class="relative z-0 w-full mb-6 group mt-4">
-                        <input v-model="getUserData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="getUserData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Name</label>
-                        <!-- @error('name') -->
-                            <p class=" text-red-600 text-sm mt-2"></p>
-                        <!-- @enderror -->
+                            <p v-if="errorMsg.name" class=" text-red-600 text-sm mt-2">{{ errorMsg.name[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-6 group mt-6">
-                        <input v-model="getUserData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="getUserData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Email</label>
-                        <!-- @error('email') -->
-                            <p class=" text-red-600 text-sm mt-2"></p>
-                        <!-- @enderror -->
+                            <p v-if="errorMsg.email" class=" text-red-600 text-sm mt-2">{{ errorMsg.email[0] }}</p>
                     </div>
     
     
     
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <input v-model="getUserData.number" name="number" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="getUserData.number" name="number" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Phone Number</label>
-                        <!-- @error('number') -->
-                                <p class=" text-red-600 text-sm mt-2"></p>
-                        <!-- @enderror -->
+                                <p v-if="errorMsg.number" class=" text-red-600 text-sm mt-2">{{ errorMsg.number[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required v-model="getUserData.address"></textarea>
+                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " v-model="getUserData.address"></textarea>
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Address</label>
-                        <!-- @error('address') -->
-                                <p class=" text-red-600 text-sm mt-2"></p>
-                        <!-- @enderror -->
+                        <p v-if="errorMsg.address" class=" text-red-600 text-sm mt-2">{{ errorMsg.address[0] }}</p>
                     </div>
                 </div>
     
@@ -120,6 +113,14 @@ export default {
         return {
             imageUrl : '/images/default_user.png',
             file : null,
+            errorMsg : {
+                image : '',
+                name : '',
+                email : '',
+                gender : '',
+                number : '',
+                address : '',
+            },
         }
     },
     computed: {
@@ -183,7 +184,9 @@ export default {
             formData.append('address', this.getUserData.address);
 
             // Append the file
-            formData.append('image', this.file);
+            if(this.file !== null){
+                formData.append('image', this.file);
+            }
 
             axios.post('http://127.0.0.1:8000/api/account/updateProfileInfo',formData , {    
                     headers: {
@@ -192,8 +195,12 @@ export default {
                     },
                 })
                 .then(response => {
-                    this.showAlert(response.data.message,response.data.status);
-                    this.setUserData(response.data.userInfo[0]);
+                    if(response.data.status == 'success'){
+                        this.showAlert(response.data.message,response.data.status);
+                        this.setUserData(response.data.userInfo[0]);
+                    }else {
+                        this.errorMsg = response.data.errors;
+                    }
                     this.setLoadingStatus(false);
                 })
                 .catch(error => {
