@@ -61,7 +61,7 @@ import { mapGetters , mapActions } from 'vuex'
         },
         mounted () {
             this.checkDarkMode();
-            // this.getLocalData();
+            this.getLocalData();
             this.checkToken();
         }
     }

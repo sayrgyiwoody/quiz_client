@@ -164,7 +164,7 @@ export default {
                                 'Authorization' : `Bearer ${this.getToken}`,
                             }
                         }).then((response) => {
-                            
+                            this.setLoadingStatus(false);
                             this.logout();
                     }).catch(error => console.log(error)); 
                 }
@@ -174,6 +174,7 @@ export default {
         },
         logout(){
             localStorage.removeItem("login_token");
+            localStorage.removeItem("userData");
             this.$store.dispatch("setToken",null);
             this.$store.dispatch("setUserData",null);
             this.directLogin();
