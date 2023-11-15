@@ -1,7 +1,7 @@
 <template>
     <div :class="isLoginView?'flex':'hidden'" class=" md:flex items-center justify-between h-16 shadow bg-white dark:bg-zinc-800 px-4 py-2">
         <a @click="directHome" class=" cursor-pointer flex items-center pl-2.5">
-          <img :src="'./images/logo.png'" class="h-12 mr-2 rounded-full" alt="Logo" />
+          <img :src="'/images/logo.png'" class="h-12 mr-2 rounded-full" alt="Logo" />
             
             <span class="font-poppins font-medium self-center text-xl whitespace-nowrap dark:text-white">Brain Lab</span>
          </a>

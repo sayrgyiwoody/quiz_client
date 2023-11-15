@@ -4,7 +4,7 @@
            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
         </svg>
         <a @click="directHome" class="flex items-center pl-2.5">
-          <img :src="'./images/logo.png'" class="h-12 mr-2 rounded-full" alt="Logo" />
+          <img :src="'/images/logo.png'" class="h-12 mr-2 rounded-full" alt="Logo" />
          <span class="font-poppins font-medium self-center text-xl whitespace-nowrap dark:text-white">Brain Lab</span>
          </a>
       <div @click="toggleDarkMode" class=" cursor-pointer rounded-full w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-zinc-600 dark:border-none border border-3 duration-150 hover:bg-slate-200 border-slate-300">

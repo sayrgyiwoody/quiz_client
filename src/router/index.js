@@ -49,6 +49,11 @@ const routes = [
     component : ()=> import('../views/play/Detail.vue')
   },
   {
+    path : '/playQuiz/:quiz_id',
+    name : 'playQuiz',
+    component : ()=> import('../views/play/PlayQuiz.vue')
+  },
+  {
     path : '/myLibrary',
     name  :'myLibrary',
     component : ()=> import('../views/library/MyLibrary.vue')
