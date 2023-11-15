@@ -69,10 +69,23 @@ export default {
                 this.answerStatus = response.data.answerStatus;
             }).catch(error => console.log(error));
         },
-        showAnswer(question_id) {
+        showAnswer(quiz_id,question_id) {
+            this.setLoadingStatus(true);
+            const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
             Swal.fire({
-                title: 'Need answer?',
-                text: "You won't get any marks if you request for the answer,",
+                html: `
+                <p class="text-center text-2xl font-bold mb-2">Need Answer ?</p"><p class="text-center">You won't get any score if request for the answer.</p>
+                
+                `,
+                color: `${textColor}`,
+                background: `${bgColor}`,
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -81,18 +94,33 @@ export default {
                 cancelButtonText : "No, I'll try myself"
               }).then((result) => {
                 if (result.isConfirmed) {
-                    this.try--;
-                    axios.post('http://127.0.0.1:8000/api/getAnswer',{quiz_id : this.$route.params.id , question_id : question_id}).then(response=>{
-                        const answer = response.data;
-                        Swal.fire({
-                            title: 'Answer for Quiz ' + this.currentQuestion ,
-                            html: `<b class="text-primary fs-4">${answer}</b>`,
-                            imageUrl: '/images/hint.gif',
-                            imageAlt: 'Preett',
-                        });
-                    }).catch(error=>{
-                        console.log('error');
+                    if (this.answerHistory[question_id] === undefined) {
+                        this.answerHistory[question_id] = false;
+                    }
+                    axios.post(`http://127.0.0.1:8000/api/answerRequest`,{
+                        'quiz_id' : quiz_id,
+                        'question_id' : question_id,
+                    },{
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
                     })
+                    .then((response) => {
+                    this.setLoadingStatus(false);
+
+                        Swal.fire({
+                            html: `
+                            <p class="text-center text-sm text-slate-500 dark:text-muted font-medium">Answer for question 1</p"><p class="text-center font-semibold text-xl">${response.data.requestedAnswer}</p>
+                            
+                            `,
+                            color: `${textColor}`,
+                            background: `${bgColor}`,
+                            icon: 'info',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'I got it.',
+                          })
+                    }).catch(error => console.log(error));
 
                 }
               })

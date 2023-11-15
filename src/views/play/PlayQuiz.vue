@@ -24,10 +24,11 @@
         </p>
         
         <div v-for="(question,index) in paginatedQuestions" :key="index" class=" mt-6 animate__animated animate__bounceIn">
-            <div class="flex items-center">
+            <div class="flex items-center justify-between">
                 <div class="bg-primary text-white px-3 py-2 rounded-t">Question {{question.id + 1}}</div>
-                
+                <p @click="showAnswer(quiz.quiz_id,question.id)" class=" cursor-pointer hover:text-primary dark:hover:text-blue-500 font-medium  text-zinc-800 dark:text-slate-200">Need Answer<i class="fa-solid fa-question ms-2 text-rose-600"></i></p>
             </div>
+
             <div class="bg-white border-[1.5px] rounded-tl-none border-primary dark:border-blue-500  dark:bg-zinc-800 shadow rounded px-5 py-3">
                 <p class="mb-2 text-zinc-900 dark:text-slate-100 font-semibold ">{{question.question_text}}</p>
                 <div v-if="question.type === 'choice'" class="">
