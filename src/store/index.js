@@ -4,7 +4,7 @@ export default createStore({
   state: {
     loadingStatus : false,
     userData : {
-
+      
     },
     token : '',
   },

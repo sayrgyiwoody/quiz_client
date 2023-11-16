@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios'
+import {mapActions} from 'vuex'
 
 export default {
     name : 'Login',
@@ -64,11 +65,13 @@ export default {
         }
     },
     methods: {
+        ...mapActions(["setLoadingStatus"]),
         togglePasswordType() {
             this.showPassword = !this.showPassword;
         },
         login(){
             if(this.validateEmail()){
+                this.setLoadingStatus(true);
                 axios.post('http://127.0.0.1:8000/api/login',this.userData)
                 .then((response) => {
                     // this.storeUserInfo(response);
@@ -82,7 +85,7 @@ export default {
                     this.validateStatus = true;
                     this.validateMessage = response.data.message;
                 }
-                    // console.log(response.data);
+                this.setLoadingStatus(false);
                 })
                 .catch(error => console.log(error))
             }else {

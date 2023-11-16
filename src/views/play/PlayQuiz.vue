@@ -5,7 +5,7 @@
         </div>
         <div class="bg-white dark:bg-zinc-800 text-zinc-800 dark:text-slate-100 px-3 py-2 rounded mb-4 shadow font-semibold text-lg ">{{ quiz.title }}</div>
         <div class="flex space-x-2">
-            <div v-for="(question,index) in questionList" :key="index" :class="{'bg-emerald-600 dark:bg-emerald-600':answerHistory[index]===true,'bg-rose-600 dark:bg-rose-600':answerHistory[index]===false}" class=" bg-white dark:bg-zinc-700 w-full h-3  border dark:border-none border-slate-300 shadow rounded-[3px] cursor-pointer"></div>
+            <div v-for="(question,index) in questionList" :key="index" :class="{'bg-emerald-600 dark:bg-emerald-600':answerHistory[index]===true,'bg-rose-600 dark:bg-rose-600':answerHistory[index]===false,'bg-white dark:bg-zinc-700':answerHistory[index]===undefined}" class=" duration-150  w-full h-3  border dark:border-none border-slate-300 shadow rounded-[3px] cursor-pointer"></div>
             
         </div>
         <p class=" text-end font-semibold text-zinc-800 dark:text-slate-50 mt-2">Question 1/{{ questionList.length }}</p>

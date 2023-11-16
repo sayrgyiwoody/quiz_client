@@ -51,6 +51,7 @@ export default {
           this.answerStatus = null;
         },
         checkAnswer(quiz_id,question_id){
+            this.answerStatus = null;
             this.loading = true;
             axios.post(`http://127.0.0.1:8000/api/answerCheck`,{
                 'quiz_id' : quiz_id,
@@ -70,7 +71,6 @@ export default {
             }).catch(error => console.log(error));
         },
         showAnswer(quiz_id,question_id) {
-            this.setLoadingStatus(true);
             const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;
             if(localStorage.getItem('darkMode') == 'true') {
                 var textColor = '#ffffff';
@@ -93,7 +93,9 @@ export default {
                 confirmButtonText: 'Yes',
                 cancelButtonText : "No, I'll try myself"
               }).then((result) => {
+
                 if (result.isConfirmed) {
+                    this.setLoadingStatus(true);
                     if (this.answerHistory[question_id] === undefined) {
                         this.answerHistory[question_id] = false;
                     }
@@ -111,7 +113,6 @@ export default {
                         Swal.fire({
                             html: `
                             <p class="text-center text-sm text-slate-500 dark:text-muted font-medium">Answer for question 1</p"><p class="text-center font-semibold text-xl">${response.data.requestedAnswer}</p>
-                            
                             `,
                             color: `${textColor}`,
                             background: `${bgColor}`,
@@ -123,6 +124,7 @@ export default {
                     }).catch(error => console.log(error));
 
                 }
+
               })
 
         },
@@ -162,7 +164,8 @@ export default {
                     this.directHome();
                 }
               });
-        }
+        },
+        
     },
     mounted () {
         this.getQuestionList();

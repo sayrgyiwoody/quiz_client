@@ -150,10 +150,11 @@ export default {
          })
       },
       logout(){
+         this.showNavMobile = false;
          localStorage.removeItem("login_token");
          localStorage.removeItem("userData");
          this.$store.dispatch("setToken",null);
-         this.$store.dispatch("setUserData",null);
+         this.$store.dispatch("setUserData",{});
          this.directLogin();
          
       },

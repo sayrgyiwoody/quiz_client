@@ -111,6 +111,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
+
             imageUrl : '/images/default_user.png',
             file : null,
             errorMsg : {
@@ -125,7 +126,7 @@ export default {
     },
     computed: {
         ...mapGetters(['getToken','getUserData']),
-
+        
     },
     methods: {
         ...mapActions(['setLoadingStatus','setUserData']),
@@ -175,7 +176,7 @@ export default {
         updateProfileInfo() {
             this.setLoadingStatus(true);
             let formData = new FormData();
-        
+            
             // Append JSON data
             formData.append('name', this.getUserData.name);
             formData.append('email', this.getUserData.email);
@@ -233,5 +234,6 @@ export default {
     mounted() {
         this.getProfileInfo();
     },
+    
 }
 </script>
