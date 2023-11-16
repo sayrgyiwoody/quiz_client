@@ -134,6 +134,7 @@ export default {
         },
         
         searchQuizzes() {
+            this.searched_quizzes = [];
             if(this.searchKey.length > 3){
                 this.setLoadingStatus(true);
                 axios.post(`http://127.0.0.1:8000/api/quiz/search?page=${this.currentPage}`,{

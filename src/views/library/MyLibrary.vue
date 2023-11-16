@@ -6,7 +6,7 @@
         <li @click="changeTab('recent')" class="me-2 cursor-pointer">
             <a :class="currentTab==='recent'?'border-b-2 text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500':'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 hover:border-b-2'" class="inline-flex flex-col md:flex-row items-center justify-center p-4  rounded-t-lg  group">
                 <svg :class="currentTab==='recent'?'text-blue-600':' text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'" class="w-5 h-5 me-2  mb-1 md:mb-0"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M20.59 22L15 16.41V7h2v8.58l5 5.01L20.59 22z"/><path fill="currentColor" d="M16 2A13.94 13.94 0 0 0 6 6.23V2H4v8h8V8H7.08A12 12 0 1 1 4 16H2A14 14 0 1 0 16 2Z"/></svg>
-                Recent <span class="ms-1 hidden md:inline-block"> Quizzes</span>
+                Recent <span class="ms-1 hidden md:inline-block"> Played</span>
             </a>
         </li>
         <li @click="changeTab('saved')" class="me-2 cursor-pointer">

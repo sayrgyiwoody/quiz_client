@@ -150,7 +150,7 @@ export default {
                 color: `${textColor}`,
                 background: `${bgColor}`,
                 html: `
-                <p class="text-center text-2xl font-bold mb-2">Congratulations</p"><p class="text-center">Congratulations on finishing all the questions. I really appreciate your effort.🎉</p>
+                <p class="text-center text-2xl font-bold mb-2">Congratulations</p"><p class="text-center">Congratulations on finishing all the questions. I really appreciate you and Remember to be proud of your effort🎉</p>
                 <p class="text-center text-sm text-slate-500 dark:text-muted mt-2 font-medium">Your Score</p>
                 <p class="text-center text-4xl font-semibold">${trueCount}/${this.questionList.length}</p>
                 `,

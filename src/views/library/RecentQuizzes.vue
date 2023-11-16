@@ -107,7 +107,7 @@ export default {
                 var bgColor = '#ffffff';
             }
             Swal.fire({
-                html: `<p class="text-center text-xl font-semibold">Remove all history?</p"><p class="text-center">You won't be able to revert this.</p>`,
+                html: `<p class="text-center text-xl font-semibold">Delete all history?</p"><p class="text-center">You won't be able to revert this.</p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
