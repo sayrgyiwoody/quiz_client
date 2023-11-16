@@ -10,6 +10,7 @@ export default {
             questionList : [],
             quiz : {},
             loading :false,
+            answerRequired : false,
         }
     },
     computed: {
@@ -51,24 +52,30 @@ export default {
           this.answerStatus = null;
         },
         checkAnswer(quiz_id,question_id){
+            this.answerRequired = false;
             this.answerStatus = null;
-            this.loading = true;
-            axios.post(`http://127.0.0.1:8000/api/answerCheck`,{
-                'quiz_id' : quiz_id,
-                'question_id' : question_id,
-                'user_answer' : this.answers[question_id],
-            },{
-                headers : {
-                    'Authorization' : `Bearer ${this.getToken}`,
-                }
-            })
-            .then((response) => {
-                this.loading = false;
-                if (this.answerHistory[question_id] === undefined) {
-                    this.answerHistory[question_id] = response.data.answerStatus;
-                }
-                this.answerStatus = response.data.answerStatus;
-            }).catch(error => console.log(error));
+            if(this.answers[question_id]){
+                
+                this.loading = true;
+                axios.post(`http://127.0.0.1:8000/api/answerCheck`,{
+                    'quiz_id' : quiz_id,
+                    'question_id' : question_id,
+                    'user_answer' : this.answers[question_id],
+                },{
+                    headers : {
+                        'Authorization' : `Bearer ${this.getToken}`,
+                    }
+                })
+                .then((response) => {
+                    this.loading = false;
+                    if (this.answerHistory[question_id] === undefined) {
+                        this.answerHistory[question_id] = response.data.answerStatus;
+                    }
+                    this.answerStatus = response.data.answerStatus;
+                }).catch(error => console.log(error));
+            }else {
+                this.answerRequired = true;
+            }
         },
         showAnswer(quiz_id,question_id) {
             const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;

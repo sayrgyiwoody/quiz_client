@@ -122,8 +122,17 @@ export default {
                 this.latest_quizzes = response.data.latest_quizzes;
             }
         })
-        .catch(error => console.log(error));
+        .catch(error =>{
+            if(error.response.status===401){
+                this.$router.push({
+                    name : "login"
+                });
+                this.setLoadingStatus(false);
+
+            }
+        });
         },
+        
         searchQuizzes() {
             if(this.searchKey.length > 3){
                 this.setLoadingStatus(true);

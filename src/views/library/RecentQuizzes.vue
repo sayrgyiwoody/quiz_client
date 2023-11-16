@@ -1,0 +1,157 @@
+<template>
+    <div class="md:px-4 font-medium text-primary dark:text-blue-500 mb-4">
+        <div class="md:flex md:justify-between">
+            <h4 class="mb-3 flex items-center">Total : {{quizzes.total}}
+                <button v-if="showSearch===false" @click="showSearch=true" class="ms-6 flex items-center ps-1 pe-3 py-1 bg-primary duration-100 hover:bg-primary_hover dark:hover:bg-blue-500 dark:bg-blue-600 rounded text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20"><path fill="currentColor" d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9.5a.5.5 0 0 0 0-1H6a1 1 0 0 1-1-1h10a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2H6Zm5.586 7.879l1.268 1.267a.5.5 0 0 1-.708.708l-1.267-1.268a2.5 2.5 0 1 1 .707-.707ZM8 8.5a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0Z"/></svg>
+                    <span class="ms-2">Search Quiz</span>
+                </button>
+                <button v-if="showSearch===true" @click="showSearch=false" class="ms-6 flex items-center ps-1 pe-3 py-1 bg-primary duration-100 hover:bg-primary_hover dark:hover:bg-blue-500 dark:bg-blue-600 rounded text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20"><path fill="currentColor" d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9.5a.5.5 0 0 0 0-1H6a1 1 0 0 1-1-1h10a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2H6Zm5.586 7.879l1.268 1.267a.5.5 0 0 1-.708.708l-1.267-1.268a2.5 2.5 0 1 1 .707-.707ZM8 8.5a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0Z"/></svg>
+                    <span class="ms-2">Hide</span>
+                </button>
+                
+            </h4>
+            <button :disabled="quizzes.total === 0" @click="clearAllHistory" class=" text-red-600 cursor-pointer hover:text-red-700 duration-100 dark:text-rose-500 dark:hover:text-rose-600">
+                <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M2.75 6.167c0-.46.345-.834.771-.834h2.665c.529-.015.996-.378 1.176-.916l.03-.095l.115-.372c.07-.228.131-.427.217-.605c.338-.702.964-1.189 1.687-1.314c.184-.031.377-.031.6-.031h3.478c.223 0 .417 0 .6.031c.723.125 1.35.612 1.687 1.314c.086.178.147.377.217.605l.115.372l.03.095c.18.538.74.902 1.27.916h2.57c.427 0 .772.373.772.834c0 .46-.345.833-.771.833H3.52c-.426 0-.771-.373-.771-.833Z"/><path fill="currentColor" d="M11.607 22h.787c2.707 0 4.06 0 4.941-.863c.88-.864.97-2.28 1.15-5.111l.26-4.081c.098-1.537.147-2.305-.295-2.792c-.442-.487-1.187-.487-2.679-.487H8.23c-1.491 0-2.237 0-2.679.487c-.441.487-.392 1.255-.295 2.792l.26 4.08c.18 2.833.27 4.248 1.15 5.112C7.545 22 8.9 22 11.607 22Z" opacity=".5"/></svg>
+                Clear all history
+            </button>
+        </div>
+        <div v-if="showSearch" class=" max-w-md flex">
+            <div class="relative w-full animate__animated animate__bounceIn">
+                <input @input="getQuizzes" v-model="searchKey" type="text" id="floating_filled" class="bg-white text-zinc-900 dark:text-white block rounded px-4 pb-2.5 pt-7 w-full text-sm border-0 shadow dark:border-[1.5px] dark:bg-zinc-800  appearance-none peer" placeholder=" " />
+                <label for="floating_filled" class=" peer-focus:border-b pb-1 border-zinc-800 dark:border-zinc-500 absolute text-sm text-zinc-800 dark:text-slate-100 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3">Search for quizzes</label>
+                <i @click="clearSearchInput" v-if="searchKey" class=" fa-solid fa-circle-xmark cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-2 text-xl right-5"></i>
+                <i v-else class="fa-solid fa-magnifying-glass cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-2 text-xl right-5"></i>
+                
+            </div>
+        </div>
+        
+    </div>
+   
+    <div v-if="quizzes.total === 0" class="font-medium flex items-center justify-center text-violet-600">
+        <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14c0 .53-.21 1.04-.59 1.41c-.37.38-.88.59-1.41.59H5c-.53 0-1.04-.21-1.41-.59C3.21 20.04 3 19.53 3 19V5c0-1.11.89-2 2-2m8 6V7h-2v2h2m0 8v-6h-2v6h2Z"/></svg>
+       No quiz to show.
+    </div>
+    <div class="grid md:grid-cols-3 md:gap-3 gap-y-3 max-w-6xl mx-auto">
+        <quiz-list :quizzes="quizzes.data"></quiz-list>
+        
+    </div>
+    <div  class="flex justify-end my-4 me-3">
+        <div class="flex items-center">
+            <button @click="changePage(currentPage -1)" :hidden="currentPage === 1" class="me-4" >
+            <svg class="text-primary hover:text-blue-500 duration-150 hover:-translate-x-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.6 4.6L10.8 12l4.6-4.6L14 6l-6 6l6 6l1.4-1.4Z"/></svg>
+            </button>
+            <span class="text-zinc-900 dark:text-slate-100">Page {{currentPage}}/{{quizzes.last_page}} </span>
+        <button  @click="changePage(currentPage + 1)" :hidden="currentPage == quizzes.last_page" class="ms-4">
+        <svg class="text-primary hover:text-blue-500 duration-150 hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-12 6l6-6l-6-6l-1.4 1.4l4.6 4.6l-4.6 4.6L10 18Z"/></svg>
+        </button>
+        </div>
+    </div>
+</template>
+
+<script>
+import QuizList from '../../components/QuizList.vue'
+import {mapActions,mapGetters} from 'vuex'
+import axios from 'axios'
+
+
+export default {
+    name : 'SavedQuizzes',
+    components: {
+        QuizList,
+    },
+    data() {
+    
+        return {
+            quizzes: [],
+            currentPage : 1,
+            searchKey : '',
+            showSearch : false,
+        }
+    },
+    computed: {
+        ...mapGetters(['getToken']),
+    },
+    methods: {
+        ...mapActions(['setLoadingStatus']),
+        getQuizzes() {
+            this.setLoadingStatus(true);
+            axios.post(`http://127.0.0.1:8000/api/quiz/getRecentQuizzes?page=${this.currentPage}`,{
+                searchKey : this.searchKey
+            },
+            {
+                    headers : {
+                        'Authorization' : `Bearer ${this.getToken}`,
+                    }
+                }).then((response) => {
+                this.quizzes = response.data.recent_quizzes;
+                this.setLoadingStatus(false);
+            }).catch(error => console.log(error));
+        },
+        changePage(page){
+            this.currentPage = page;
+            this.getQuizzes();
+        },
+        directHome() {
+            this.$router.push({
+                name : "home"
+            })
+        },
+        clearAllHistory(){
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
+            Swal.fire({
+                html: `<p class="text-center text-xl font-semibold">Remove all history?</p"><p class="text-center">You won't be able to revert this.</p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete all!',
+                color: `${textColor}`,
+                background: `${bgColor}`,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post(`http://127.0.0.1:8000/api/quiz/deleteAllHistory`,null, {
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
+                    }).then((response) => {
+                        this.showAlert(response.data.message,response.data.icon);
+                        this.quizzes = [];
+                }).catch(error => console.log(error));                    
+                }
+              })
+        },
+        showAlert(message,icon){
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
+            Swal.fire(
+                        {
+                            html: `${message}`,
+                            icon: icon,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ok',
+                            color: `${textColor}`,
+                            background: `${bgColor}`,
+                        }
+                      )
+        },
+    },
+    mounted () {
+        this.getQuizzes();
+    },
+}
+</script>
+

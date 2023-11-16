@@ -74,7 +74,7 @@ export default {
                         this.setLoadingStatus(false);
                         })
                         .catch((error)=>{
-                        return false;
+                                console.log(error.response.status);
                         })
                 },
                 categoryFilter(category_id) {
