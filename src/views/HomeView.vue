@@ -50,7 +50,7 @@
                     <p class="mb-5 text-zinc-800 dark:text-slate-200"><i class="fa-solid fa-bell txt-primary me-2"></i>Latest Quizzes</p>
                   </div>
                   <div v-if="latest_quizzes.length === 0" class=" font-semibold text-zinc-900 dark:text-slate-100">No Quiz to show </div>
-                  <quizzes-swiper v-else :quizzes="latest_quizzes"></quizzes-swiper>
+                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="latest_quizzes"></quizzes-swiper>
             </div>
 
             <div class="mx-auto max-w-5xl mt-4 md:mt-6">
@@ -58,7 +58,7 @@
                     <p class="mb-5 text-zinc-800 dark:text-slate-200"><i class="fa-solid fa-chart-simple txt-primary me-2"></i>Most Played Quizzes</p>
                   </div>
                   <div v-if="most_played_quizzes.length === 0" class=" font-semibold text-zinc-900 dark:text-slate-100">No Quiz to show </div>
-                  <quizzes-swiper v-else :quizzes="most_played_quizzes"></quizzes-swiper>
+                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="most_played_quizzes"></quizzes-swiper>
             </div>
         </div>
        
@@ -164,6 +164,34 @@ export default {
                         }
                       )
         },
+        handleSaveQuiz(quiz_id){
+            this.latest_quizzes = this.latest_quizzes.map(quiz => {
+                if (quiz.quiz_id === quiz_id) {
+                    return { ...quiz, saved: true };
+                }
+                return quiz;
+            });
+            this.most_played_quizzes = this.most_played_quizzes.map(quiz => {
+                if (quiz.quiz_id === quiz_id) {
+                    return { ...quiz, saved: true };
+                }
+                return quiz;
+            });
+        },
+        handleUnsaveQuiz(quiz_id){
+            this.latest_quizzes = this.latest_quizzes.map(quiz => {
+                if (quiz.quiz_id === quiz_id) {
+                    return { ...quiz, saved: false };
+                }
+                return quiz;
+            });
+            this.most_played_quizzes = this.most_played_quizzes.map(quiz => {
+                if (quiz.quiz_id === quiz_id) {
+                    return { ...quiz, saved: false };
+                }
+                return quiz;
+            });
+        }
     },
     mounted () {
         this.getHomeQuizzes();
