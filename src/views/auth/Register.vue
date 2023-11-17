@@ -168,7 +168,7 @@
                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"/></svg>
                 Please fill info first</div>
                 <div v-if="currentTab === 1" class="animate__animated animate__bounceIn">
-                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-8">
+                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Let's start with your name</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
@@ -181,7 +181,7 @@
                     </div>
                 </div>
                 <div v-if="currentTab === 2" class="animate__animated animate__bounceIn">
-                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-8">
+                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Let's us know your email address</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div v-if="currentTab === 3" class="animate__animated animate__bounceIn">
-                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-8">
+                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">What's your gender ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
@@ -218,26 +218,20 @@
             </div>
                 </div>
                 <div v-if="currentTab === 4" class="animate__animated animate__bounceIn">
-                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-8">
+                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">How old are you ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill your birth date to know your age.
                         </p>
                     </div>
+                   
                     
-                    <div class="relative max-w-sm">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                        </svg>
-                        </div>
-                        <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-                    </div>
-  
+                    <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" type="date" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-4 p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+   
                 </div>
                 <div v-if="currentTab === 5" class="animate__animated animate__bounceIn">
-                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-8">
+                    <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Where you live in ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
@@ -267,13 +261,23 @@
 
 </template>
 
+<style  scoped>
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor : pointer;
+  } 
+</style>
+
 
 <script>
 import axios from 'axios'
 import {mapActions} from 'vuex'
 
+
 export default {
 name : 'Register',
+components: { 
+
+},
 data() {
     return {
         currentTab : 1,
