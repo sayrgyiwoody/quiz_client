@@ -15,8 +15,8 @@ import { mapGetters , mapActions } from 'vuex'
             }
         },
         computed: {
-            isLoginView() {
-                return this.$route.name=== 'login'; 
+            isAuthView() {
+                return this.$route.name=== 'login' || this.$route.name === 'register'; 
             },
             ...mapGetters(["getToken"]),
 
@@ -80,7 +80,7 @@ import { mapGetters , mapActions } from 'vuex'
     </div>
      
      <side-nav></side-nav>
-     <div :class="{'sm:ml-52':!isLoginView}" class=" bg-slate-100 dark:bg-zinc-900 min-h-screen">
+     <div :class="{'sm:ml-52':!isAuthView}" class=" bg-slate-100 dark:bg-zinc-900 min-h-screen">
         <top-nav></top-nav>
         
         <div class="p-3 md:p-4">

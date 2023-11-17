@@ -72,12 +72,12 @@
                 <div class=" col-span-2">
     
                     <div class="relative z-0 w-full mb-6 group mt-4">
-                        <input v-model="getUserData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <input v-model="getUserData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Name</label>
                             <p v-if="errorMsg.name" class=" text-red-600 text-sm mt-2">{{ errorMsg.name[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-6 group mt-6">
-                        <input v-model="getUserData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <input v-model="getUserData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Email</label>
                             <p v-if="errorMsg.email" class=" text-red-600 text-sm mt-2">{{ errorMsg.email[0] }}</p>
                     </div>
@@ -85,12 +85,12 @@
     
     
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <input v-model="getUserData.number" name="number" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <input v-model="getUserData.number" name="number" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Phone Number</label>
                                 <p v-if="errorMsg.number" class=" text-red-600 text-sm mt-2">{{ errorMsg.number[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " v-model="getUserData.address"></textarea>
+                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required v-model="getUserData.address"></textarea>
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Address</label>
                         <p v-if="errorMsg.address" class=" text-red-600 text-sm mt-2">{{ errorMsg.address[0] }}</p>
                     </div>

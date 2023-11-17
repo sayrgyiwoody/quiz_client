@@ -1,6 +1,12 @@
 <template>
         
         <div class="w-full sm:w-auto max-w-lg mx-auto bg-white dark:bg-zinc-800 shadow px-6 py-4 rounded mt-8 md:mt-20">
+            <p class="flex justify-end cursor-pointer group text-zinc-800 dark:text-slate-100">
+                <a @click="directRegister" class="hover:text-primary duration-150  flex items-center">Register Here
+                    <svg class="ms-1 inline-block group-hover:translate-x-1 duration-150" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-12 6l6-6l-6-6l-1.4 1.4l4.6 4.6l-4.6 4.6L10 18Z"/></svg>
+                </a>
+        
+                </p>
             <img :src="'./images/logo.png'" class="mt-2 w-20 mx-auto rounded  mb-2 " alt="Logo" />
             
             <h4 class=" font-poppins font-medium text-2xl text-center text-zinc-900 dark:text-slate-100">Brain Lab</h4>
@@ -43,6 +49,7 @@
                 </button>
             </form>
         </div>
+        
     
 </template>
 
@@ -108,6 +115,11 @@ export default {
         directHome() {
             this.$router.push({
                 name : "home"
+            })
+        },
+        directRegister(){
+            this.$router.push({
+                name : "register"
             })
         },
         storeUserInfo(response){

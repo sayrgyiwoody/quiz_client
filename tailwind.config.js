@@ -16,6 +16,7 @@ export default {
         primary: "#2563EB",
         primary_hover: "#1d4ed8",
         muted: "#ababab",
+        
       },
       fontFamily: {
         orelega: ["Orelega One", "serif"],
