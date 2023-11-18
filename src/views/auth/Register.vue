@@ -147,8 +147,11 @@
                     <div class="relative z-0 w-full mb-4 group">
                         <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" name="name" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="peer-focus:font-medium absolute text-sm  dark:text-slate-200 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0] bg-slate-100 dark:bg-zinc-900  peer-focus:bg-slate-100 dark:peer-focus:bg-zinc-900 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Your name</label>
+                        <i v-if="validateName === true" class=" text-emerald-500 fa-solid fa-circle-check cursor-pointer  absolute transform -translate-y-6 -bottom-3 text-xl right-4"></i>
+                        
                     </div>
                     <p v-if="errorMsg.name" class=" text-red-600 text-sm mt-2">{{ errorMsg.name[0] }}</p>
+                    <p v-if="validateName !==true" class=" text-blue-600 dark:text-blue-500  text-sm mt-2">{{ validateName }}</p>
 
                 </div>
                 <div v-if="currentTab === 2" class="animate__animated animate__bounceIn">
@@ -162,14 +165,17 @@
                     <div class="relative z-0 w-full mb-4 group">
                         <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" name="email" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="peer-focus:font-medium absolute text-sm  dark:text-slate-200 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0] bg-slate-100 dark:bg-zinc-900  peer-focus:bg-slate-100 dark:peer-focus:bg-zinc-900 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Your Email</label>
+                        <i v-if="validateEmail === true" class=" text-emerald-500 fa-solid fa-circle-check cursor-pointer  absolute transform -translate-y-6 -bottom-3 text-xl right-4"></i>
+                        
                     </div>
                     <p v-if="errorMsg.email" class=" text-red-600 text-sm mt-2">{{ errorMsg.email[0] }}</p>
+                    <p v-if="validateEmail !==true" class=" text-blue-600 dark:text-blue-500  text-sm mt-2">{{ validateEmail }}</p>
 
                 </div>
                 <div v-if="currentTab === 3" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
-                        <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Set account password</h4>
+                        <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Create account password</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please pick a strong password for your account security.
                         </p>
@@ -178,9 +184,15 @@
                     <div class="relative z-0 w-full mb-4 group">
                         <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]"  name="password" :type="showPassword? 'text':'password'" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="peer-focus:font-medium absolute text-sm  dark:text-slate-200 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0] bg-slate-100 dark:bg-zinc-900  peer-focus:bg-slate-100 dark:peer-focus:bg-zinc-900 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Password</label>
-                        <i @click="togglePasswordType" :class="showPassword?'fa-eye-slash':'fa-eye'" class="fa-solid  eye-icon cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-3 text-xl right-4"></i>
+                        <i v-if="validatePassword === true" class=" text-emerald-500 fa-solid fa-circle-check cursor-pointer  absolute transform -translate-y-6 -bottom-3 text-xl right-4"></i>
+                        
+                    </div>
+                    <div class="flex items-center">
+                        <input v-model="showPassword" id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Show Password</label>
                     </div>
                     <p v-if="errorMsg.password" class=" text-red-600 text-sm mt-2">{{ errorMsg.password[0] }}</p>
+                    <p v-if="validatePassword !==true" class=" text-blue-600 dark:text-blue-500  text-sm mt-2">{{ validatePassword }}</p>
 
                 </div>
                 <div v-if="currentTab === 4" class="animate__animated animate__bounceIn">
@@ -235,8 +247,12 @@
                         <textarea @keyup.enter="register" v-model="registerData[currentTab-1]" name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required></textarea>
                         <label class="bg-slate-100 dark:bg-zinc-900 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-slate-100 dark:peer-focus:bg-zinc-900 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Address</label>
                         <p v-if="errorMsg.address" class=" text-red-600 text-sm mt-2">{{ errorMsg.address[0] }}</p>
+                        <i v-if="validateAddress === true" class=" text-emerald-500 fa-solid fa-circle-check cursor-pointer  absolute transform -translate-y-6 top-10 text-xl right-4"></i>
+                        
                     </div>
-  
+                    <p v-if="validateAddress !==true" class=" text-blue-600 dark:text-blue-500  text-sm mt-2">{{ validateAddress }}</p>
+                    
+
                 </div>
                 <button v-if="!(currentTab >= 6)" @click="nextStep" class=" animate__animated animate__bounceIn group ms-auto  mb-2 flex justify-center items-center bg-primary hover:bg-primary_hover px-5 py-2 text-sm font-medium text-white rounded-3xl mt-4 w-fit">
                     Next Step
@@ -270,6 +286,47 @@ export default {
 name : 'Register',
 components: { 
 
+},
+computed: {
+
+    validateName() {
+        if(this.registerData[0] !== undefined && this.registerData[0] !== ''){
+            if(this.registerData[0].length < 3 || this.registerData[0].length > 20){
+                return 'The length of name must be from 3 to 20' ;
+            }else {
+                return true;
+            }
+        }
+    },
+    validateEmail() {
+        if(this.registerData[1] !== undefined && this.registerData[1] !== ''){
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(this.registerData[1])) {
+                return true;
+            } else {
+                return 'Not a valid email type';
+            }
+        }
+        
+    },
+    validatePassword() {
+        if(this.registerData[2] !== undefined && this.registerData[2] !== ''){
+            if(this.registerData[2].length < 6){
+                return 'Password length must be greater than 6' ;
+            }else {
+                return true;
+            }
+        }
+    },
+    validateAddress() {
+        if(this.registerData[5] !== undefined && this.registerData[5] !== ''){
+            if(this.registerData[5].length > 100){
+                return 'Address length not greater than 100 characters.' ;
+            }else {
+                return true;
+            }
+        }
+    },
 },
 data() {
     return {
@@ -356,15 +413,7 @@ methods: {
         this.userData.email = '';
         this.userData.password = '';
     },
-    validateEmail() {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(this.userData.email)) {
-            return true;
-        } else {
-            this.validateMessage = "Not a valid email type";
-            return false;
-        }
-    },
+   
     directHome() {
         this.$router.push({
             name : "home"
