@@ -136,6 +136,10 @@
                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"/></svg>
                 Please fill info first
                 </div>
+                <div v-if="valiRequired === true" class="animate__animated animate__bounceIn bg-amber-500 text-white rounded-2xl rounded-bl-none px-4 py-2 mb-4 w-fit">
+                    <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"/></svg>
+                    Please adhere validation rules
+                    </div>
                 <div v-if="currentTab === 1" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
                         <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
@@ -254,11 +258,11 @@
                     
 
                 </div>
-                <button v-if="!(currentTab >= 6)" @click="nextStep" class=" animate__animated animate__bounceIn group ms-auto  mb-2 flex justify-center items-center bg-primary hover:bg-primary_hover px-5 py-2 text-sm font-medium text-white rounded-3xl mt-4 w-fit">
+                <button v-if="!(currentTab >= 6)" @click="nextStep" class=" disabled:bg-gray-200 disabled:text-slate-600 dark:disabled:text-white dark:disabled:bg-zinc-700 animate__animated animate__bounceIn group ms-auto  mb-2 flex justify-center items-center bg-primary hover:bg-primary_hover px-5 py-2 text-sm font-medium text-white rounded-3xl mt-4 w-fit">
                     Next Step
                     <svg class=" group-hover:translate-x-1 duration-150 inline-block ms-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12.675 12L9.6 15.075L11 16.5l4.5-4.5L11 7.5L9.6 8.925L12.675 12ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/></svg>
                 </button>
-                <button v-else @click="register" class=" animate__animated animate__bounceIn group ms-auto  mb-2 flex justify-center items-center bg-primary hover:bg-primary_hover px-5 py-2 text-sm font-medium text-white rounded-3xl mt-4 w-fit">
+                <button v-else @click="register" class=" disabled:bg-gray-200 disabled:text-slate-600 dark:disabled:text-white dark:disabled:bg-zinc-700 animate__animated animate__bounceIn group ms-auto  mb-2 flex justify-center items-center bg-primary hover:bg-primary_hover px-5 py-2 text-sm font-medium text-white rounded-3xl mt-4 w-fit">
                     Finish Registration
                     <svg class=" group-hover:translate-x-1 duration-150 inline-block ms-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12.675 12L9.6 15.075L11 16.5l4.5-4.5L11 7.5L9.6 8.925L12.675 12ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/></svg>
                 </button>
@@ -333,6 +337,7 @@ data() {
         currentTab : 1,
         registerData : [],
         infoRequired : false,
+        valiRequired : false,
         validationFail : false,
         showPassword: false,
         validateStatus : false,
@@ -344,7 +349,7 @@ data() {
                 password : '',
                 birthday : '',
                 address : '',
-            },
+        },
     }
 },
 methods: {
@@ -353,10 +358,14 @@ methods: {
         
         this.infoRequired = false;
         if(this.registerData[this.currentTab-1]!==undefined && this.registerData[this.currentTab-1] !== null && this.registerData[this.currentTab-1] !== ''){
-            this.registerData[this.currentTab] = "";
-        
-            this.currentTab = this.currentTab + 1;
-        }else {
+            if(this.currentTab === 1 && this.validateName !== true || this.currentTab === 2 && this.validateEmail !== true ){
+                this.showValiRequired();
+            }else {
+                this.registerData[this.currentTab] = "";
+                this.currentTab = this.currentTab + 1;
+            }
+            
+        } else {
             this.showInfoRequired();
         }
 
@@ -365,6 +374,12 @@ methods: {
         this.infoRequired = true;
         setTimeout(() => {
             this.infoRequired = false;
+        }, 3000);
+    },
+    showValiRequired(){
+        this.valiRequired = true;
+        setTimeout(() => {
+            this.valiRequired = false;
         }, 3000);
     },
     changeTab(tab){
@@ -378,6 +393,9 @@ methods: {
     },
     register(){
         if(this.registerData[this.currentTab-1]){
+            if(this.currentTab === 6 && this.validateAddress !== true){
+                this.showValiRequired();         
+            }else {
                 this.setLoadingStatus(true);
                 let formData = new FormData();
                 
@@ -404,6 +422,8 @@ methods: {
                 })
                 .catch(error => console.log(error))
                 this.setLoadingStatus(false);
+            }
+                
         }else {
             this.showInfoRequired();
         }
