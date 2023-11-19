@@ -85,9 +85,9 @@
     
     
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <input v-model="getUserData.number" name="number" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                        <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Phone Number</label>
-                                <p v-if="errorMsg.number" class=" text-red-600 text-sm mt-2">{{ errorMsg.number[0] }}</p>
+                        <input v-model="getUserData.birthday" name="birthday" type="date" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Birthday</label>
+                                <p v-if="errorMsg.birthday" class=" text-red-600 text-sm mt-2">{{ errorMsg.birthday[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-4 group mt-6">
                         <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required v-model="getUserData.address"></textarea>
@@ -119,7 +119,7 @@ export default {
                 name : '',
                 email : '',
                 gender : '',
-                number : '',
+                birthday : '',
                 address : '',
             },
         }
@@ -181,7 +181,7 @@ export default {
             formData.append('name', this.getUserData.name);
             formData.append('email', this.getUserData.email);
             formData.append('gender', this.getUserData.gender);
-            formData.append('number', this.getUserData.number);
+            formData.append('birthday', this.getUserData.birthday);
             formData.append('address', this.getUserData.address);
 
             // Append the file

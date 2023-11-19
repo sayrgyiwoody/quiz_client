@@ -15,15 +15,17 @@
     <aside v-if="!isAuthView" :class="showNavMobile ?'translate-x-0':'-translate-x-full'" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform  sm:translate-x-0" aria-label="Sidebar">
        
       <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
-         <div v-if="userData" class="px-6">
+         <div class="px-6">
             <div @click="toggleNav" class="text-zinc-900 dark:text-white md:hidden">
                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 15 15">
                   <path fill="currentColor" fill-rule="evenodd" d="M.877 7.5a6.623 6.623 0 1 1 13.246 0a6.623 6.623 0 0 1-13.246 0ZM7.5 1.827a5.673 5.673 0 1 0 0 11.346a5.673 5.673 0 0 0 0-11.346Zm2.354 3.32a.5.5 0 0 1 0 .707L8.207 7.5l1.647 1.646a.5.5 0 0 1-.708.708L7.5 8.207L5.854 9.854a.5.5 0 0 1-.708-.708L6.793 7.5L5.146 5.854a.5.5 0 0 1 .708-.708L7.5 6.793l1.646-1.647a.5.5 0 0 1 .708 0Z" clip-rule="evenodd"/>
                </svg>
              </div> 
-            <img class="mx-auto rounded-full w-16 h-16 object-cover mb-1" :src="imageUrl" alt="">  
-            <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ userData.name }}</p>
-            <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ userData.email }}</p>
+            <div v-if="userData" @click="directProfile" class="">
+               <img class="mx-auto rounded-full w-16 h-16 object-cover mb-1" :src="imageUrl" alt="">  
+               <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ userData.name }}</p>
+               <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ userData.email }}</p>
+            </div>
          </div>
            <ul class="space-y-2 px-6 font-medium">
             
@@ -136,6 +138,11 @@ export default {
       directLogin() {
          this.$router.push({
             name : "login"
+         })
+      },
+      directProfile() {
+         this.$router.push({
+            name : "profile"
          })
       },
       directCreate() {
