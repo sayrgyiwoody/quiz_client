@@ -61,7 +61,6 @@
                   <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="most_played_quizzes"></quizzes-swiper>
             </div>
         </div>
-       
     </div>
 </template>
 

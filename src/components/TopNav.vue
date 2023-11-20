@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     isAuthView() {
-        return this.$route.name=== 'login' || this.$route.name === 'register'; 
+        return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
     }
   },
   methods: {

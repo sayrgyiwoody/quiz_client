@@ -131,7 +131,7 @@
                 <div v-if="validationFail" class="animate__animated animate__bounceIn bg-rose-500 text-white rounded-2xl rounded-bl-none px-4 py-2 mb-4 w-fit">
                     <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"/></svg>
                     Validation fail check input steps
-                    </div>
+                </div>
                 <div v-if="infoRequired === true" class="animate__animated animate__bounceIn bg-indigo-500 text-white rounded-2xl rounded-bl-none px-4 py-2 mb-4 w-fit">
                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"/></svg>
                 Please fill info first
@@ -410,6 +410,8 @@ methods: {
 
                 axios.post('http://127.0.0.1:8000/api/register',formData)
                 .then((response) => {
+                this.setLoadingStatus(false);
+
                     if(response.data.status === true){
                         this.directHome();
                         this.storeUserInfo(response);
@@ -421,8 +423,10 @@ methods: {
                         }
             
                 })
-                .catch(error => console.log(error))
-                this.setLoadingStatus(false);
+                .catch(error => {
+                    this.setLoadingStatus(false);
+                    console.log(error);
+                })
             }
                 
         }else {

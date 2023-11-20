@@ -16,7 +16,7 @@ import { mapGetters , mapActions } from 'vuex'
         },
         computed: {
             isAuthView() {
-                return this.$route.name=== 'login' || this.$route.name === 'register'; 
+                return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
             },
             ...mapGetters(["getToken"]),
 
@@ -62,7 +62,7 @@ import { mapGetters , mapActions } from 'vuex'
         mounted () {
             this.checkDarkMode();
             this.getLocalData();
-            this.checkToken();
+            // this.checkToken();
         }
     }
 </script>

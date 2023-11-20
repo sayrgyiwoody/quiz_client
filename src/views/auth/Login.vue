@@ -39,7 +39,7 @@
                     <i @click="togglePasswordType" :class="showPassword?'fa-eye-slash':'fa-eye'" class="fa-solid  eye-icon cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-3 text-xl right-4"></i>
                     </div>
                 </div>
-                <a class="underline text-sm text-blue-600 hover:text-blue-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a @click="directForgotPassword" class="underline text-sm text-blue-600 hover:text-blue-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Forgot your password?
                 </a>
     
@@ -120,6 +120,11 @@ export default {
         directRegister(){
             this.$router.push({
                 name : "register"
+            })
+        },
+        directForgotPassword(){
+            this.$router.push({
+                name : "forgotPassword"
             })
         },
         storeUserInfo(response){

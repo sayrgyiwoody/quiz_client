@@ -109,7 +109,7 @@ export default {
       ...mapGetters(['getToken','getUserData']),
       
         isAuthView() {
-         return this.$route.name=== 'login'  || this.$route.name === 'register'; 
+         return this.$route.name=== 'login'  || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
       },
       imageUrl(){
          if(this.getUserData && this.getUserData.profile_photo_path){
