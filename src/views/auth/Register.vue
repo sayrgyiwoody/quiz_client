@@ -396,7 +396,6 @@ methods: {
             if(this.currentTab === 6 && this.validateAddress !== true){
                 this.showValiRequired();         
             }else {
-                this.setLoadingStatus(true);
                 let formData = new FormData();
                 
                 // Append JSON data
@@ -406,6 +405,8 @@ methods: {
                 formData.append('gender', this.registerData[3]);
                 formData.append('birthday', this.registerData[4]);
                 formData.append('address', this.registerData[5]);
+
+                this.setLoadingStatus(true);
 
                 axios.post('http://127.0.0.1:8000/api/register',formData)
                 .then((response) => {
