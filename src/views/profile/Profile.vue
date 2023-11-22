@@ -199,6 +199,8 @@ export default {
                     if(response.data.status == 'success'){
                         this.showAlert(response.data.message,response.data.status);
                         this.setUserData(response.data.userInfo[0]);
+                        this.storeLocalData(response.data.userInfo[0]);
+                        this.errorMsg = {};
                     }else {
                         this.errorMsg = response.data.errors;
                     }
@@ -228,6 +230,9 @@ export default {
                             background: `${bgColor}`,
                         }
                       )
+        },
+        storeLocalData(data){
+            localStorage.setItem("userData",JSON.stringify(data));
         },
         
     },

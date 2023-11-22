@@ -84,7 +84,7 @@
                     <div @click="changeTab(2)" class="cursor-pointer group flex justify-end items-center ">
                         <p class=" group-hover:text-primary dark:group-hover:text-blue-500 font-medium  text-zinc-900 dark:text-slate-100">Email</p>
                         <button :class="currentTab===2?'bg-primary ':'bg-white dark:bg-zinc-800 group-hover:bg-slate-50 dark:group-hover:bg-zinc-700'" class="  duration-100 ms-3 w-12 h-12 rounded-full flex items-center justify-center shadow border dark:border-zinc-600">
-                            <svg :class="currentTab===2?'text-white':'text-zinc-800 '" class="w-8 h-8  dark:text-slate-200" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36"><path fill="currentColor" d="M32 6H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-1.54 22H5.66l7-7.24l-1.44-1.39L4 26.84V9.52l12.43 12.37a2 2 0 0 0 2.82 0L32 9.21v17.5l-7.36-7.36l-1.41 1.41ZM5.31 8h25.07L17.84 20.47Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                            <svg :class="currentTab===2?'text-white':'text-zinc-800 '" class="w-6 h-6  dark:text-slate-200" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36"><path fill="currentColor" d="M32 6H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-1.54 22H5.66l7-7.24l-1.44-1.39L4 26.84V9.52l12.43 12.37a2 2 0 0 0 2.82 0L32 9.21v17.5l-7.36-7.36l-1.41 1.41ZM5.31 8h25.07L17.84 20.47Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
                         </button>
                     </div>
                     <div class="w-[2px] h-16 bg-zinc-700 absolute right-6"></div>
@@ -361,7 +361,9 @@ methods: {
             if(this.currentTab === 1 && this.validateName !== true || this.currentTab === 2 && this.validateEmail !== true ){
                 this.showValiRequired();
             }else {
-                this.registerData[this.currentTab] = "";
+                if(this.registerData[this.currentTab] === undefined){
+                    this.registerData[this.currentTab] = "";
+                }
                 this.currentTab = this.currentTab + 1;
             }
             
