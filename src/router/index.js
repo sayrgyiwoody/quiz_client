@@ -78,6 +78,10 @@ const routes = [
     name  :'notFound',
     component : ()=> import('../views/NotFound.vue')
   },
+  { 
+    path: '/socialite-callback/:userId',
+    component: ()=> import('../views/SocialiteCallback.vue')
+  },
 ]
 
 const router = createRouter({

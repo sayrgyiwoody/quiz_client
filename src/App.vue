@@ -18,11 +18,11 @@ import { mapGetters , mapActions } from 'vuex'
             isAuthView() {
                 return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
             },
-            ...mapGetters(["getToken"]),
+            ...mapGetters(["getToken","getUserData"]),
 
         },
         methods: {
-            ...mapActions(["setLoadingStatus","setUserData"]),
+            ...mapActions(["setLoadingStatus","setUserId"]),
             checkDarkMode() {
                 const localDarkMode = localStorage.getItem('darkMode');
                 if(JSON.parse(localDarkMode) == true ){
@@ -43,8 +43,9 @@ import { mapGetters , mapActions } from 'vuex'
             },
                    
             getLocalData(){
-                this.$store.dispatch("setUserData",JSON.parse(localStorage.getItem('userData')));
+                this.$store.dispatch("setUserId",JSON.parse(localStorage.getItem('userId')));
                 this.$store.dispatch("setToken",localStorage.getItem('login_token'));
+                // this.getProfileInfo();
             },
             directLogin() {
                 this.$router.push({
@@ -56,13 +57,23 @@ import { mapGetters , mapActions } from 'vuex'
                 this.$store.dispatch("setToken",null);
                 this.directLogin();
             },
-            
+            getProfileInfo() {
+                this.setLoadingStatus(true);
+                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
+                    }).then((response) => {
+                        this.$store.dispatch("setUserData",response.data.user);
+                        this.setLoadingStatus(false);
+                }).catch(error => console.log(error));
+        },
             
         },
         mounted () {
             this.checkDarkMode();
             this.getLocalData();
-            // this.checkToken();
+
         }
     }
 </script>

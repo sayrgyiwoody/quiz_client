@@ -54,15 +54,15 @@
     
                     <div class="flex items-center space-x-3 justify-center">
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'male'" id="default-radio-1" type="radio" value="male" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input :checked="userData.gender === 'male'" id="default-radio-1" type="radio" v-model="userData.gender" value="male" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-1" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
                         </div>
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'female'"  id="default-radio-2" type="radio" value="female" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input :checked="userData.gender === 'female'"  id="default-radio-2" type="radio" v-model="userData.gender" value="female" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-2" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                         </div>
                         <div class="flex items-center">
-                            <input :checked="getUserData.gender === 'other'"  id="default-radio-3" type="radio" value="other" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input :checked="userData.gender === 'other'"  id="default-radio-3" type="radio" v-model="userData.gender" value="other" name="gender" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-3" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
                         </div>
                     </div>
@@ -72,12 +72,12 @@
                 <div class=" col-span-2">
     
                     <div class="relative z-0 w-full mb-6 group mt-4">
-                        <input v-model="getUserData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="userData.name" name="name" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none  border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Name</label>
                             <p v-if="errorMsg.name" class=" text-red-600 text-sm mt-2">{{ errorMsg.name[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-6 group mt-6">
-                        <input v-model="getUserData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="userData.email" name="email" type="text" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px]  rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Email</label>
                             <p v-if="errorMsg.email" class=" text-red-600 text-sm mt-2">{{ errorMsg.email[0] }}</p>
                     </div>
@@ -85,12 +85,12 @@
     
     
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <input v-model="getUserData.birthday" name="birthday" type="date" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input v-model="userData.birthday" name="birthday" type="date" class=" border-slate-300 dark:border-zinc-700 dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Birthday</label>
                                 <p v-if="errorMsg.birthday" class=" text-red-600 text-sm mt-2">{{ errorMsg.birthday[0] }}</p>
                     </div>
                     <div class="relative z-0 w-full mb-4 group mt-6">
-                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required v-model="getUserData.address"></textarea>
+                        <textarea name="address"  cols="30" rows="8" class=" border-slate-300 dark:border-zinc-700 dark:text-white relative block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required v-model="userData.address"></textarea>
                         <label class="bg-white dark:bg-zinc-800 peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10 text-zinc-900 peer-focus:z-10 origin-[0]  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Address</label>
                         <p v-if="errorMsg.address" class=" text-red-600 text-sm mt-2">{{ errorMsg.address[0] }}</p>
                     </div>
@@ -111,7 +111,9 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            userData : {
 
+            },
             imageUrl : '/images/default_user.png',
             file : null,
             errorMsg : {
@@ -125,14 +127,14 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getToken','getUserData']),
+        ...mapGetters(['getToken','getUserId']),
         
     },
     methods: {
-        ...mapActions(['setLoadingStatus','setUserData']),
+        ...mapActions(['setLoadingStatus','setUserId','setUserData']),
         getImageUrl(){
-            if(this.getUserData.profile_photo_path){
-            this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
+            if(this.userData.profile_photo_path){
+            this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.userData.profile_photo_path;
             }
         },
         handleDrop(event) {
@@ -166,10 +168,8 @@ export default {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
                 }).then((response) => {
-                    const userInfo = response.data.user;
-                    this.setUserData(userInfo);
+                    this.userData = response.data.user;
                     this.getImageUrl();
-                   
                     this.setLoadingStatus(false);
             }).catch(error => console.log(error));
         },
@@ -178,11 +178,11 @@ export default {
             let formData = new FormData();
             
             // Append JSON data
-            formData.append('name', this.getUserData.name);
-            formData.append('email', this.getUserData.email);
-            formData.append('gender', this.getUserData.gender);
-            formData.append('birthday', this.getUserData.birthday);
-            formData.append('address', this.getUserData.address);
+            formData.append('name', this.userData.name);
+            formData.append('email', this.userData.email);
+            formData.append('gender', this.userData.gender);
+            formData.append('birthday', this.userData.birthday);
+            formData.append('address', this.userData.address);
 
             // Append the file
             if(this.file !== null){
@@ -199,7 +199,7 @@ export default {
                     if(response.data.status == 'success'){
                         this.showAlert(response.data.message,response.data.status);
                         this.setUserData(response.data.userInfo[0]);
-                        this.storeLocalData(response.data.userInfo[0]);
+                        // this.storeLocalData(response.data.userInfo[0]);
                         this.errorMsg = {};
                     }else {
                         this.errorMsg = response.data.errors;
