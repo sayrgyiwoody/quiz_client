@@ -1,5 +1,5 @@
 <template>
-    <div :class="isAuthView?'flex':'hidden'" class=" md:flex items-center justify-between h-16 shadow bg-white dark:bg-zinc-800 px-4 py-2">
+    <div :class="{'hidden':isLoggedIn && !isAuthView}" class="flex md:flex items-center justify-between h-16 shadow bg-white dark:bg-zinc-800 px-4 py-2">
         <a @click="directHome" class=" cursor-pointer flex items-center pl-2.5">
           <img :src="'/images/logo.png'" class="h-12 mr-2 rounded-full" alt="Logo" />
             
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -23,8 +24,14 @@ export default {
 
   },
   computed: {
-    isAuthView() {
-        return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
+    ...mapGetters(["getToken"]),
+    isLoggedIn() {
+      return this.getToken !== '' || this.getToken !== undefined || this.getToken !== null;
+
+    },
+    isAuthView(){
+        return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword' ; 
+
     }
   },
   methods: {
@@ -34,7 +41,7 @@ export default {
         localStorage.setItem('darkMode', this.darkMode.toString());
     },
     directHome() {
-         if(!this.isAuthView){
+         if(this.isLoggedIn && !this.isAuthView){
           this.$router.push({
             name : "home"
          })

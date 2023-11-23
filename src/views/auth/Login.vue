@@ -90,7 +90,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getCallbackError"]),
+        ...mapGetters(["getCallbackError","getToken"]),
+        isLoggedIn() {
+            return this.getToken !== '' && this.getToken !== undefined && this.getToken !== null;
+        },
     },
     methods: {
         ...mapActions(["setLoadingStatus","setCallbackError"]),
@@ -160,6 +163,11 @@ export default {
         },
 
         
+    },
+    mounted () {
+        if(this.isLoggedIn){
+            this.directHome();
+        }
     },
     
 }

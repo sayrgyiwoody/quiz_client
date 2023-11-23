@@ -15,8 +15,12 @@ import { mapGetters , mapActions } from 'vuex'
             }
         },
         computed: {
-            isAuthView() {
-                return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
+            isLoggedIn() {
+                return this.getToken !== '' && this.getToken !== undefined && this.getToken !== null;
+            },
+            isAuthView(){
+                return this.$route.name=== 'login' || this.$route.name === 'register' || this.$route.name === 'forgotPassword' ; 
+
             },
             ...mapGetters(["getToken","getUserData"]),
 
@@ -34,7 +38,7 @@ import { mapGetters , mapActions } from 'vuex'
             checkToken(){
 
                 if(this.getToken != null && this.getToken != undefined && this.getToken != ""){
-                    
+                    this.directHome();
                 }else {
                     this.loginStatus = false;
                     console.log("redirected to login");
@@ -53,6 +57,11 @@ import { mapGetters , mapActions } from 'vuex'
             directLogin() {
                 this.$router.push({
                     name : "login"
+                })
+            },
+            directHome() {
+                this.$router.push({
+                    name : "home"
                 })
             },
             logout(){
@@ -85,6 +94,7 @@ import { mapGetters , mapActions } from 'vuex'
             
         },
         mounted () {
+            // this.checkToken();
             this.checkDarkMode();
             this.getLocalData();
 
@@ -105,7 +115,7 @@ import { mapGetters , mapActions } from 'vuex'
     </div>
      
      <side-nav></side-nav>
-     <div :class="{'sm:ml-52':!isAuthView}" class=" bg-slate-100 dark:bg-zinc-900 min-h-screen">
+     <div :class="{'sm:ml-52':isLoggedIn && !isAuthView}" class=" bg-slate-100 dark:bg-zinc-900 min-h-screen">
         <top-nav></top-nav>
         
         <div class="p-3 md:p-4">

@@ -283,7 +283,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 <script>
 import axios from 'axios'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 
 export default {
@@ -351,6 +351,12 @@ data() {
                 address : '',
         },
     }
+},
+computed: {
+    ...mapGetters(["getToken"]),
+    isLoggedIn() {
+        return this.getToken !== '' || this.getToken !== undefined || this.getToken !== null;
+    },
 },
 methods: {
     ...mapActions(["setLoadingStatus"]),
@@ -459,6 +465,12 @@ methods: {
         localStorage.setItem("userData",JSON.stringify(data.user));
     },
     
+},
+mounted () {
+    // if(this.isLoggedIn){
+    //     this.directHome();
+    // }
+
 },
 
 }
