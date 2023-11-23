@@ -23,8 +23,8 @@
              </div> 
             <div v-if="userData" @click="directProfile" class="">
                <img class="mx-auto rounded-full w-16 h-16 object-cover mb-1" :src="imageUrl" alt="">  
-               <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ getUserData.name }}</p>
-               <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ getUserData.email }}</p>
+               <p class="text-center text-xl font-semibold text-zinc-900 dark:text-slate-100 ">{{ userData.name }}</p>
+               <p class="text-sm text-center text-slate-600 dark:text-muted mb-4">{{ userData.email }}</p>
             </div>
          </div>
            <ul class="space-y-2 px-6 font-medium">
@@ -102,24 +102,26 @@ export default {
          darkMode: localStorage.getItem('darkMode') === 'true',
          showNavMobile : false,
          isMobile: window.innerWidth <= 768,
-         userData : {
-
-         },
       }
    },
    computed: {
       ...mapGetters(['getToken','getUserId','getUserData']),
-      
+      userData(){
+         return this.getUserData;
+      },
+      imageUrl(){
+         if(this.getUserData.provider_avatar && this.getUserData.profile_photo_path === null){
+           return this.getUserData.provider_avatar;
+         }else if(this.getUserData && this.getUserData.profile_photo_path){
+           return 'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
+         }else {
+            return '/images/default_user.png'
+         }
+      },
         isAuthView() {
          return this.$route.name=== 'login'  || this.$route.name === 'register' || this.$route.name === 'forgotPassword'; 
       },
-      imageUrl(){
-         if(this.userData && this.userData.profile_photo_path){
-         
-         return 'http://127.0.0.1:8000/storage/'+ this.userData.profile_photo_path;
-         }
-         return '/images/default_user.png';
-      },
+      
     },
    methods: {
       ...mapActions(['setLoadingStatus','setToken']),
@@ -162,20 +164,11 @@ export default {
          this.directLogin();
          
       },
-      getProfileInfo() {
-         this.setLoadingStatus(true);
-                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
-                        headers : {
-                            'Authorization' : `Bearer ${this.getToken}`,
-                        }
-                    }).then((response) => {
-                        this.$store.dispatch("setUserData",response.data.user);
-                        this.setLoadingStatus(false);
-                }).catch(error => console.log(error));
-        },
+      
+        
    },
    mounted () {
-      // this.getProfileInfo();
+
    },
 
 }

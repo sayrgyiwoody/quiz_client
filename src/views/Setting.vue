@@ -165,8 +165,10 @@ export default {
                                 'Authorization' : `Bearer ${this.getToken}`,
                             }
                         }).then((response) => {
+                            if(response.data.status === true){
+                                this.logout();
+                            }
                             this.setLoadingStatus(false);
-                            this.logout();
                     }).catch(error => console.log(error)); 
                 }
               })

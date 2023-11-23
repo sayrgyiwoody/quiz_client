@@ -132,9 +132,11 @@ export default {
     },
     methods: {
         ...mapActions(['setLoadingStatus','setUserId','setUserData']),
-        getImageUrl(){
-            if(this.userData.profile_photo_path){
-            this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.userData.profile_photo_path;
+        updateImageUrl(){
+            if(this.userData.provider_avatar && this.userData.profile_photo_path === null ){
+                this.imageUrl = this.userData.provider_avatar;
+            }else if(this.userData.profile_photo_path){
+                this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.userData.profile_photo_path;
             }
         },
         handleDrop(event) {
@@ -169,7 +171,7 @@ export default {
                     }
                 }).then((response) => {
                     this.userData = response.data.user;
-                    this.getImageUrl();
+                    this.updateImageUrl();
                     this.setLoadingStatus(false);
             }).catch(error => console.log(error));
         },
@@ -199,7 +201,7 @@ export default {
                     if(response.data.status == 'success'){
                         this.showAlert(response.data.message,response.data.status);
                         this.setUserData(response.data.userInfo[0]);
-                        // this.storeLocalData(response.data.userInfo[0]);
+                        this.storeLocalData(response.data.userInfo[0]);
                         this.errorMsg = {};
                     }else {
                         this.errorMsg = response.data.errors;

@@ -100,9 +100,10 @@ export default {
                 }).then((response) => {
                 this.quiz = response.data.quiz;
                 this.played_count = response.data.played_count;
-                if(response.data.quiz.user_image != null){
+                if(response.data.quiz.provider_avatar != null && response.data.quiz.user_image === null){
+                    this.imageUrl =  response.data.quiz.provider_avatar;
+                }else if(response.data.quiz.user_image != null){
                     this.imageUrl =  'http://127.0.0.1:8000/storage/'+ response.data.quiz.user_image;
-
                 }
 
                 this.setLoadingStatus(false);
