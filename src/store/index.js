@@ -8,12 +8,14 @@ export default createStore({
       
     },
     token : '',
+    callbackError : null,
   },
   getters: {
     getLoadingStatus : (state) => state.loadingStatus,
     getUserId : (state) => state.userId,
     getUserData : (state) => state.userData,
     getToken : (state) => state.token,
+    getCallbackError : (state) => state.callbackError,
   },
   mutations: {
   },
@@ -22,7 +24,7 @@ export default createStore({
     setToken : ({state},value) => state.token = value,
     setUserId : ({state},value) => state.userId = value,
     setUserData : ({state},value) => state.userData = value,
-
+    setCallbackError : ({state},value) => state.callbackError = value,
   },
   modules: {
   }

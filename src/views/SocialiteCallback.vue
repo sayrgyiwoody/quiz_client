@@ -5,12 +5,17 @@
   </template>
   
   <script>
+import { mapActions } from 'vuex';
   export default {
+    methods: {
+      ...mapActions(["setCallbackError"]),
+    },
     created() {
         const userId = this.$route.params.userId;
         const token = this.$route.query.token;
-  
-      if (userId) {
+        const error = this.$route.query.message || null;
+      
+      if (userId && token) {
         localStorage.setItem('userId', userId);
         localStorage.setItem("login_token",token);
 
@@ -19,7 +24,7 @@
 
         this.$router.push('/home');
       } else {
-        console.error('Socialite authentication failed.');
+        this.$store.dispatch("setCallbackError",error);
         this.$router.push('/login');
       }
     },
