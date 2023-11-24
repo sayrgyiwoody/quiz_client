@@ -315,8 +315,8 @@ computed: {
     },
     validatePassword() {
         if(this.registerData[2] !== undefined && this.registerData[2] !== ''){
-            if(this.registerData[2].length < 6){
-                return 'Password length must be greater than 6' ;
+            if(this.registerData[2].length < 8){
+                return 'Password length must be greater than 8' ;
             }else {
                 return true;
             }
@@ -331,6 +331,10 @@ computed: {
             }
         }
     },
+    isLoggedIn() {
+        return this.getToken !== '' && this.getToken !== undefined && this.getToken !== null;
+    },
+    ...mapGetters(["getToken"]),
 },
 data() {
     return {
@@ -351,12 +355,6 @@ data() {
                 address : '',
         },
     }
-},
-computed: {
-    ...mapGetters(["getToken"]),
-    isLoggedIn() {
-        return this.getToken !== '' || this.getToken !== undefined || this.getToken !== null;
-    },
 },
 methods: {
     ...mapActions(["setLoadingStatus"]),
@@ -467,9 +465,9 @@ methods: {
     
 },
 mounted () {
-    // if(this.isLoggedIn){
-    //     this.directHome();
-    // }
+    if(this.isLoggedIn){
+        this.directHome();
+    }
 
 },
 

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLoggedIn && !isAuthView" class="bg-white dark:bg-zinc-800 inline-flex items-center justify-between w-screen p-2 text-sm text-gray-500 sm:hidden  dark:text-gray-400 ">
+    <div  class="bg-white dark:bg-zinc-800 inline-flex items-center justify-between w-screen p-2 text-sm text-gray-500 sm:hidden  dark:text-gray-400 ">
         <svg @click="toggleNav" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
         </svg>
@@ -12,7 +12,7 @@
             <svg class="text-gray-600" v-else xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.75 0-6.375-2.625T3 12q0-3.75 2.625-6.375T12 3q.35 0 .688.025t.662.075q-1.025.725-1.638 1.888T11.1 7.5q0 2.25 1.575 3.825T16.5 12.9q1.375 0 2.525-.613T20.9 10.65q.05.325.075.662T21 12q0 3.75-2.625 6.375T12 21Z"/></svg>
       </div>
      </div>
-    <aside v-if="isLoggedIn && !isAuthView" :class="showNavMobile ?'translate-x-0':'-translate-x-full'" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform  sm:translate-x-0" aria-label="Sidebar">
+    <aside  :class="showNavMobile ?'translate-x-0':'-translate-x-full'" class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform  sm:translate-x-0" aria-label="Sidebar">
        
       <div class="h-full  py-4 overflow-y-auto bg-white dark:bg-zinc-800 shadow-md">
          <div class="px-6">
@@ -164,17 +164,30 @@ export default {
          localStorage.removeItem("login_token");
          localStorage.removeItem("userId");
          localStorage.removeItem("userData");
+         localStorage.setItem("socialiteLogin",false);
          this.$store.dispatch("setToken",'');
          this.$store.dispatch("setUserId",'');
          this.$store.dispatch("setUserData",{});
+
          this.directLogin();
          
       },
-      
+      getProfileInfo() {
+                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
+                    }).then((response) => {
+                        this.$store.dispatch("setUserData",response.data.user);
+                        localStorage.setItem('userData',JSON.stringify(response.data.user));
+                        this.setLoadingStatus(false);
+                }).catch(error => console.log(error));
+        },
+        
         
    },
    mounted () {
-
+      this.getProfileInfo();
    },
 
 }

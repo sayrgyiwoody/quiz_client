@@ -14,6 +14,7 @@ import { mapActions } from 'vuex';
         const userId = this.$route.params.userId;
         const token = this.$route.query.token;
         const error = this.$route.query.message || null;
+
       
       if (userId && token) {
         localStorage.setItem('userId', userId);

@@ -9,6 +9,7 @@ export default createStore({
     },
     token : '',
     callbackError : null,
+    socialiteLogin : null,
   },
   getters: {
     getLoadingStatus : (state) => state.loadingStatus,
@@ -16,6 +17,8 @@ export default createStore({
     getUserData : (state) => state.userData,
     getToken : (state) => state.token,
     getCallbackError : (state) => state.callbackError,
+    getSocialiteLogin : (state) => state.socialiteLogin,
+
   },
   mutations: {
   },
@@ -25,6 +28,8 @@ export default createStore({
     setUserId : ({state},value) => state.userId = value,
     setUserData : ({state},value) => state.userData = value,
     setCallbackError : ({state},value) => state.callbackError = value,
+    setSocialiteLogin : ({state},value) => state.socialiteLogin = value,
+
   },
   modules: {
   }

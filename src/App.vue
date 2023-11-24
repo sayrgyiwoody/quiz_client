@@ -2,7 +2,7 @@
 import axios from 'axios'
 import SideNav from './components/SideNav.vue'
 import TopNav from './components/TopNav.vue'
-import { mapGetters , mapActions } from 'vuex'
+import { mapGetters , mapActions, mapState } from 'vuex'
 
     export default {
         components: {
@@ -23,6 +23,7 @@ import { mapGetters , mapActions } from 'vuex'
 
             },
             ...mapGetters(["getToken","getUserData"]),
+            ...mapState(['token']),
 
         },
         methods: {
@@ -36,13 +37,17 @@ import { mapGetters , mapActions } from 'vuex'
                 }
             },
             checkToken(){
-
-                if(this.getToken != null && this.getToken != undefined && this.getToken != ""){
-                    this.directHome();
+                if(localStorage.getItem('socialiteLogin')==="true"){
+                    localStorage.setItem('socialiteLogin',false);
                 }else {
-                    this.loginStatus = false;
-                    console.log("redirected to login");
-                    this.directLogin();
+                    if(this.getToken !== null && this.getToken !== undefined && this.getToken !== "" ){
+                        
+                    }else {
+                        this.loginStatus = false;
+                        console.log("redirected to login");
+                        this.directLogin();
+                    }
+                    
                 }
             },
                    
@@ -50,13 +55,16 @@ import { mapGetters , mapActions } from 'vuex'
                 this.$store.dispatch("setUserId",JSON.parse(localStorage.getItem('userId')));
                 this.$store.dispatch("setToken",localStorage.getItem('login_token'));
                 this.$store.dispatch("setUserData",JSON.parse(localStorage.getItem('userData')));
-
-
-                // this.getProfileInfo();
+                
             },
             directLogin() {
                 this.$router.push({
                     name : "login"
+                })
+            },
+            directRegister() {
+                this.$router.push({
+                    name : "register"
                 })
             },
             directHome() {
@@ -69,36 +77,16 @@ import { mapGetters , mapActions } from 'vuex'
                 this.$store.dispatch("setToken",null);
                 this.directLogin();
             },
-            getProfileInfo() {
-                this.setLoadingStatus(true);
-                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
-                        headers : {
-                            'Authorization' : `Bearer ${this.getToken}`,
-                        }
-                    }).then((response) => {
-                        this.$store.dispatch("setUserData",response.data.user);
-                        this.setLoadingStatus(false);
-                }).catch(error => console.log(error));
-        },
-        getProfileInfo() {
-                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
-                        headers : {
-                            'Authorization' : `Bearer ${this.getToken}`,
-                        }
-                    }).then((response) => {
-                        this.$store.dispatch("setUserData",response.data.user);
-
-                        this.setLoadingStatus(false);
-                }).catch(error => console.log(error));
-        },
+            
             
         },
         mounted () {
-            // this.checkToken();
+            this.getLocalData()
+            this.checkToken();
             this.checkDarkMode();
-            this.getLocalData();
+        },
 
-        }
+        
     }
 </script>
 
@@ -114,7 +102,7 @@ import { mapGetters , mapActions } from 'vuex'
         </div>
     </div>
      
-     <side-nav></side-nav>
+     <side-nav v-if="isLoggedIn && !isAuthView"></side-nav>
      <div :class="{'sm:ml-52':isLoggedIn && !isAuthView}" class=" bg-slate-100 dark:bg-zinc-900 min-h-screen">
         <top-nav></top-nav>
         
