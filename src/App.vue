@@ -45,7 +45,7 @@ import { mapGetters , mapActions, mapState } from 'vuex'
                     }else {
                         this.loginStatus = false;
                         console.log("redirected to login");
-                        this.directLogin();
+                        this.returnBack();
                     }
                     
                 }
@@ -56,6 +56,9 @@ import { mapGetters , mapActions, mapState } from 'vuex'
                 this.$store.dispatch("setToken",localStorage.getItem('login_token'));
                 this.$store.dispatch("setUserData",JSON.parse(localStorage.getItem('userData')));
                 
+            },
+            returnBack() {
+                this.$router.back();
             },
             directLogin() {
                 this.$router.push({

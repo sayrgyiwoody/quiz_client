@@ -1,7 +1,7 @@
 <template>
     <div class="flex mt-6 flex-col items-center justify-center animate__animated animate__fadeIn">
         <form @submit.prevent="updateProfileInfo" class="w-full px-6 py-3 md:px-7 md:py-4 max-w-3xl bg-white dark:bg-zinc-800 shadow-sm rounded">
-            <h4 class="text-center text-2xl font-semibold text-zinc-900 dark:text-white">Personal Info</h4>
+            <h4 class="text-center text-2xl font-semibold text-zinc-900 dark:text-white">Personal Profile</h4>
             <p class="text-center text-zinc-600 dark:text-muted font-medium mb-4">Update your own personal informations</p>
             <hr class="mb-6  bg-zinc-900 h-[1.6px]">
             <div class="md:grid md:grid-cols-3 md:space-x-6">
@@ -127,7 +127,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getToken','getUserId']),
+        ...mapGetters(['getToken','getUserId','getUserData']),
         
     },
     methods: {
@@ -164,16 +164,18 @@ export default {
             }
         },
         getProfileInfo() {
-            this.setLoadingStatus(true);
-            axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
-                    headers : {
-                        'Authorization' : `Bearer ${this.getToken}`,
-                    }
-                }).then((response) => {
-                    this.userData = response.data.user;
-                    this.updateImageUrl();
-                    this.setLoadingStatus(false);
-            }).catch(error => console.log(error));
+            this.userData = this.getUserData;
+            this.updateImageUrl();
+            // this.setLoadingStatus(true);
+            // axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+            //         headers : {
+            //             'Authorization' : `Bearer ${this.getToken}`,
+            //         }
+            //     }).then((response) => {
+            //         this.userData = response.data.user;
+            //         this.updateImageUrl();
+            //         this.setLoadingStatus(false);
+            // }).catch(error => console.log(error));
         },
         updateProfileInfo() {
             this.setLoadingStatus(true);

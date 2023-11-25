@@ -45,10 +45,10 @@ export default {
                 ...mapGetters(["getToken"]),
                 displayedCategories() {
                         if (window.innerWidth <= 768) {
-                return this.showAllCategories ? this.categories : this.categories.slice(0, 3); // if mobile
-                }else {
-                return this.showAllCategories ? this.categories : this.categories.slice(0, 6); // larger than mobile
-                }
+                        return this.showAllCategories ? this.categories : this.categories.slice(0, 3); // if mobile
+                        }else {
+                        return this.showAllCategories ? this.categories : this.categories.slice(0, 6); // larger than mobile
+                        }
                 },
         },
         methods: {

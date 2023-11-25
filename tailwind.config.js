@@ -21,6 +21,8 @@ export default {
       fontFamily: {
         orelega: ["Orelega One", "serif"],
         poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+
       },
     },
   },
