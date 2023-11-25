@@ -362,7 +362,7 @@ methods: {
         
         this.infoRequired = false;
         if(this.registerData[this.currentTab-1]!==undefined && this.registerData[this.currentTab-1] !== null && this.registerData[this.currentTab-1] !== ''){
-            if(this.currentTab === 1 && this.validateName !== true || this.currentTab === 2 && this.validateEmail !== true ){
+            if(this.currentTab === 1 && this.validateName !== true || this.currentTab === 2 && this.validateEmail !== true || this.currentTab === 3 && this.validatePassword !== true ){
                 this.showValiRequired();
             }else {
                 if(this.registerData[this.currentTab] === undefined){

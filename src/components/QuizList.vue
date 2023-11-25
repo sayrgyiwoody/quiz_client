@@ -40,7 +40,9 @@
             <p class="mb-3 text-xs text-slate-500 dark:text-muted font-inter">{{limitString(quiz.desc,80)}}</p>
             <div class="flex justify-between items-center">
               <div class="text-xs font-medium text-zinc-800 dark:text-slate-100 flex items-center font-inter ">
-                <img class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover"  :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image"  alt="profile image">
+                <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image" alt="profile image">
+                <img v-else class="rounded-full  w-8 h-8 me-2 object-cover" :src="'/images/default_user.png'" alt="profile image">
+                    
                 <span class="">{{quiz.user_name}}</span>
                 <span class="mx-1">|</span>
                <span class="">{{formatDate(quiz.created_at)}}</span>
@@ -156,9 +158,9 @@ export default {
             if (daysDiff > 0) {
                 timeDifference += `${daysDiff} ${daysDiff === 1 ? 'day' : 'days'}`;
             }else if (hoursDiff > 0) {
-                timeDifference += `${timeDifference.length ? ' ' : ''}${hoursDiff} ${hoursDiff === 1 ? 'hour' : 'hours'}`;
+                timeDifference += `${timeDifference.length ? ' ' : ''}${hoursDiff} ${hoursDiff === 1 ? 'hr' : 'hrs'}`;
             }else if (minutesDiff > 0) {
-                timeDifference += `${timeDifference.length ? ' ' : ''}${minutesDiff} ${minutesDiff === 1 ? 'minute' : 'minutes'}`;
+                timeDifference += `${timeDifference.length ? ' ' : ''}${minutesDiff} ${minutesDiff === 1 ? 'min' : 'mins'}`;
             }
 
             // Add "ago" to the end

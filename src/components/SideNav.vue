@@ -107,7 +107,8 @@ export default {
    computed: {
       ...mapGetters(['getToken','getUserId','getUserData']),
       userData(){
-         return this.getUserData;
+         const data = this.getUserData;
+         return data;
       },
       imageUrl(){
          if(this.getUserData.provider_avatar && this.getUserData.profile_photo_path === null){

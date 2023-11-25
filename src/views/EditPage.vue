@@ -23,8 +23,10 @@
                     <div>
                         <div action="" class="">
                             <div class="relative z-0 w-full mb-4 group">
-                                <input v-model="quiz_title"  name="" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                <input @input="titleFocused=true" @blur="titleFocused=false" v-model="quiz_title"  name="" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                 <label class="peer-focus:font-medium absolute text-sm  dark:text-slate-200 duration-300 transform -translate-y-6 scale-75 top-3 left-3 -z-10  text-zinc-900 peer-focus:z-10 origin-[0] bg-white dark:bg-zinc-800  peer-focus:bg-white dark:peer-focus:bg-zinc-800 px-3 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Enter Quiz Title</label>
+                                <span v-if="titleFocused" class=" text-primary dark:text-blue-500 px-1 text-sm">{{ remainingTitle }} characters for title remain</span>
+                                
                             </div>
                             <div class="relative z-0 w-full mb-4 group">
                                 <textarea v-model="quiz_desc" name="" type="text" class=" dark:text-white px-3 relative block py-3 w-full text-sm text-gray-900 bg-transparent appearance-none border-[1.5px] border-slate-300 dark:border-zinc-700 rounded-md dark:focus:border-blue-500 -z-0 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required rows="2"></textarea>
@@ -200,9 +202,14 @@ export default {
             categories : [],
             selectedCategory : '',
             infoValidateMessage : null,
+            maxTitle : 20,
+            titleFocused : false,
         }
     },
     computed: {
+        remainingTitle() {
+            return this.maxTitle - this.quiz_title.length;
+        },
         paginatedQuestions() {
             const descList = this.questionList.slice().reverse();
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;

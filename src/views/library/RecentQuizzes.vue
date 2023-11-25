@@ -124,6 +124,8 @@ export default {
                     }).then((response) => {
                         this.showAlert(response.data.message,response.data.icon);
                         this.quizzes = [];
+                        this.quizzes.total = 0;
+                        this.quizzes.last_page = 1;
                 }).catch(error => console.log(error));                    
                 }
               })
