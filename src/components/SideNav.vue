@@ -107,7 +107,7 @@ export default {
    computed: {
       ...mapGetters(['getToken','getUserId','getUserData']),
       userData(){
-         const data = this.getUserData;
+         let data = this.getUserData;
          return data;
       },
       imageUrl(){

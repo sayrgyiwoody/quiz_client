@@ -1,7 +1,7 @@
 <template>
     
     
-    <div  v-for="(quiz,index) in quizzes" :key="index" class=" animate__animated animate__bounceIn bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 shadow rounded-md border border-slate-200 dark:border-zinc-700">
+    <div  v-for="(quiz,index) in quizzes" :key="index" class=" animate__animated animate__bounceIn bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 shadow rounded-md border dark:border-[1.5px] border-slate-200 dark:border-zinc-700">
         <div class=" w-full flex justify-between">
             <p class=" h-fit flex items-center bg-indigo-600 px-3 py-2 text-white rounded-tl rounded-br text-sm font-inter">{{quiz.category_name}}</p>
             <div class="flex flex-col justify-end items-end">
@@ -43,14 +43,14 @@
             <p class="mb-3 text-xs text-slate-500 dark:text-muted font-inter">{{limitString(quiz.desc,80)}}</p>
             <div class="flex justify-between items-center">
               <div class="text-xs font-medium text-zinc-800 dark:text-slate-100 flex items-center font-inter ">
-                <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image" alt="profile image">
+                <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image" referrerpolicy="no-referrer" alt="profile image">
                 <img v-else class="rounded-full  w-8 h-8 me-2 object-cover" :src="'/images/default_user.png'" alt="profile image">
                     
                 <span class="">{{quiz.user_name}}</span>
                 <span class="mx-1">|</span>
                <span class="">{{formatDate(quiz.created_at)}}</span>
               </div>
-              <button @click="viewQuiz(quiz.quiz_id)" class="px-3 py-2 cursor-pointer group bg-slate-50 border-[1.5px] border-slate-200 dark:border-zinc-500 hover:text-blue-500 dark:hover:text-blue-500 dark:hover:bg-zinc-600 hover:bg-slate-100 duration-150 dark:bg-zinc-700 text-zinc-800 dark:text-slate-200 rounded group font-inter font-medium">
+              <button @click="viewQuiz(quiz.quiz_id)" class="px-3 py-2 cursor-pointer bg-slate-50 border-[1.5px] border-slate-200 dark:border-zinc-500 hover:text-blue-500 dark:hover:text-blue-500 dark:hover:bg-zinc-600 hover:bg-slate-100 duration-150 dark:bg-zinc-700 text-zinc-800 dark:text-slate-200 rounded-lg hover:rounded-xl group font-inter font-medium">
                 <svg class=" rotate-45 group-hover:rotate-90 inline-block duration-150 me-1 group-hover:text-blue-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M152 224a8 8 0 0 1-8 8h-32a8 8 0 0 1 0-16h32a8 8 0 0 1 8 8Zm-24-112a12 12 0 1 0-12-12a12 12 0 0 0 12 12Zm95.62 43.83l-12.36 55.63a16 16 0 0 1-25.51 9.11L158.51 200h-61l-27.26 20.57a16 16 0 0 1-25.51-9.11l-12.36-55.63a16.09 16.09 0 0 1 3.32-13.71l28.56-34.26a123.07 123.07 0 0 1 8.57-36.67c12.9-32.34 36-52.63 45.37-59.85a16 16 0 0 1 19.6 0c9.34 7.22 32.47 27.51 45.37 59.85a123.07 123.07 0 0 1 8.57 36.67l28.56 34.26a16.09 16.09 0 0 1 3.32 13.71ZM99.43 184h57.14c21.12-37.54 25.07-73.48 11.74-106.88C156.55 47.64 134.49 29 128 24c-6.51 5-28.57 23.64-40.33 53.12c-13.31 33.4-9.36 69.34 11.76 106.88Zm-15 5.85q-16.15-29.35-19.6-57.69L48 152.36L60.36 208l.18-.13ZM208 152.36l-16.83-20.2q-3.42 28.28-19.56 57.69l23.85 18l.18.13Z"/></svg>
                 View</button>
 

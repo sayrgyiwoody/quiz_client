@@ -164,7 +164,7 @@ export default {
             }
         },
         getProfileInfo() {
-            this.userData = this.getUserData;
+            this.userData = JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')):this.getUserData;
             this.updateImageUrl();
             // this.setLoadingStatus(true);
             // axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{

@@ -9,7 +9,7 @@
     <div class="bg-white dark:bg-zinc-800 px-6 py-4 rounded shadow max-w-xl mx-auto ">
         <h4 class=" capitalize rounded-l-sm border-l-4 ps-2 border-rose-500 dark:border-rose-500 text-zinc-900 dark:text-white text-2xl font-semibold mb-3">{{quiz.title}}</h4>
         <div class="mb-3 flex items-center">
-            <img class="rounded-full w-16 h-16 me-2 object-cover" :src="imageUrl" alt="profile image">
+            <img class="rounded-full w-16 h-16 me-2 object-cover" referrerpolicy="no-referrer" :src="imageUrl" alt="profile image">
             <div class="flex flex-col">
                 <div class="text-zinc-800 dark:text-slate-100 font-medium flex items-center flex-wrap">
                     <span class=" font-semibold text-lg">{{quiz.user_name}}</span>
