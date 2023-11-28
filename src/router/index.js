@@ -31,12 +31,12 @@ const routes = [
   {
     path : '/createPage',
     name : 'createPage',
-    component : ()=> import('../views/CreatePage.vue')
+    component : ()=> import('../views/quiz/CreatePage.vue')
   },
   {
     path : '/editPage/:quiz_id',
     name : 'editPage',
-    component : ()=> import('../views/EditPage.vue')
+    component : ()=> import('../views/quiz/EditPage.vue')
   },
   {
     path : '/allQuiz',

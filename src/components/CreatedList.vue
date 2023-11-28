@@ -46,7 +46,7 @@
                 <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image" referrerpolicy="no-referrer" alt="profile image">
                 <img v-else class="rounded-full  w-8 h-8 me-2 object-cover" :src="'/images/default_user.png'" alt="profile image">
                     
-                <span class="">{{quiz.user_name}}</span>
+                <span class="">{{quiz.user_name?quiz.user_name:"Unknown"}}</span>
                 <span class="mx-1">|</span>
                <span class="">{{formatDate(quiz.created_at)}}</span>
               </div>
