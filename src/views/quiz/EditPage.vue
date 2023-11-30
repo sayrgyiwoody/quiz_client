@@ -426,7 +426,6 @@ export default {
                 var textColor = '#18181b';
                 var bgColor = '#ffffff';
             }
-            console.log(textColor,bgColor);
             Swal.fire({
                 html: `<p class="text-center text-xl font-semibold mb-2">Are you Sure?</p"><p class="text-center">All question will be deleted.</p>`,
                 icon: 'warning',

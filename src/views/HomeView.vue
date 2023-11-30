@@ -1,17 +1,21 @@
 <template>
     <div class="pb-4">
         <h4 class="animate__animated animate__bounceIn my-5 md:my-8 dark:text-slate-100 text-center text-xl md:text-2xl font-semibold font-poppins">What <span class="text-primary dark:text-blue-500">Quiz</span> you will play today?</h4>
-        <div class="mx-auto max-w-2xl flex">
-            <div class="relative w-4/6 animate__animated animate__bounceIn">
+        <div class="mx-auto max-w-2xl md:flex grid grid-cols-2">
+            <div class="relative md:w-4/6 animate__animated animate__bounceIn mb-3 col-span-2">
                 <input @input="searchQuizzes" v-model="searchKey" type="text" id="floating_filled" class="bg-white text-zinc-900 dark:text-white block rounded px-4 pb-2.5 pt-7 w-full text-sm border-0 shadow dark:border-[1.5px] dark:border-zinc-700 dark:bg-zinc-800  appearance-none peer" placeholder=" " />
-                <label for="floating_filled" class=" peer-focus:border-b pb-1 border-zinc-800 dark:border-zinc-500 absolute text-sm text-zinc-800 dark:text-slate-100 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3">Search for quizzes</label>
+                <label for="floating_filled" class="peer-valid:border-b peer-valid:mt-1 peer-focus:border-b pb-1 border-zinc-800 dark:border-zinc-500 absolute text-sm text-zinc-800 dark:text-slate-100 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3">Search for quizzes</label>
                 <i @click="clearSearchInput" v-if="searchKey" class=" fa-solid fa-circle-xmark cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-2 text-xl right-5"></i>
                 <i v-else class="fa-solid fa-magnifying-glass cursor-pointer text-slate-600 dark:text-slate-300 absolute transform -translate-y-6 -bottom-2 text-xl right-5"></i>
                 
             </div>
-            <div @click="directAll" class=" cursor-pointer animate__animated animate__bounceIn font-medium hover:bg-slate-50 dark:hover:bg-zinc-700 duration-150 w-2/6 text-zinc-900 dark:text-white bg-white shadow dark:bg-zinc-800 flex items-center justify-center ms-3 rounded px-3 dark:border border-zinc-800 border-0 dark:border-zinc-700">
-                <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45c-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1c-.5.15-1 .23-1.5.23c-.88 0-1.76-.27-2.5-.79c-.53.16-1.07.23-1.62.22c-.79.01-1.57-.15-2.3-.45a4.105 4.105 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11c-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7c1.6-1.5 4.05-1.66 5.83-.37c.42-.11.86-.17 1.3-.17c1.36-.03 2.65.57 3.5 1.64c2.04.53 3.5 2.35 3.58 4.47c.05 1.11-.25 2.2-.86 3.13c.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29c.25.09.51.14.77.21c5.13-.07 4.53-3.2 4.53-3.25a2.592 2.592 0 0 0-2.69-2.49a1 1 0 0 1-1-1a1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3c.05-.29.08-.59.08-.89c-.06-1.24-.62-2.32-2.87-2.53c-1.25-2.96-4.4-1.32-4.4-.4c-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1c-.53-.02-1.03-.22-1.43-.56c-.48.31-1.03.5-1.6.56c-.57.05-1.04-.35-1.07-.9a.968.968 0 0 1 .88-1.1c.16-.02.94-.14.94-.77c0-.66.25-1.29.68-1.79c-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2C4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25c.5.19.78.75.59 1.29c-.19.52-.77.78-1.29.59c-.73-.32-1.55-.34-2.3-.06c-.32.27-.32.83-.32 1.27c0 .74.37 1.43 1 1.83c.53.27 1.12.41 1.71.4c-.15-.26-.28-.53-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05c1.37-.07 2.59-.88 3.19-2.13c.23-1.38 1.34-1.5 2.56-1.5m2 7.47l-.62-1.3l-.71.16l1 1.25l.33-.11m-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67c-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1c0-.27.07-.54.23-.76c.12-.1.27-.15.43-.15c.55.03 1.02-.38 1.02-.92Z"/></svg>
+            <div @click="directAll" class="h-fit py-4 cursor-pointer animate__animated animate__bounceIn font-medium hover:bg-slate-50 dark:hover:bg-zinc-700 duration-150 p-3 md:w-2/6 text-zinc-900 dark:text-white bg-white shadow dark:bg-zinc-800 flex items-center justify-center md:ms-3 rounded px-3 dark:border border-zinc-800 border-0 dark:border-zinc-700">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M174 232a6 6 0 0 1-6 6H88a6 6 0 0 1 0-12h80a6 6 0 0 1 6 6Zm40-128a85.56 85.56 0 0 1-32.88 67.64A18.23 18.23 0 0 0 174 186v6a14 14 0 0 1-14 14H96a14 14 0 0 1-14-14v-6a18 18 0 0 0-7-14.23a85.59 85.59 0 0 1-33-67.24C41.74 57.91 79.39 19.12 125.93 18A86 86 0 0 1 214 104Zm-12 0a74 74 0 0 0-75.79-74C86.17 31 53.78 64.34 54 104.42a73.67 73.67 0 0 0 28.4 57.87A29.92 29.92 0 0 1 94 186v6a2 2 0 0 0 2 2h64a2 2 0 0 0 2-2v-6a30.18 30.18 0 0 1 11.7-23.78A73.59 73.59 0 0 0 202 104Zm-20.08-9A55.58 55.58 0 0 0 137 50.08a6 6 0 1 0-2 11.84c17.38 2.92 32.13 17.68 35.08 35.08a6 6 0 0 0 5.91 5a6.87 6.87 0 0 0 1-.08a6 6 0 0 0 4.93-6.92Z"/></svg>
                 <span class="ms-2">All Quizzes</span>
+            </div>
+            <div @click="enterRoom" class="h-fit py-4 cursor-pointer animate__animated animate__bounceIn font-medium hover:bg-slate-50 dark:hover:bg-zinc-700 duration-150 p-3 ms-2 md:w-2/6 text-zinc-900 dark:text-white bg-white shadow dark:bg-zinc-800 flex items-center justify-center md:ms-3 rounded px-3 dark:border border-zinc-800 border-0 dark:border-zinc-700">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M24 168V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16v112a8 8 0 0 1-16 0V56H40v112a8 8 0 0 1-16 0Zm224 32a8 8 0 0 1-8 8H16a8 8 0 0 1 0-16h96v-24a8 8 0 0 1 8-8h64a8 8 0 0 1 8 8v24h48a8 8 0 0 1 8 8Zm-120-8h48v-16h-48Z"/></svg>
+                <span class="ms-2">Enter Code</span>
             </div>
         </div>
         <div v-if="searchKey" class="mx-auto max-w-5xl mt-4">
@@ -209,10 +213,19 @@ export default {
                     console.log("redirected to login");
                     this.directLogin();
                 }
-            },
+        },
+        enterRoom(){
+            this.$router.push({
+                    name : "joinRoom"
+            });
+        },
     },
     mounted () {
         this.getHomeQuizzes();
+        window.Echo.channel('test-channel')
+        .listen('Hello',(e)=>{
+        alert(e.hello);
+        });
         // this.getProfileInfo();
         // this.showAlert(`<h4 class="flex items-center text-primary mb-1 justify-center mb-3">
         //                 <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">

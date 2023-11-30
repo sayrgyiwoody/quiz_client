@@ -45,7 +45,7 @@ import { mapGetters , mapActions, mapState } from 'vuex'
                     }else {
                         this.loginStatus = false;
                         console.log("redirected to login");
-                        this.returnBack();
+                        this.directLogin();
                     }
                     
                 }
@@ -87,6 +87,7 @@ import { mapGetters , mapActions, mapState } from 'vuex'
             this.getLocalData()
             this.checkToken();
             this.checkDarkMode();
+            
         },
 
         

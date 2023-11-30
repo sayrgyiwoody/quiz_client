@@ -9,7 +9,7 @@
     <div class="bg-white dark:bg-zinc-800 px-6 py-4 rounded shadow max-w-xl mx-auto font-poppins">
         <h4 class=" capitalize rounded-l-sm border-l-4 ps-2 border-rose-500 dark:border-rose-500 text-zinc-900 dark:text-white text-2xl font-semibold mb-3">{{quiz.title}}</h4>
         <div class="mb-3 flex items-center">
-            <img class="rounded-full w-16 h-16 me-2 object-cover" referrerpolicy="no-referrer" :src="imageUrl" alt="profile image">
+            <img class="  rounded-full w-16 h-16 me-2 object-cover" referrerpolicy="no-referrer" :src="imageUrl" alt="profile image">
             <div class="flex flex-col">
                 <div class="text-zinc-800 dark:text-slate-100 font-medium flex items-center flex-wrap">
                     <span class=" font-semibold text-lg">{{quiz.user_name?quiz.user_name:"Unknown"}}</span>
@@ -46,14 +46,14 @@
         </div>
         <div class="flex items-center space-x-2">
 
-            <button  class=" font-inter border-[1.5px] border-sky-500 dark:border-sky-500 flex items-center group hover:bg-sky-500 duration-200 dark:hover:bg-sky-500 hover:text-white dark:hover:text-slate-50  text-sky-500 dark:text-sky-500 px-3 py-2 rounded-lg mt-3 font-medium ">
+            <button @click="createRoom" class=" font-inter border-[1.5px] border-sky-500 dark:border-sky-500 flex items-center group hover:bg-sky-500 duration-200 dark:hover:bg-sky-500 hover:text-white dark:hover:text-slate-50  text-sky-500 dark:text-sky-500 px-3 py-2 rounded-lg mt-3 font-medium ">
                 Multiplayer
                 <svg class="ms-2 group-hover:translate-x-1 duration-150 inline-block w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100"><path fill="currentColor" d="M49.947 0C22.354.03 0 22.406 0 50a50 50 0 0 0 20.404 40.21c-.265-2.031-.213-4.128.117-6.202a45.22 45.22 0 0 1-8.511-9.877h12.445c1.182-1.845 2.4-3.67 4.525-5c-1.245-5.1-2.006-10.716-2.146-16.631h1.346a18.653 18.653 0 0 1 1.93-5h-3.243c.212-5.935 1.043-11.554 2.363-16.63H47.5v8.888a13.75 13.75 0 0 1 5 1.804V30.87h19.195c.26.997.495 2.02.715 3.057a19.769 19.769 0 0 1 5.084-.117a76.416 76.416 0 0 0-.639-2.94h13.89a44.747 44.747 0 0 1 3.965 14.028c.58 5.049.591 10.975-1.246 16.771a45.007 45.007 0 0 1-2.286 6.478c1.128 1.187 2.494 2.309 3.867 3.454A50 50 0 0 0 100 50c0-27.614-22.386-50-50-50ZM52.5 5.682c5.268.896 10.302 5.236 14.268 12.437c1.278 2.321 2.42 4.927 3.408 7.75H52.5Zm-5 .197v19.99H30.75c.988-2.823 2.13-5.429 3.408-7.75C37.89 11.341 42.571 7.102 47.5 5.88M35.98 7.232c-2.324 2.352-4.41 5.22-6.203 8.475c-1.68 3.05-3.125 6.467-4.312 10.162H12.01c5.535-8.706 13.975-15.37 23.97-18.637Zm29.41.463c9.398 3.413 17.32 9.868 22.6 18.174H75.455c-1.184-3.695-2.627-7.112-4.307-10.162c-1.676-3.045-3.613-5.749-5.757-8.012M9.257 30.87h14.808c-1.245 5.162-2.008 10.76-2.203 16.631H5.072a44.79 44.79 0 0 1 4.184-16.63ZM5.072 52.5h16.762c.129 5.856.82 11.454 1.994 16.63H9.256A44.79 44.79 0 0 1 5.072 52.5" color="currentColor"/><path fill="currentColor" d="M76 37.769c-8.285 0-15 6.716-15 15c0 8.284 6.715 15 15 15c8.283 0 15-6.716 15-15c0-8.284-6.717-15-15-15zm0 32.223c-16.57 0-24 7.431-24 24v2c.075 3.94 1.817 4.056 5.5 4h37c4.695-.004 5.532.005 5.5-4v-2c0-16.569-7.432-24-24-24M44 43.39c-6.787 0-12.291 5.504-12.291 12.292c0 6.787 5.504 12.289 12.291 12.289c6.787 0 12.29-5.502 12.29-12.29c0-6.787-5.503-12.29-12.29-12.29m0 26.401c-13.575 0-19.664 6.09-19.664 19.664v1.639c.062 3.228 1.489 3.323 4.506 3.277h19.123c-.488-8.088 1.901-16.678 7.851-22.139c-3.012-1.646-6.925-2.441-11.816-2.441"/></svg>
     
             </button>
             <button @click="playQuiz(quiz.quiz_id)" class=" flex items-center group bg-indigo-600 hover:bg-indigo-500 dark:bg-indigo-500  hover dark:hover:bg-indigo-600  text-white px-3 py-2 rounded-lg mt-3 font-medium ">
                 Play
-                <svg  class="ms-2 group-hover:translate-x-1 duration-150 inline-block w-6 h-6 mt-1"  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M176 112h-24a8 8 0 0 1 0-16h24a8 8 0 0 1 0 16m-72-16h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16m137.48 104.65a36 36 0 0 1-54.94 4.81c-.12-.12-.24-.24-.35-.37L146.48 160h-37l-39.67 45.09l-.35.37A36.08 36.08 0 0 1 44 216a36 36 0 0 1-35.44-42.25a.68.68 0 0 1 0-.14l16.37-84.09A59.88 59.88 0 0 1 83.89 40H172a60.08 60.08 0 0 1 59 49.25v.18l16.37 84.17a.68.68 0 0 1 0 .14a35.74 35.74 0 0 1-5.89 26.91M172 144a44 44 0 0 0 0-88H83.89a43.9 43.9 0 0 0-43.21 36.37v.13L24.3 176.59A20 20 0 0 0 58 194.3l41.92-47.59a8 8 0 0 1 6-2.71Zm59.7 32.59l-8.74-45A60 60 0 0 1 172 160h-4.2l30.2 34.31a20.09 20.09 0 0 0 17.46 5.39a20 20 0 0 0 16.23-23.11Z"/></svg>
+                <svg  class=" ms-2 group-hover:translate-x-1 duration-150 inline-block w-6 h-6 mt-1"  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M176 112h-24a8 8 0 0 1 0-16h24a8 8 0 0 1 0 16m-72-16h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16m137.48 104.65a36 36 0 0 1-54.94 4.81c-.12-.12-.24-.24-.35-.37L146.48 160h-37l-39.67 45.09l-.35.37A36.08 36.08 0 0 1 44 216a36 36 0 0 1-35.44-42.25a.68.68 0 0 1 0-.14l16.37-84.09A59.88 59.88 0 0 1 83.89 40H172a60.08 60.08 0 0 1 59 49.25v.18l16.37 84.17a.68.68 0 0 1 0 .14a35.74 35.74 0 0 1-5.89 26.91M172 144a44 44 0 0 0 0-88H83.89a43.9 43.9 0 0 0-43.21 36.37v.13L24.3 176.59A20 20 0 0 0 58 194.3l41.92-47.59a8 8 0 0 1 6-2.71Zm59.7 32.59l-8.74-45A60 60 0 0 1 172 160h-4.2l30.2 34.31a20.09 20.09 0 0 0 17.46 5.39a20 20 0 0 0 16.23-23.11Z"/></svg>
     
             </button>
             
@@ -120,6 +120,60 @@ export default {
             
           })
         },
+        createRoom(){
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
+            Swal.fire({
+                // imageUrl: "../../../public/images/online_2.gif",
+                // imageWidth: 300,
+                color: `${textColor}`,
+                background: `${bgColor}`,
+                html: `<img class="rounded dark:mb-3 dark:h-48 w-full h-40 object-cover mx-auto" src="../../../public/images/online_2.gif">
+                <p class="mb-2 font-inter text-2xl text-zinc-800 dark:text-slate-100 text-center font-semibold">Online multiplayer</p>
+                <p class=" font-inter text-sm text-slate-500 dark:text-muted font-medium">Create Quiz Multiplayer Room to play with friends</p>
+                `,
+                confirmButtonText: `
+                <svg class=" inline-block me-2 hover:scale-110 duration-150 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2a9 9 0 0 1 9 9h2c0-6.08-4.93-11-11-11z"/></svg>
+                Create Room
+                `,
+                showCloseButton: true,
+                showCancelButton: false,
+                focusConfirm: true,
+                showConfirmButton :true,
+              }).then(result=>{
+                if(result.isConfirmed){
+                    this.generateRoomCode();
+                }
+              });
+        },
+        generateRoomCode(){
+            this.setLoadingStatus(true);
+            axios.post(`http://127.0.0.1:8000/api/multiplayer/generateRoom`,{
+                'quiz_id' : this.$route.params.quiz_id
+                },
+                {
+                    headers : {
+                        'Authorization' : `Bearer ${this.getToken}`,
+                    }
+                }).then((response) => {
+                if(response.data.status === true){
+                    this.$router.push({
+                        name :'waitingRoom',
+                        params : {
+                          room_code : response.data.room.room_code,
+                        }
+                        
+                    }) 
+                }
+                this.setLoadingStatus(false);
+            }).catch(error => console.log(error));
+            
+        }
     },
     mounted () {
         this.getQuiz();

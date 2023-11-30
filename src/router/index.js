@@ -82,6 +82,16 @@ const routes = [
     path: '/socialite-callback/:userId',
     component: ()=> import('../views/SocialiteCallback.vue')
   },
+  {
+    path : '/joinRoom',
+    name : 'joinRoom',
+    component : ()=> import('../views/multiplayer/JoinRoom.vue')
+  },
+  {
+    path : '/waitingRoom/:room_code',
+    name : 'waitingRoom',
+    component : ()=> import('../views/multiplayer/WaitingRoom.vue')
+  },
 ]
 
 const router = createRouter({

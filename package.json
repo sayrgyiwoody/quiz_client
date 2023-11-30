@@ -13,6 +13,8 @@
     "axios": "^1.6.0",
     "flowbite": "^2.1.1",
     "flowbite-vue": "^0.1.0",
+    "laravel-echo": "^1.15.3",
+    "pusher-js": "^8.4.0-rc1",
     "swiper": "^11.0.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
