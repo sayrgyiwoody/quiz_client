@@ -71,16 +71,24 @@ export default {
                         headers : {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }
-                    }).then((response) => {
-                        console.log(response.data);
-                        if(response.data.status === false){
+                    }).then((response) => {         
+                        if(response.data.status === true){
+                            this.$router.push({
+                                name :'waitingRoom',
+                                params : {
+                                room_code : this.room_code,
+                                }
+                                
+                            }) 
+                        }else {
                             this.errorMsg = response.data.message;
                         }
                         this.setLoadingStatus(false);
                 }).catch(error => console.log(error));
             }
             
-        }
+        },
+        
     },
 }
 </script>
