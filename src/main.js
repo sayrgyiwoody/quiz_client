@@ -17,7 +17,8 @@ window.Echo = new Echo({
     cluster: 'mt1',
 
     forceTLS: false,
-    disableStats: true
+    disableStats: true,
+    authEndpoint: '/broadcasting/auth',
    
 });
 

@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-lg mx-auto mt-4 md:mt-10 font-poppins mb-4">
-        <button v-if="isCurrentUserHost" @click="endRoom"  class="flex items-center group  text-rose-600 hover:text-rose-500 dark:text-rose-500 dark:hover:text-rose-600  py-2 rounded mt-3 font-medium">
+        <button v-if="isCurrentUserHost" @click="deleteRoom"  class="flex items-center group  text-rose-600 hover:text-rose-500 dark:text-rose-500 dark:hover:text-rose-600  py-2 rounded mt-3 font-medium">
           <svg class="me-2 group-hover:scale-110 duration-150 inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M2 16C2 8.268 8.268 2 16 2s14 6.268 14 14s-6.268 14-14 14S2 23.732 2 16Zm10-6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8Z"/></svg>
             End Room
         </button>
@@ -137,6 +137,30 @@ export default {
                   }
                   this.setLoadingStatus(false);
             }).catch(error => console.log(error));
+        },
+        deleteRoom(){
+            if(localStorage.getItem('darkMode') == 'true') {
+                var textColor = '#ffffff';
+                var bgColor = '#3f3f46';
+            }else {
+                var textColor = '#18181b';
+                var bgColor = '#ffffff';
+            }
+            Swal.fire({
+                html: `<p class="text-center text-xl font-semibold">Are you Sure?</p"><p class="text-center">This room will be deleted.</p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                color: `${textColor}`,
+                background: `${bgColor}`,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.endRoom();
+                }
+              })
+          
         },
         endRoom(){
           axios.post(`http://127.0.0.1:8000/api/multiplayer/endRoom`,{
