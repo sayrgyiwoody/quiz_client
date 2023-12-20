@@ -7,12 +7,14 @@
                                 Categories : {{categories.length}}
                         </span>
                         </div>
-                        <p v-if="showAllCategories" @click="showAllCategories = false" class=" cursor-pointer text-indigo-600 dark:text-indigo-500 flex items-center ">Hide
-                                <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-4.6 4.6L6 14l6-6l6 6l-1.4 1.4l-4.6-4.6Z"/></svg>
-                        </p>
-                        <p v-else @click="showAllCategories = true" class=" cursor-pointer text-indigo-600 dark:text-indigo-500 flex items-center ">Show All
-                                <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4l-6 6Z"/></svg>
-                        </p>
+                        <div v-if="categories.length > 3 && isMobile || categories.length > 6 && !isMobile" class="">
+                                <p v-if="showAllCategories" @click="showAllCategories = false" class=" cursor-pointer text-indigo-600 dark:text-indigo-500 flex items-center ">Hide
+                                        <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-4.6 4.6L6 14l6-6l6 6l-1.4 1.4l-4.6-4.6Z"/></svg>
+                                </p>
+                                <p v-else @click="showAllCategories = true" class=" cursor-pointer text-indigo-600 dark:text-indigo-500 flex items-center ">Show All
+                                        <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4l-6 6Z"/></svg>
+                                </p>
+                        </div>
                 </h4>
                 <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
                         <div @click="categoryFilter(c.id)" v-for="(c, index) in displayedCategories" :key="index" class=" group animate__animated animate__bounceIn cursor-pointer bg-white dark:bg-zinc-800 h-fit hover:bg-slate-50 dark:hover:bg-zinc-700 duration-150 shadow-sm hover:shadow px-3 py-2 group rounded">
@@ -43,8 +45,15 @@ export default {
         },
         computed: {
                 ...mapGetters(["getToken"]),
-                displayedCategories() {
+                isMobile(){
                         if (window.innerWidth <= 768) {
+                                return true;
+                        }else {
+                                return false;
+                        }
+                },
+                displayedCategories() {
+                        if (this.isMobile) {
                         return this.showAllCategories ? this.categories : this.categories.slice(0, 3); // if mobile
                         }else {
                         return this.showAllCategories ? this.categories : this.categories.slice(0, 6); // larger than mobile

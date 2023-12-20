@@ -161,17 +161,28 @@ export default {
          })
       },
       logout(){
-         this.showNavMobile = false;
-         localStorage.removeItem("login_token");
-         localStorage.removeItem("userId");
-         localStorage.removeItem("userData");
-         localStorage.setItem("socialiteLogin",false);
-         this.$store.dispatch("setToken",'');
-         this.$store.dispatch("setUserId",'');
-         this.$store.dispatch("setUserData",{});
+         this.setLoadingStatus(true);
+         axios.post(`http://127.0.0.1:8000/api/logout`,null,{
+                        headers : {
+                            'Authorization' : `Bearer ${this.getToken}`,
+                        }
+                    }).then((response) => {
 
-         this.directLogin();
-         
+                        if(response.data.status ==='success'){
+                           this.showNavMobile = false;
+                           localStorage.removeItem("login_token");
+                           localStorage.removeItem("userId");
+                           localStorage.removeItem("userData");
+                           localStorage.setItem("socialiteLogin",false);
+                           this.$store.dispatch("setToken",'');
+                           this.$store.dispatch("setUserId",'');
+                           this.$store.dispatch("setUserData",{});
+
+                           this.directLogin();
+                        }
+                }).catch(error => console.log(error));
+                this.setLoadingStatus(false);
+
       },
       getProfileInfo() {
                 axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{

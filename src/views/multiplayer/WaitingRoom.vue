@@ -183,12 +183,14 @@ export default {
             }) 
         }
     },
-    mounted () {
-      this.getRoomInfo();
-      window.Echo.channel(`room.${this.room_code}`)
-        .listen('ParticipantJoined',(e)=>{
-          this.participants.push(e.participant);
-        });
+    mounted() {
+    this.getRoomInfo();
+    
+    //   Echo.private(`room.${this.room_code}`)
+    //       .listen('ParticipantJoined', (e) => {
+    //           console.log(e);
+    //           this.participants.push(e.participant);
+    //       });
     },
 }
 </script>

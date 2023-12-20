@@ -7,9 +7,7 @@
       :spaceBetween="20"
       :freeMode="false"
       :navigation="false"
-      :pagination="{
-        clickable: true,
-      }"
+      
       :modules="modules"
       class="mySwiper"
     >
@@ -77,7 +75,7 @@
   
   
     // import required modules
-    import {FreeMode, Pagination , Navigation } from 'swiper/modules';
+    import {FreeMode , Navigation } from 'swiper/modules';
 
     export default {
       name : 'QuizzesSwiper',
@@ -92,7 +90,7 @@
       },
       setup() {
         return {
-          modules: [FreeMode,Pagination,Navigation],
+          modules: [FreeMode,Navigation],
         };
       },
       computed: {
