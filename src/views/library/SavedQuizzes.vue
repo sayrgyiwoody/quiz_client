@@ -67,6 +67,9 @@ export default {
     },
     methods: {
         ...mapActions(['setLoadingStatus']),
+        clearSearchInput() {
+            this.searchKey = '';
+        },
         getQuizzes() {
             this.setLoadingStatus(true);
             axios.post(`http://127.0.0.1:8000/api/quiz/getPaginatedSaved?page=${this.currentPage}`,{
