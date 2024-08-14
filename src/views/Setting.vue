@@ -93,7 +93,7 @@ export default {
         changePassword() {
             if(this.validateForm()){
                 this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/account/changePassword`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/account/changePassword`,{
                 'oldPassword' : this.passwords.oldPassword,
                 'newPassword' : this.passwords.newPassword,
                 'confirmPassword' : this.passwords.confirmPassword,
@@ -162,7 +162,7 @@ export default {
               }).then((result) => {
                 if (result.isConfirmed) {
                     this.setLoadingStatus(true);
-                    axios.post(`http://127.0.0.1:8000/api/account/deleteAccount`,null,{
+                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/account/deleteAccount`,null,{
                             headers : {
                                 'Authorization' : `Bearer ${this.getToken}`,
                             }
@@ -196,7 +196,7 @@ export default {
       },
       checkOldPassword(){
         this.setLoadingStatus(true);
-        axios.post(`http://127.0.0.1:8000/api/account/isOldPassword`,null,{
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/account/isOldPassword`,null,{
                 headers : {
                     'Authorization' : `Bearer ${this.getToken}`,
                 }

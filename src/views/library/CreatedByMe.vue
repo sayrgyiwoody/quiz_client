@@ -74,13 +74,14 @@ export default {
         },
         getQuizzes() {
             this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/quiz/getCreatedQuizzes?page=${this.currentPage}`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/getCreatedQuizzes?page=${this.currentPage}`,{
                 'searchKey' : this.searchKey
             },{
                     headers : {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
                 }).then((response) => {
+                    console.log(response);
                     this.quizzes = response.data.created_quizzes;
                     this.setLoadingStatus(false);
             }).catch(error => console.log(error));

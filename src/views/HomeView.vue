@@ -113,7 +113,7 @@ export default {
         },
       getHomeQuizzes(){
         this.setLoadingStatus(true);
-        axios.get('http://127.0.0.1:8000/api/quiz/getHomeQuizzes',{
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/getHomeQuizzes`,{
                     headers : {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
@@ -140,7 +140,7 @@ export default {
             this.searched_quizzes = [];
             if(this.searchKey.length > 3){
                 this.setLoadingStatus(true);
-                axios.post(`http://127.0.0.1:8000/api/quiz/search?page=${this.currentPage}`,{
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/search?page=${this.currentPage}`,{
                     'searchKey' : this.searchKey,
                     },
                     {

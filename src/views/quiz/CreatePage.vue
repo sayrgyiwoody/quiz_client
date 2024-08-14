@@ -514,7 +514,7 @@ export default {
         publish(){
             if(this.validateInfo()){
                 this.infoValidateMessage = null;
-                axios.post("http://127.0.0.1:8000/api/quiz/create",
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/create`,
                 {   
                     'quiz_title' : this.quiz_title,
                     'category_id' : this.selectedCategory,
@@ -548,7 +548,7 @@ export default {
         },
         getCategoryList(){
             this.setLoadingStatus(true);
-            axios.get("http://127.0.0.1:8000/api/category/list",
+            axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/category/list`,
                 {
                     headers : {
                         'Authorization' : `Bearer ${this.getToken}`,

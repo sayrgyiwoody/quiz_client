@@ -114,7 +114,7 @@ export default {
          if(this.getUserData.provider_avatar && this.getUserData.profile_photo_path === null){
            return this.getUserData.provider_avatar;
          }else if(this.getUserData && this.getUserData.profile_photo_path){
-           return 'http://127.0.0.1:8000/storage/'+ this.getUserData.profile_photo_path;
+           return `${import.meta.env.VITE_API_BASE_URL}/storage/`+ this.getUserData.profile_photo_path;
          }else {
             return '/images/default_user.png'
          }
@@ -162,7 +162,7 @@ export default {
       },
       logout(){
          this.setLoadingStatus(true);
-         axios.post(`http://127.0.0.1:8000/api/logout`,null,{
+         axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/logout`,null,{
                         headers : {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }
@@ -185,7 +185,7 @@ export default {
 
       },
       getProfileInfo() {
-                axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+                axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/account/getProfileInfo`,{
                         headers : {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }

@@ -46,7 +46,7 @@ export default {
         },
        requestPassword(){
         this.setLoadingStatus(true);
-        axios.post('http://127.0.0.1:8000/api/requestPassword',
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/requestPassword`,
                 {
                     email : this.email,
                 }

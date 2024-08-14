@@ -414,7 +414,7 @@ methods: {
 
                 this.setLoadingStatus(true);
 
-                axios.post('http://127.0.0.1:8000/api/register',formData)
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/register`,formData)
                 .then((response) => {
                 this.setLoadingStatus(false);
 

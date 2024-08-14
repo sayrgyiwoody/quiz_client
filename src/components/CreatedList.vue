@@ -43,7 +43,7 @@
             <p class="mb-3 text-xs text-slate-500 dark:text-muted font-inter">{{limitString(quiz.desc,80)}}</p>
             <div class="flex justify-between items-center">
               <div class="text-xs font-medium text-zinc-800 dark:text-slate-100 flex items-center font-inter ">
-                <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:'http://127.0.0.1:8000/storage/'+quiz.user_image" referrerpolicy="no-referrer" alt="profile image">
+                <img v-if="quiz.provider_avatar || quiz.user_image" class="rounded-full ring-1 ring-slate-400 dark:ring-zinc-500 w-8 h-8 me-2 object-cover" :src="quiz.provider_avatar && quiz.user_image === null ?quiz.provider_avatar:`${api_url}/storage/`+quiz.user_image" referrerpolicy="no-referrer" alt="profile image">
                 <img v-else class="rounded-full  w-8 h-8 me-2 object-cover" :src="'/images/default_user.png'" alt="profile image">
                     
                 <span class="">{{quiz.user_name?quiz.user_name:"Unknown"}}</span>
@@ -81,7 +81,8 @@ export default {
     name : 'QuizList',
     data() {
         return {
-            currentDropdownIndex: null
+            currentDropdownIndex: null,
+            api_url : import.meta.env.VITE_API_BASE_URL,
         }
     },
     props: {
@@ -143,7 +144,7 @@ export default {
                 background: `${bgColor}`,
               }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.post(`http://127.0.0.1:8000/api/quiz/deleteQuiz`,{
+                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/deleteQuiz`,{
                     'quiz_id' : quiz_id,
                     },
                     {

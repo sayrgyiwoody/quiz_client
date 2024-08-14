@@ -80,7 +80,7 @@ export default {
         },
         getQuizzes() {
             this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/quiz/getRecentQuizzes?page=${this.currentPage}`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/getRecentQuizzes?page=${this.currentPage}`,{
                 searchKey : this.searchKey
             },
             {
@@ -120,7 +120,7 @@ export default {
                 background: `${bgColor}`,
               }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.post(`http://127.0.0.1:8000/api/quiz/deleteAllHistory`,null, {
+                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/deleteAllHistory`,null, {
                         headers : {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }

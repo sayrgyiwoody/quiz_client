@@ -136,7 +136,7 @@ export default {
             if(this.userData.provider_avatar && this.userData.profile_photo_path === null ){
                 this.imageUrl = this.userData.provider_avatar;
             }else if(this.userData.profile_photo_path){
-                this.imageUrl =  'http://127.0.0.1:8000/storage/'+ this.userData.profile_photo_path;
+                this.imageUrl =  `${import.meta.env.VITE_API_BASE_URL}/storage/`+ this.userData.profile_photo_path;
             }
         },
         handleDrop(event) {
@@ -167,7 +167,7 @@ export default {
             this.userData = JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')):this.getUserData;
             this.updateImageUrl();
             // this.setLoadingStatus(true);
-            // axios.get(`http://127.0.0.1:8000/api/account/getProfileInfo`,{
+            // axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/account/getProfileInfo`,{
             //         headers : {
             //             'Authorization' : `Bearer ${this.getToken}`,
             //         }
@@ -194,7 +194,7 @@ export default {
                 formData.append('image', this.file);
             }
 
-            axios.post('http://127.0.0.1:8000/api/account/updateProfileInfo',formData , {    
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/account/updateProfileInfo`,formData , {    
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${this.getToken}`,

@@ -64,7 +64,7 @@ export default {
                 this.errorMsg = "Please fill room code";
             }else{
                 this.setLoadingStatus(true);
-                axios.post(`http://127.0.0.1:8000/api/multiplayer/joinRoom`,{
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/multiplayer/joinRoom`,{
                     'room_code' : this.room_code
                     },
                     {

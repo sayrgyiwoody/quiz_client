@@ -96,7 +96,7 @@ export default {
         if(p.provider_avatar != null && p.profile_photo_path === null){
             return p.provider_avatar;
         }else if(p.profile_photo_path != null){
-            return 'http://127.0.0.1:8000/storage/'+ p.profile_photo_path;
+            return `${import.meta.env.VITE_API_BASE_URL}/storage/`+ p.profile_photo_path;
         }else {
           return'/images/default_user.png' ;
         }
@@ -120,7 +120,7 @@ export default {
         },
         getRoomInfo(){
           this.setLoadingStatus(true);
-          axios.post(`http://127.0.0.1:8000/api/multiplayer/getRoomInfo`,{
+          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/multiplayer/getRoomInfo`,{
                 'room_code' : this.room_code
                 },
                 {
@@ -163,7 +163,7 @@ export default {
           
         },
         endRoom(){
-          axios.post(`http://127.0.0.1:8000/api/multiplayer/endRoom`,{
+          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/multiplayer/endRoom`,{
                 'room_code' : this.room_code
                 },
                 {

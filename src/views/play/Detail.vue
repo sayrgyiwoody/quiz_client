@@ -86,7 +86,7 @@ export default {
         },
         getQuiz() {
             this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/quiz/detail`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/detail`,{
                 'quiz_id' : this.$route.params.quiz_id
                 },
                 {
@@ -99,7 +99,7 @@ export default {
                 if(response.data.quiz.provider_avatar != null && response.data.quiz.user_image === null){
                     this.imageUrl =  response.data.quiz.provider_avatar;
                 }else if(response.data.quiz.user_image != null){
-                    this.imageUrl =  'http://127.0.0.1:8000/storage/'+ response.data.quiz.user_image;
+                    this.imageUrl =  `${import.meta.env.VITE_API_BASE_URL}/storage/`+ response.data.quiz.user_image;
                 }
 
                 this.setLoadingStatus(false);
@@ -153,7 +153,7 @@ export default {
         },
         generateRoomCode(){
             this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/multiplayer/generateRoom`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/multiplayer/generateRoom`,{
                 'quiz_id' : this.$route.params.quiz_id
                 },
                 {

@@ -469,7 +469,7 @@ export default {
         publish(){
             if(this.validateInfo()){
                 this.infoValidateMessage = null;
-                axios.post("http://127.0.0.1:8000/api/quiz/update",
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/update`,
                 {   
                     'edit_quiz_id' : this.$route.params.quiz_id,
                     'quiz_title' : this.quiz_title,
@@ -549,7 +549,7 @@ export default {
         },
         getEditInfo(){
             this.setLoadingStatus(true);
-            axios.post(`http://127.0.0.1:8000/api/quiz/getEditInfo`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/getEditInfo`,{
                     'quiz_id' : this.$route.params.quiz_id,
                     },
                     {
