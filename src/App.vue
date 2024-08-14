@@ -44,7 +44,7 @@ import { mapGetters , mapActions, mapState } from 'vuex'
                         
                     }else {
                         this.loginStatus = false;
-                        console.log("redirected to login");
+                        // console.log("redirected to login");
                         this.directLogin();
                     }
                     

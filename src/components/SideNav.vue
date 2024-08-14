@@ -190,6 +190,18 @@ export default {
                             'Authorization' : `Bearer ${this.getToken}`,
                         }
                     }).then((response) => {
+                        if(response.status == 401) {
+                           this.showNavMobile = false;
+                           localStorage.removeItem("login_token");
+                           localStorage.removeItem("userId");
+                           localStorage.removeItem("userData");
+                           localStorage.setItem("socialiteLogin",false);
+                           this.$store.dispatch("setToken",'');
+                           this.$store.dispatch("setUserId",'');
+                           this.$store.dispatch("setUserData",{});
+
+                           this.directLogin();
+                        }
                         this.$store.dispatch("setUserData",response.data.user);
                         localStorage.setItem('userData',JSON.stringify(response.data.user));
                         this.setLoadingStatus(false);

@@ -142,7 +142,7 @@
                     </div>
                 <div v-if="currentTab === 1" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Let's start with your name</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill the detail below so that we can get in touch with you.
@@ -160,7 +160,7 @@
                 </div>
                 <div v-if="currentTab === 2" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Let's us know your email address</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill the detail below so that we can get in touch with you.
@@ -178,7 +178,7 @@
                 </div>
                 <div v-if="currentTab === 3" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Create account password</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please pick a strong password for your account security.
@@ -201,7 +201,7 @@
                 </div>
                 <div v-if="currentTab === 4" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">What's your gender ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill the detail below so that we can get in touch with you.
@@ -227,7 +227,7 @@
                 </div>
                 <div v-if="currentTab === 5" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">How old are you ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill your birth date to know your age.
@@ -235,13 +235,13 @@
                     </div>
                    
                     
-                    <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" type="date" class=" md:w-2/5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-4 p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                    <input @keyup.enter="nextStep" v-model="registerData[currentTab-1]" type="date" class=" md:w-2/6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-4 p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                     <p v-if="errorMsg.birthday" class=" text-red-600 text-sm mt-2">{{ errorMsg.birthday[0] }}</p>
                     
                 </div>
                 <div v-if="currentTab === 6" class="animate__animated animate__bounceIn">
                     <div class=" border-b-2 pb-5 px-3 md:px-0 dark:border-zinc-700 mb-4 md:mb-8">
-                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/5</p>
+                        <p class="mb-1 text-sm font-medium text-slate-600 dark:text-muted">Step {{ currentTab }}/6</p>
                         <h4 class="mb-1 font-semibold text-xl text-zinc-800 dark:text-slate-200">Where you live in ?</h4>
                         <p class=" text-xs text-slate-600 dark:text-muted">
                             Please fill your current address so that we can get in touch with you
