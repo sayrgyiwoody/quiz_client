@@ -57,7 +57,7 @@ export default {
             if(this.answers[question_id]){
                 
                 this.loading = true;
-                axios.post(`http://127.0.0.1:8000/api/answerCheck`,{
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerCheck`,{
                     'quiz_id' : quiz_id,
                     'question_id' : question_id,
                     'user_answer' : this.answers[question_id],
@@ -106,7 +106,7 @@ export default {
                     if (this.answerHistory[question_id] === undefined) {
                         this.answerHistory[question_id] = false;
                     }
-                    axios.post(`http://127.0.0.1:8000/api/answerRequest`,{
+                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerRequest`,{
                         'quiz_id' : quiz_id,
                         'question_id' : question_id,
                     },{
