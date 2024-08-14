@@ -32,7 +32,7 @@ export default {
         getQuestionList(){
             this.setLoadingStatus(true);
             let quiz_id = this.$route.params.quiz_id;
-            axios.post(`http://127.0.0.1:8000/api/getQuestionList`,{
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/getQuestionList`,{
                 'quiz_id' : quiz_id,
             },{
                 headers : {
