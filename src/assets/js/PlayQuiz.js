@@ -66,12 +66,12 @@ export default {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
                 })
-                .then((response) => {
+                    .then((response) => {
                     this.loading = false;
                     if (this.answerHistory[question_id] === undefined) {
                         this.answerHistory[question_id] = response.data.answerStatus;
                     }
-                    this.answerStatus = response.data.answerStatus;
+                        this.answerStatus = response.data.answerStatus;
                 }).catch(error => console.log(error));
             }else {
                 this.answerRequired = true;

@@ -9,7 +9,7 @@
                 </p>
             <img :src="'./images/logo.png'" class="mt-2 w-20 mx-auto rounded  mb-2 " alt="Logo" />
             
-            <h4 class=" font-poppins font-medium text-2xl text-center text-zinc-900 dark:text-slate-100">Brain Lab</h4>
+            <h4 class=" font-poppins font-medium text-2xl text-center text-zinc-900 dark:text-slate-100">Quiz Lab</h4>
             <p class="text-center text-slate-500 dark:text-muted font-medium mb-3">Learn and Create your own quizzes</p>
             <hr class="mb-6 h-[1.5px] bg-zinc-700">
     

@@ -47,7 +47,7 @@
                         <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
                             <path fill="currentColor" d="M93.66 106.34a8 8 0 0 1 0 11.32l-32 32a8 8 0 0 1-11.32 0l-16-16a8 8 0 0 1 11.32-11.32L56 132.69l26.34-26.35a8 8 0 0 1 11.32 0Zm-11.32-64L56 68.69L45.66 58.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32Zm0 128L56 196.69l-10.34-10.35a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32ZM216 48h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8Zm0 128h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8Zm0-64h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8Z"/>
                         </svg>
-                        <span class="ms-2 text-2xl font-semibold">Quiz Builder</span>
+                        <span class="ms-2 text-2xl font-semibold">Create New Quiz</span>
                     </h4>
                     <div v-if="option === 'choice' && choices.length > 1" @click="removeChoice" class=" cursor-pointer p-2 border-2 hover:bg-slate-50 dark:hover:bg-zinc-600 duration-150 border-blue-600 text-zinc-900 dark:text-slate-100 bg-white shadow dark:bg-zinc-700 rounded">
                         <svg class=" inline-block w-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.25h-3m0 3.5c0 2.5 2.798 5.5 6.25 5.5a6.25 6.25 0 1 0 0-12.5c-3.75 0-6.25 3.5-6.25 3.5v-3.5"/></svg>
@@ -66,12 +66,12 @@
                     <div class="border-[1.5px] dark:border-zinc-700 rounded px-4 py-3 mb-4">
                         
                         <div class="flex items-center mb-4">
-                            <input v-model="option" id="default-radio-1" type="radio" value="question" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Question</label>
+                            <input v-model="option" id="default-radio-1" type="radio" value="question" name="default-radio" class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer">Question</label>
                         </div>
                         <div class="flex items-center">
-                            <input v-model="option" id="default-radio-2" type="radio" value="choice" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Multiple Choice</label>
+                            <input v-model="option" id="default-radio-2" type="radio" value="choice" name="default-radio" class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer">Multiple Choice</label>
                         </div>
     
                     </div>

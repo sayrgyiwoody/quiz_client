@@ -9,7 +9,7 @@
             
         </div>
         <p class=" text-end font-semibold text-zinc-800 dark:text-slate-50 mt-2">Question {{ currentQuestion }}/{{ questionList.length }}</p>
-        <div v-if="loading" class="spinner-container"><div class="spinner"></div><span class="font-semibold ms-2 text-zinc-700 dark:text-slate-200 " >Loading..</span></div>
+        <div v-if="loading" class="spinner-container"><div class="spinner"></div><span class="font-semibold ms-2 text-zinc-700 dark:text-slate-200 " >Checking Answer..</span></div>
         <p v-if="answerRequired" class="animate__animated animate__bounceIn text-white bg-indigo-500 px-4 py-3 rounded mt-4 font-medium">
             <svg class="me-2 mb-1 inline-block w-6  h-6 " xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z"/></svg>
             Please select or enter answer first !
@@ -37,7 +37,7 @@
                 <p class="mb-2 text-zinc-900 dark:text-slate-100 font-semibold ">{{question.question_text}}</p>
                 <div v-if="question.type === 'choice'" class="">
                     <div v-for="(c,cIndex) in question.choices" :key="cIndex" class="flex items-center mb-2">
-                        <input v-model="answers[question.id]" :id="'choice-radio-'+cIndex" type="radio" :value="c.choice" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input v-model="answers[question.id]" :id="'choice-radio-'+cIndex" type="radio" :value="c.choice" :disabled="answerStatus" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label :for="'choice-radio-'+cIndex" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{c.choice}}</label>
                     </div>
                     
