@@ -37,16 +37,16 @@
                 <p class="mb-2 text-zinc-900 dark:text-slate-100 font-semibold ">{{question.question_text}}</p>
                 <div v-if="question.type === 'choice'" class="">
                     <div v-for="(c,cIndex) in question.choices" :key="cIndex" class="flex items-center mb-2">
-                        <input v-model="answers[question.id]" :id="'choice-radio-'+cIndex" type="radio" :value="c.choice" :disabled="answerStatus" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label :for="'choice-radio-'+cIndex" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{c.choice}}</label>
+                        <input v-model="answers[question.id]" :id="'choice-radio-'+cIndex" type="radio" :value="c.choice" :disabled="answerStatus || loading" name="default-radio" class=" cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label :for="'choice-radio-'+cIndex" :disabled="answerStatus || loading" class=" cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{c.choice}}</label>
                     </div>
                     
                 </div>
                 <div v-if="question.type === 'question'" class="mt-3">
-                    <input @keyup.enter="checkAnswer(quiz.quiz_id,question.id)" v-model="answers[question.id]" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your answer here ...">
+                    <input :disabled="answerStatus || loading" @keyup.enter="checkAnswer(quiz.quiz_id,question.id)" v-model="answers[question.id]" type="text" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your answer here ...">
                 </div>
             </div>
-            <button :disabled="answerStatus" @click="checkAnswer(quiz.quiz_id,question.id)" type="button" class=" disabled:bg-blue-800 dark:disabled:bg-zinc-700 cursor-pointer mt-4 animate__animated animate__bounceIn flex items-center justify-center text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-md  px-5 py-2.5 text-center w-full dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button :disabled="answerStatus || loading" @click="checkAnswer(quiz.quiz_id,question.id)" type="button" class=" disabled:bg-blue-800 dark:disabled:bg-zinc-700 cursor-pointer mt-4 animate__animated animate__bounceIn flex items-center justify-center text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-md  px-5 py-2.5 text-center w-full dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class=" inline-block me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M4.615 20q-.69 0-1.152-.462Q3 19.075 3 18.385V5.615q0-.69.463-1.152Q3.925 4 4.615 4h14.77q.69 0 1.152.463q.463.462.463 1.152v12.77q0 .69-.462 1.152q-.463.463-1.153.463H4.615Zm0-1h14.77q.23 0 .423-.192q.192-.193.192-.423V5.615q0-.23-.192-.423Q19.615 5 19.385 5H4.615q-.23 0-.423.192Q4 5.385 4 5.615v12.77q0 .23.192.423q.193.192.423.192Zm.885-2.5h4v-1h-4v1Zm9.05-2.212l4.238-4.238l-.713-.713l-3.525 3.55l-1.425-1.425l-.688.713l2.113 2.113ZM5.5 12.5h4v-1h-4v1Zm0-4h4v-1h-4v1ZM4 19V5v14Z"/>
                 </svg>
