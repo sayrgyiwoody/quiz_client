@@ -137,7 +137,10 @@ export default {
         },
         showScore(){
             const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;
-            if(localStorage.getItem('darkMode') == 'true') {
+            
+            let calculatedMark = Math.round(trueCount / this.questionList.length * 100);
+            
+            if (localStorage.getItem('darkMode') == 'true') {
                 var textColor = '#ffffff';
                 var bgColor = '#3f3f46';
             }else {
@@ -152,7 +155,7 @@ export default {
                 html: `
                 <p class="text-center text-2xl font-bold mb-2">Congratulations</p"><p class="text-center">Congratulations on finishing all the questions. I really appreciate you and Remember to be proud of your effort🎉</p>
                 <p class="text-center text-sm text-slate-500 dark:text-muted mt-2 font-medium">Your Score</p>
-                <p class="text-center text-4xl font-semibold">${trueCount}/${this.questionList.length}</p>
+                <p class="text-center text-4xl font-semibold">${calculatedMark}/100</p>
                 `,
                 showCloseButton: true,
                 showCancelButton: false,
