@@ -139,7 +139,15 @@
           })
         },
         saveQuiz(quiz_id){
-          this.setLoadingStatus(true);
+          const index = this.quizzes.findIndex(q=>q.quiz_id==quiz_id);
+
+          this.quizzes[index].saved = !this.quizzes[index].saved;
+
+            if(this.quizzes[index].saved){
+              this.$emit('saveQuiz',quiz_id);
+            }else {
+              this.$emit('unsaveQuiz',quiz_id);
+            }
           axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/saveQuiz`,{
                     'quiz_id' : quiz_id,
                     },
@@ -148,19 +156,7 @@
                             'Authorization' : `Bearer ${this.getToken}`,
                         }
                     }).then((response) => {
-                      const index = this.quizzes.findIndex(q=>q.quiz_id==quiz_id);
-
-                      if(response.data.status === 'saved'){
-                        this.$emit('saveQuiz',quiz_id);
-                        this.quizzes[index].saved = true;
-                      }else if(response.data.status === 'unsaved'){
-                        this.$emit('unsaveQuiz',quiz_id);
-                        this.quizzes[index].saved = false;
-                      }
-
-                      this.showAlert(response.data.message,response.data.icon);
-                      this.setLoadingStatus(false);
-
+                      
                 }).catch(error => console.log(error));
         },
         isQuizSaved(quiz_id) {
