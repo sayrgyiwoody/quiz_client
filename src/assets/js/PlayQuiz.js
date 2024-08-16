@@ -148,7 +148,7 @@ export default {
                 var bgColor = '#ffffff';
             }
             Swal.fire({
-                imageUrl: "../../../public/images/trophy.gif",
+                imageUrl: "/images/trophy.gif",
                 imageWidth: 300,
                 color: `${textColor}`,
                 background: `${bgColor}`,
