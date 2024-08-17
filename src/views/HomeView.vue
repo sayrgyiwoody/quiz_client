@@ -19,11 +19,11 @@
             </div> -->
         </div>
         <div class="max-w-2xl mx-auto">
-            <p v-if="searchKey !== '' && searchKey.length < 4" class=" text-emerald-600 font-semibold text-sm"><i class="fa-solid fa-info-circle me-2"></i>Please type at least three character to search</p>
+            <p v-if="searchKey && searchKey.length < 4" class=" text-emerald-600 font-semibold"><i class="fa-solid fa-info-circle me-2"></i>Please type at least three character to search</p>
         </div>
 
         <div v-if="searchKey" class="mx-auto max-w-5xl mt-4">
-            <div class=" flex justify-between items-center text-zinc-800 dark:text-slate-200 mb-3 md:text-xl">
+            <div class="flex  justify-between items-center text-zinc-800 dark:text-slate-200 mb-3 text-xl">
                 <span class="flex items-center hover:text-primary duration-100 font-semibold">
                     <svg class=" inline-block me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M6 9H3c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm0 3H3c-.55 0-1 .45-1 1s.45 1 1 1h3c.55 0 1-.45 1-1s-.45-1-1-1zm13.88 6.29l-3.12-3.12c-.86.56-1.89.88-3 .82c-2.37-.11-4.4-1.96-4.72-4.31a5.013 5.013 0 0 1 5.83-5.61c1.95.33 3.57 1.85 4 3.78c.33 1.46.01 2.82-.7 3.9l3.13 3.13c.39.39.39 1.02 0 1.41c-.39.39-1.03.39-1.42 0zM17 11c0-1.65-1.35-3-3-3s-3 1.35-3 3s1.35 3 3 3s3-1.35 3-3zM3 19h8c.55 0 1-.45 1-1s-.45-1-1-1H3c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
                     Searched : <span class="text-primary ms-2">{{searchKey}}</span></span>
@@ -50,10 +50,6 @@
                 </button>
                 </div>
             </div>
-                
-            <div v-if="isSearching && searchKey.length >=4" class="spinner-container"><div class="spinner"></div><span class="font-semibold ms-2 text-zinc-700 dark:text-slate-200 " >Searching Quizzes..</span></div>
-
-
         </div>
         <div v-else>
            
@@ -79,16 +75,12 @@
     </div>
 </template>
 
-<style src="../assets/css/spinner.css"></style>
-
-
 <script>
 import axios from 'axios'
 import {mapGetters,mapActions} from 'vuex'
 import QuizzesSwiper from '../components/QuizzesSwiper.vue'
 import QuizList from '../components/QuizList.vue'
 import CategoryList from '../components/CategoryList.vue'
-
 
 export default {
     name : 'HomeView',
@@ -105,7 +97,6 @@ export default {
             most_played_quizzes : [],
             searched_quizzes : [],
             currentPage : 1,
-            isSearching : false,
         }
     },
     computed: {
@@ -154,8 +145,8 @@ export default {
         
         searchQuizzes() {
             this.searched_quizzes = [];
-            this.isSearching = true;
             if(this.searchKey.length > 3){
+                this.setLoadingStatus(true);
                 axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/search?page=${this.currentPage}`,{
                     'searchKey' : this.searchKey,
                     },
@@ -165,11 +156,8 @@ export default {
                         }
                     }).then((response) => {
                         this.searched_quizzes = response.data.searched_quizzes;
-                        this.isSearching = false;
-                }).catch(error => {
-                    this.isSearching = false;
-                    console.log(error);
-                });
+                        this.setLoadingStatus(false);
+                }).catch(error => console.log(error));
             }
         },
         changePage(page){
