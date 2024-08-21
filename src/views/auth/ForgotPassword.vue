@@ -1,6 +1,6 @@
 <template>
-    <div class=" font-poppins animate__animated animate__bounceIn mt-6 flex items-center justify-center flex-col">
-        <a @click="returnBack" class="group w-full max-w-lg flex items-center text-zinc-900 dark:text-slate-100 dark:hover:text-primary hover:text-primary duration-150">
+    <div class=" font-poppins animate__animated animate__fadeIn mt-6 flex items-center justify-center flex-col">
+        <a @click="returnBack" class=" cursor-pointer group w-full max-w-lg flex items-center text-zinc-900 dark:text-slate-100 dark:hover:text-primary hover:text-primary duration-150">
             <svg class="me-1 group-hover:-translate-x-1 duration-150" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2m-3.29 13.59L14.29 18l-6-6l6-6l1.42 1.41L11.12 12l4.59 4.59Z"/></svg>Back
         </a>
 
