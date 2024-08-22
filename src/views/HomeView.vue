@@ -19,7 +19,7 @@
             </div> -->
         </div>
         <div class="max-w-2xl mx-auto">
-            <p v-if="searchKey && searchKey.length < 4" class=" text-emerald-600 font-semibold"><i class="fa-solid fa-info-circle me-2"></i>Please type at least three character to search</p>
+            <p v-if="searchKey && searchKey.length < 4" class=" text-sm md:text-base text-emerald-600 font-semibold"><i class="fa-solid fa-info-circle me-2"></i>Please type at least three character to search</p>
         </div>
 
         <div v-if="searchKey" class="mx-auto max-w-5xl mt-4">
