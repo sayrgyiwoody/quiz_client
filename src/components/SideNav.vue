@@ -147,7 +147,8 @@ export default {
       directProfile() {
          this.$router.push({
             name : "profile"
-         })
+         });
+         this.toggleNav();
       },
       directCreate() {
          this.$router.push({
