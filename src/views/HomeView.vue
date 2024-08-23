@@ -61,7 +61,7 @@
                     <p class="mb-5 text-zinc-800 dark:text-slate-200"><i class="fa-solid fa-bell txt-primary me-2"></i>Latest Quizzes : <span class="text-blue-600 dark:text-blue-">{{ latest_quizzes.length }}</span></p>
                   </div>
                   <div v-if="latest_quizzes.length === 0" class=" font-semibold text-zinc-900 dark:text-slate-100">No Quiz to show </div>
-                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="latest_quizzes"></quizzes-swiper>
+                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="latest_quizzes" :autoplayDelay="2000"></quizzes-swiper>
             </div>
 
             <div class="mx-auto max-w-5xl mt-4 md:mt-6">
@@ -69,7 +69,7 @@
                     <p class="mb-5 text-zinc-800 dark:text-slate-200"><i class="fa-solid fa-chart-simple txt-primary me-2"></i>Most Played Quizzes : <span class="text-blue-600 dark:text-blue-">{{ most_played_quizzes.length }}</span></p>
                   </div>
                   <div v-if="most_played_quizzes.length === 0" class=" font-semibold text-zinc-900 dark:text-slate-100">No Quiz to show </div>
-                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="most_played_quizzes"></quizzes-swiper>
+                  <quizzes-swiper v-else @saveQuiz="handleSaveQuiz" @unsaveQuiz="handleUnsaveQuiz" :quizzes="most_played_quizzes" :autoplayDelay="3000"></quizzes-swiper>
             </div>
         </div>
     </div>

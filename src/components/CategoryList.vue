@@ -74,7 +74,7 @@
         <img
           :src="c.image"
           alt="category img"
-          class="h-20 object-contain mx-auto bg-slate-100 group-hover:bg-slate-200 duration-150 dark:group-hover:bg-zinc-600 dark:bg-zinc-700 rounded"
+          class="h-20 object-contain mx-auto group-hover:bg-slate-200 duration-150 dark:group-hover:bg-zinc-600 rounded"
         />
 
         <p

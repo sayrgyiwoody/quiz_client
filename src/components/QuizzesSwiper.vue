@@ -7,6 +7,11 @@
       :spaceBetween="20"
       :freeMode="false"
       :navigation="false"
+      :autoplay="{
+        delay: autoplayDelay,
+        disableOnInteraction: false,
+      }"
+      :loop="true"
       
       :modules="modules"
       class="mySwiper"
@@ -73,7 +78,7 @@
   
   
     // import required modules
-    import {FreeMode , Navigation } from 'swiper/modules';
+    import {Autoplay ,FreeMode , Navigation } from 'swiper/modules';
 
     export default {
       name : 'QuizzesSwiper',
@@ -85,6 +90,7 @@
       },
         props: {
             quizzes : Array,
+            autoplayDelay : Number,
         },
         emits: ['saveQuiz','unsaveQuiz'],
         
@@ -94,7 +100,7 @@
       },
       setup() {
         return {
-          modules: [FreeMode,Navigation],
+          modules: [Autoplay ,FreeMode,Navigation],
         };
       },
       computed: {
