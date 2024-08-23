@@ -58,7 +58,23 @@ export default {
     methods: {
         changeTab(value) {
             this.currentTab = value;
+        },
+        handleHashChange() {
+        const hash = window.location.hash.substring(1); // Remove the #
+        if (hash) {
+            this.changeTab(hash);
         }
+        }
+    },
+    mounted() {
+    this.handleHashChange(); // Check hash on mount
+
+    // Add event listener for hash changes
+    window.addEventListener('hashchange', this.handleHashChange);
+    },
+    beforeDestroy() {
+        // Remove event listener when component is destroyed
+        window.removeEventListener('hashchange', this.handleHashChange);
     },
 }
 </script>

@@ -50,13 +50,13 @@
                         </button>
                     </form>
             </div>
-            <div class="mt-3 bg-white dark:bg-zinc-800 px-4 py-3 rounded shadow animate__animated animate__bounceIn">
+            <div ref="questionForm" id="questionForm" class="mt-3 bg-white dark:bg-zinc-800 px-4 py-3 rounded shadow animate__animated animate__bounceIn">
                 <div class="flex justify-between">
                     <h4 class="flex items-center text-zinc-900 dark:text-slate-100">
                         <svg class=" inline-block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
                             <path fill="currentColor" d="M93.66 106.34a8 8 0 0 1 0 11.32l-32 32a8 8 0 0 1-11.32 0l-16-16a8 8 0 0 1 11.32-11.32L56 132.69l26.34-26.35a8 8 0 0 1 11.32 0Zm-11.32-64L56 68.69L45.66 58.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32Zm0 128L56 196.69l-10.34-10.35a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32ZM216 48h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8Zm0 128h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8Zm0-64h-88a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h88a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8Z"/>
                         </svg>
-                        <span class="ms-2 text-2xl font-semibold">Create New Quiz</span>
+                        <span class="ms-2 text-2xl font-semibold">{{ editStatus ? 'Edit Quiz' : 'Create New Quiz' }}</span>
                     </h4>
                     <div v-if="option === 'choice' && choices.length > 1" @click="removeChoice" class="cursor-pointer p-2 border-2 hover:bg-slate-50 dark:hover:bg-zinc-600 duration-150 border-blue-600 text-zinc-900 dark:text-slate-100 bg-white shadow dark:bg-zinc-700 rounded">
                         <svg class=" inline-block w-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.25h-3m0 3.5c0 2.5 2.798 5.5 6.25 5.5a6.25 6.25 0 1 0 0-12.5c-3.75 0-6.25 3.5-6.25 3.5v-3.5"/></svg>
@@ -432,6 +432,24 @@ export default {
                 this.choices = editQuestion.choices;
             }
             this.currentEditId = question_id;
+
+            const questionForm = this.$refs.questionForm;
+            if (questionForm) {
+                // Scroll the element to the vertical center of the viewport
+                questionForm.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // Add the background color inline styles
+                questionForm.style.border = '1px solid #10B981';
+
+                // Remove the background color after 3 seconds
+                setTimeout(() => {
+                    questionForm.style.border = '';
+                }, 3000);
+            }
+
         },
         updateId(){
             for(let i = 0; i < this.questionList.length ;i++) {

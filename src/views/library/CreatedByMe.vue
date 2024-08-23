@@ -81,7 +81,6 @@ export default {
                         'Authorization' : `Bearer ${this.getToken}`,
                     }
                 }).then((response) => {
-                    console.log(response);
                     this.quizzes = response.data.created_quizzes;
                     this.setLoadingStatus(false);
             }).catch(error => console.log(error));
