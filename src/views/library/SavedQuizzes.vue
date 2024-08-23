@@ -34,7 +34,7 @@
             <button @click="changePage(currentPage -1)" :hidden="currentPage === 1" class="me-4" >
             <svg class="text-primary hover:text-blue-500 duration-150 hover:-translate-x-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.6 4.6L10.8 12l4.6-4.6L14 6l-6 6l6 6l1.4-1.4Z"/></svg>
             </button>
-            <span class="text-zinc-900 dark:text-slate-100">Page {{currentPage}}/{{quizzes.last_page}} </span>
+            <span class="text-zinc-900 dark:text-slate-100">Page {{currentPage}}/{{quizzes.last_page || 1}} </span>
         <button  @click="changePage(currentPage + 1)" :hidden="currentPage == quizzes.last_page" class="ms-4">
         <svg class="text-primary hover:text-blue-500 duration-150 hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-12 6l6-6l-6-6l-1.4 1.4l4.6 4.6l-4.6 4.6L10 18Z"/></svg>
         </button>
