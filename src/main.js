@@ -1,13 +1,11 @@
-import { createApp } from 'vue'
-import './style.css'
-import router from './router'
-import store from './store'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './style.css';
+import router from './router';
+import store from './store';
+import App from './App.vue';
 
 import Echo from 'laravel-echo';
-
 import Pusher from 'pusher-js';
-
 import axios from 'axios';
 
 // window.Pusher = Pusher;
@@ -24,11 +22,12 @@ import axios from 'axios';
     
 // });
 
+// Import Vercel Analytics
+import { inject } from '@vercel/analytics';
 
+const app = createApp(App);
 
+app.use(store).use(router).mount('#app');
 
-
-
-createApp(App).use(store).use(router).mount('#app')
-
-
+// Initialize Vercel Analytics
+inject();
