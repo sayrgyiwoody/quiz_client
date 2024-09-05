@@ -138,19 +138,19 @@ export default {
         getQuizResult(mark) {
             let title, desc, gif_name;
 
-            if (mark <= 40) {
+            if (mark < 60) {
                 gif_name = 'D';
                 title = "Epic Fail (But in a Fun Way)!";
                 desc = "It looks like your brain went on vacation! Don’t worry, everyone has off days. Give it another go – success is just a quiz away!";
-            } else if (mark <= 60) {
+            } else if (mark >= 60 && mark < 80) {
                 gif_name = 'C';
                 title = "Not Bad, But You Can Do Better!";
                 desc = "Not quite there, but hey, you're heating up! A few more tries and you'll be blazing through those questions like a pro.";
-            } else if (mark <= 80) {
+            } else if (mark >= 80 && mark < 100) {
                 gif_name = 'B';
                 title = "Almost Genius but a little more!";
                 desc = "You're so close you can taste it! A few tweaks here and there, and you'll be ruling the quiz kingdom in no time.";
-            } else if (mark <= 100) {
+            } else if (mark == 100) {
                 gif_name = 'A';
                 title = "Quiz Master Extraordinaire!";
                 desc = "Bow down to the quiz king/queen! You've shown everyone how it's done and aced the challenge. Keep it up, you’re unstoppable!";
