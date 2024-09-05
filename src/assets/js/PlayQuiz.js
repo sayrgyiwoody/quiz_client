@@ -1,88 +1,88 @@
 import axios from 'axios';
-import { mapActions , mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     data() {
         return {
-            currentQuestion : 1,
-            answers : [],
-            answerHistory : [],
-            answerStatus : null,
-            questionList : [],
-            quiz : {},
-            loading :false,
-            answerRequired : false,
+            currentQuestion: 1,
+            answers: [],
+            answerHistory: [],
+            answerStatus: null,
+            questionList: [],
+            quiz: {},
+            loading: false,
+            answerRequired: false,
         }
     },
     computed: {
         ...mapGetters(["getToken"]),
         paginatedQuestions() {
-            return this.questionList.slice(this.currentQuestion-1,this.currentQuestion);
+            return this.questionList.slice(this.currentQuestion - 1, this.currentQuestion);
         },
     },
     methods: {
         ...mapActions(["setLoadingStatus"]),
-        directBack(){
+        directBack() {
             history.back();
         },
         directHome() {
             this.$router.push({
-                name : "home"
+                name: "home"
             })
         },
-        getQuestionList(){
+        getQuestionList() {
             this.setLoadingStatus(true);
             let quiz_id = this.$route.params.quiz_id;
-            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/getQuestionList`,{
-                'quiz_id' : quiz_id,
-            },{
-                headers : {
-                    'Authorization' : `Bearer ${this.getToken}`,
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/getQuestionList`, {
+                'quiz_id': quiz_id,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${this.getToken}`,
                 }
             })
-            .then((response) => {
-                
-                this.questionList = response.data.question_list;
-                this.quiz = response.data.quiz;
-                this.setLoadingStatus(false);
-            }).catch(error => console.log(error));
+                .then((response) => {
+
+                    this.questionList = response.data.question_list;
+                    this.quiz = response.data.quiz;
+                    this.setLoadingStatus(false);
+                }).catch(error => console.log(error));
         },
         // change next question 
-        changeQuestion(questionNum) {  
-          this.currentQuestion = questionNum;
-          this.answerStatus = null;
+        changeQuestion(questionNum) {
+            this.currentQuestion = questionNum;
+            this.answerStatus = null;
         },
-        checkAnswer(quiz_id,question_id){
+        checkAnswer(quiz_id, question_id) {
             this.answerRequired = false;
             this.answerStatus = null;
-            if(this.answers[question_id]){
-                
+            if (this.answers[question_id]) {
+
                 this.loading = true;
-                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerCheck`,{
-                    'quiz_id' : quiz_id,
-                    'question_id' : question_id,
-                    'user_answer' : this.answers[question_id],
-                },{
-                    headers : {
-                        'Authorization' : `Bearer ${this.getToken}`,
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerCheck`, {
+                    'quiz_id': quiz_id,
+                    'question_id': question_id,
+                    'user_answer': this.answers[question_id],
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.getToken}`,
                     }
                 })
                     .then((response) => {
-                    this.loading = false;
-                    if (this.answerHistory[question_id] === undefined) {
-                        this.answerHistory[question_id] = response.data.answerStatus;
-                    }
+                        this.loading = false;
+                        if (this.answerHistory[question_id] === undefined) {
+                            this.answerHistory[question_id] = response.data.answerStatus;
+                        }
                         this.answerStatus = response.data.answerStatus;
-                }).catch(error => console.log(error));
-            }else {
+                    }).catch(error => console.log(error));
+            } else {
                 this.answerRequired = true;
             }
         },
-        showAnswer(quiz_id,question_id) {
+        showAnswer(quiz_id, question_id) {
             const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;
-            if(localStorage.getItem('darkMode') == 'true') {
+            if (localStorage.getItem('darkMode') == 'true') {
                 var textColor = '#ffffff';
                 var bgColor = '#3f3f46';
-            }else {
+            } else {
                 var textColor = '#18181b';
                 var bgColor = '#ffffff';
             }
@@ -98,62 +98,88 @@ export default {
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes',
-                cancelButtonText : "No, I'll try myself"
-              }).then((result) => {
+                cancelButtonText: "No, I'll try myself"
+            }).then((result) => {
 
                 if (result.isConfirmed) {
                     this.setLoadingStatus(true);
                     if (this.answerHistory[question_id] === undefined) {
                         this.answerHistory[question_id] = false;
                     }
-                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerRequest`,{
-                        'quiz_id' : quiz_id,
-                        'question_id' : question_id,
-                    },{
-                        headers : {
-                            'Authorization' : `Bearer ${this.getToken}`,
+                    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/answerRequest`, {
+                        'quiz_id': quiz_id,
+                        'question_id': question_id,
+                    }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.getToken}`,
                         }
                     })
-                    .then((response) => {
-                    this.setLoadingStatus(false);
+                        .then((response) => {
+                            this.setLoadingStatus(false);
 
-                        Swal.fire({
-                            html: `
+                            Swal.fire({
+                                html: `
                             <p class="text-center text-sm text-slate-500 dark:text-muted font-medium">Answer for question 1</p"><p class="text-center font-semibold text-xl">${response.data.requestedAnswer}</p>
                             `,
-                            color: `${textColor}`,
-                            background: `${bgColor}`,
-                            icon: 'info',
-                            showCancelButton: false,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'I got it.',
-                          })
-                    }).catch(error => console.log(error));
+                                color: `${textColor}`,
+                                background: `${bgColor}`,
+                                icon: 'info',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'I got it.',
+                            })
+                        }).catch(error => console.log(error));
 
                 }
 
-              })
+            })
 
         },
-        showScore(){
+        getQuizResult(mark) {
+            let title, desc, gif_name;
+
+            if (mark <= 40) {
+                gif_name = 'D';
+                title = "Epic Fail (But in a Fun Way)!";
+                desc = "It looks like your brain went on vacation! Don’t worry, everyone has off days. Give it another go – success is just a quiz away!";
+            } else if (mark <= 60) {
+                gif_name = 'C';
+                title = "Not Bad, But You Can Do Better!";
+                desc = "Not quite there, but hey, you're heating up! A few more tries and you'll be blazing through those questions like a pro.";
+            } else if (mark <= 80) {
+                gif_name = 'B';
+                title = "Almost Genius but a little more!";
+                desc = "You're so close you can taste it! A few tweaks here and there, and you'll be ruling the quiz kingdom in no time.";
+            } else if (mark <= 100) {
+                gif_name = 'A';
+                title = "Quiz Master Extraordinaire!";
+                desc = "Bow down to the quiz king/queen! You've shown everyone how it's done and aced the challenge. Keep it up, you’re unstoppable!";
+            }
+
+            return { title, desc, gif_name };
+        },
+        showScore() {
             const trueCount = Object.values(this.answerHistory).filter(answer => answer === true).length;
-            
+
             let calculatedMark = Math.round(trueCount / this.questionList.length * 100);
-            
+
             if (localStorage.getItem('darkMode') == 'true') {
                 var textColor = '#ffffff';
                 var bgColor = '#3f3f46';
-            }else {
+            } else {
                 var textColor = '#18181b';
                 var bgColor = '#ffffff';
             }
+
+            let result = this.getQuizResult(calculatedMark);
+
             Swal.fire({
-                imageUrl: "/images/trophy.gif",
+                imageUrl: `/images/${result.gif_name}.gif`,
                 imageWidth: 300,
                 color: `${textColor}`,
                 background: `${bgColor}`,
                 html: `
-                <p class="text-center text-2xl font-bold mb-2">Congratulations</p"><p class="text-center">Congratulations on finishing all the questions. I really appreciate you and Remember to be proud of your effort🎉</p>
+                <p class="text-center text-2xl font-bold mb-2">${result.title}</p"><p class="text-center">${result.desc}</p>
                 <p class="text-center text-sm text-slate-500 dark:text-muted mt-2 font-medium">Your Score</p>
                 <p class="text-center text-4xl font-semibold">${calculatedMark}/100</p>
                 `,
@@ -169,17 +195,17 @@ export default {
                   <i class="fa fa-thumbs-down"></i>
                 `,
                 cancelButtonAriaLabel: "Thumbs down"
-              }).then(result=>{
-                if(result.isConfirmed){
+            }).then(result => {
+                if (result.isConfirmed) {
                     this.directHome();
                 }
-              });
+            });
         },
-        
+
     },
-    mounted () {
+    mounted() {
         this.getQuestionList();
-        
+
     },
 
 }
